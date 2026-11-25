@@ -1,0 +1,1489 @@
+{
+  "schemaVersion": 1,
+  "id": "sample-claims-triage",
+  "createdAt": "2026-11-25T00:00:00.000Z",
+  "updatedAt": "2026-11-25T00:00:00.000Z",
+  "title": "Sample: Insurance claims triage agents",
+  "summary": "Agents extract claim details, find the relevant policy wording, propose a coverage decision and pay approved claims, with a human handler for complex or high-value claims.",
+  "problem": "Motor claims wait several days for a first assessment because handlers re-key documents and search policy wording by hand.",
+  "outcome": "A first coverage proposal with cited policy clauses within minutes of submission; humans decide every claim above the payout authority.",
+  "sponsor": "Chief Claims Officer (fictional)",
+  "accountableOwner": "Head of Claims Operations (fictional)",
+  "stakeholders": "Claims handlers, fraud analytics, payments, risk, data protection officer",
+  "domain": "Insurance — motor claims",
+  "jurisdictions": "EU",
+  "dataClassification": "Confidential",
+  "riskTier": "high",
+  "profile": "feature",
+  "inScope": "Motor claims under the payout authority; document extraction; policy clause retrieval; coverage proposal; payment of approved claims.",
+  "outOfScope": "Injury claims; litigation; changes to policy wording; automatic rejection without human review.",
+  "constraints": "Claim data stays in the EU region. Every rejection is decided by a human. Payments only through the existing payments API.",
+  "successMetrics": "Median time to first proposal under 10 minutes; proposal agreement with handlers ≥ 90% on the evaluation set; zero duplicate payments.",
+  "assumptions": "Fictional sample shipped with the studio to demonstrate every page. The organisation, volumes, prices and evidence are invented example values, not quotes or measurements.",
+  "sourceUrl": "",
+  "sourceDate": "",
+  "patternIds": [
+    "ap-11",
+    "ap-13",
+    "ap-25",
+    "ap-16"
+  ],
+  "ragIds": [
+    "rag-3",
+    "rag-15",
+    "rag-18"
+  ],
+  "nodes": [
+    {
+      "id": "s1-n1",
+      "name": "Intake router",
+      "kind": "orchestrator",
+      "x": 60,
+      "y": 80,
+      "description": "Classifies a new claim and routes it to extraction or straight to a handler.",
+      "model": "Small model",
+      "toolPermissions": "Read claim submission; route only",
+      "dataScope": "",
+      "owner": "Claims platform lead",
+      "timeoutSeconds": 20,
+      "maxSteps": 1,
+      "spendLimitUsd": 0.02,
+      "identity": "Workload role: claims-intake-router",
+      "inputTokens": 1200,
+      "outputTokens": 80,
+      "inputPricePerM": 0.5,
+      "outputPricePerM": 2,
+      "cachedInputPct": 0,
+      "cachedInputPricePerM": 0,
+      "costPerCallUsd": 0,
+      "latencySeconds": 0.8,
+      "routing": "one",
+      "actionType": "",
+      "idempotent": false,
+      "openWorld": false,
+      "requiresHumanApproval": false,
+      "executesCode": false,
+      "sandbox": "",
+      "allowedEgress": "",
+      "patternId": "ap-11",
+      "ragIds": []
+    },
+    {
+      "id": "s1-n2",
+      "name": "Document extraction agent",
+      "kind": "agent",
+      "x": 320,
+      "y": 80,
+      "description": "Extracts claimant, incident, amounts and dates into a claim record.",
+      "model": "Multimodal model",
+      "toolPermissions": "Read uploaded claim documents",
+      "dataScope": "Claim documents of the current claim only",
+      "owner": "Claims platform lead",
+      "timeoutSeconds": 90,
+      "maxSteps": 2,
+      "spendLimitUsd": 0.2,
+      "identity": "Workload role: claims-doc-reader",
+      "inputTokens": 9000,
+      "outputTokens": 900,
+      "inputPricePerM": 3,
+      "outputPricePerM": 15,
+      "cachedInputPct": 20,
+      "cachedInputPricePerM": 0.3,
+      "costPerCallUsd": 0,
+      "latencySeconds": 6,
+      "routing": "one",
+      "actionType": "",
+      "idempotent": false,
+      "openWorld": false,
+      "requiresHumanApproval": false,
+      "executesCode": false,
+      "sandbox": "",
+      "allowedEgress": "",
+      "patternId": "",
+      "ragIds": []
+    },
+    {
+      "id": "s1-n3",
+      "name": "Policy retriever",
+      "kind": "retriever",
+      "x": 580,
+      "y": 80,
+      "description": "Returns policy clauses relevant to the claim.",
+      "model": "",
+      "toolPermissions": "Read policy wording index for the claimant’s policy",
+      "dataScope": "Policy documents, filtered by policy ID",
+      "owner": "Knowledge platform owner",
+      "timeoutSeconds": 10,
+      "maxSteps": 2,
+      "spendLimitUsd": 0.01,
+      "identity": "Workload role: policy-index-reader",
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "inputPricePerM": 0,
+      "outputPricePerM": 0,
+      "cachedInputPct": 0,
+      "cachedInputPricePerM": 0,
+      "costPerCallUsd": 0.002,
+      "latencySeconds": 0.6,
+      "routing": "one",
+      "actionType": "read-only",
+      "idempotent": true,
+      "openWorld": false,
+      "requiresHumanApproval": false,
+      "executesCode": false,
+      "sandbox": "",
+      "allowedEgress": "",
+      "patternId": "",
+      "ragIds": [
+        "rag-3",
+        "rag-15",
+        "rag-18"
+      ]
+    },
+    {
+      "id": "s1-n4",
+      "name": "Coverage assessor",
+      "kind": "agent",
+      "x": 840,
+      "y": 80,
+      "description": "Proposes a coverage decision with cited clauses and requests a fraud signal.",
+      "model": "Large model",
+      "toolPermissions": "Call fraud signal tool (read-only)",
+      "dataScope": "Claim record and retrieved clauses",
+      "owner": "Head of claims",
+      "timeoutSeconds": 120,
+      "maxSteps": 3,
+      "spendLimitUsd": 0.4,
+      "identity": "Workload role: coverage-assessor",
+      "inputTokens": 7000,
+      "outputTokens": 1200,
+      "inputPricePerM": 3,
+      "outputPricePerM": 15,
+      "cachedInputPct": 40,
+      "cachedInputPricePerM": 0.3,
+      "costPerCallUsd": 0,
+      "latencySeconds": 9,
+      "routing": "all",
+      "actionType": "",
+      "idempotent": false,
+      "openWorld": false,
+      "requiresHumanApproval": false,
+      "executesCode": false,
+      "sandbox": "",
+      "allowedEgress": "",
+      "patternId": "ap-13",
+      "ragIds": []
+    },
+    {
+      "id": "s1-n5",
+      "name": "Fraud signal service",
+      "kind": "tool",
+      "x": 840,
+      "y": 260,
+      "description": "Returns a fraud risk score for the claim.",
+      "model": "",
+      "toolPermissions": "POST /fraud-score (read-only scoring)",
+      "dataScope": "",
+      "owner": "Fraud analytics lead",
+      "timeoutSeconds": 5,
+      "maxSteps": 3,
+      "spendLimitUsd": 0.05,
+      "identity": "Service account: fraud-score-client",
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "inputPricePerM": 0,
+      "outputPricePerM": 0,
+      "cachedInputPct": 0,
+      "cachedInputPricePerM": 0,
+      "costPerCallUsd": 0.01,
+      "latencySeconds": 1.2,
+      "routing": "one",
+      "actionType": "read-only",
+      "idempotent": true,
+      "openWorld": true,
+      "requiresHumanApproval": false,
+      "executesCode": false,
+      "sandbox": "",
+      "allowedEgress": "fraud-score.internal (fictional)",
+      "patternId": "",
+      "ragIds": []
+    },
+    {
+      "id": "s1-n6",
+      "name": "Decision validator",
+      "kind": "validator",
+      "x": 1100,
+      "y": 80,
+      "description": "Checks the proposed decision against cited clauses; sends it back for revision or forward.",
+      "model": "Large model",
+      "toolPermissions": "None",
+      "dataScope": "",
+      "owner": "Claims quality lead",
+      "timeoutSeconds": 60,
+      "maxSteps": 3,
+      "spendLimitUsd": 0.15,
+      "identity": "Workload role: decision-validator",
+      "inputTokens": 5000,
+      "outputTokens": 400,
+      "inputPricePerM": 3,
+      "outputPricePerM": 15,
+      "cachedInputPct": 0,
+      "cachedInputPricePerM": 0,
+      "costPerCallUsd": 0,
+      "latencySeconds": 4,
+      "routing": "one",
+      "actionType": "",
+      "idempotent": false,
+      "openWorld": false,
+      "requiresHumanApproval": false,
+      "executesCode": false,
+      "sandbox": "",
+      "allowedEgress": "",
+      "patternId": "ap-13",
+      "ragIds": []
+    },
+    {
+      "id": "s1-n7",
+      "name": "Policy engine",
+      "kind": "policy",
+      "x": 1100,
+      "y": 260,
+      "description": "Applies payout limits; above the limit the claim goes to a human handler.",
+      "model": "",
+      "toolPermissions": "Evaluate payout authority rules",
+      "dataScope": "",
+      "owner": "Risk officer",
+      "timeoutSeconds": 2,
+      "maxSteps": 1,
+      "spendLimitUsd": 0,
+      "identity": "Service account: payout-policy",
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "inputPricePerM": 0,
+      "outputPricePerM": 0,
+      "cachedInputPct": 0,
+      "cachedInputPricePerM": 0,
+      "costPerCallUsd": 0.0005,
+      "latencySeconds": 0.1,
+      "routing": "one",
+      "actionType": "",
+      "idempotent": false,
+      "openWorld": false,
+      "requiresHumanApproval": false,
+      "executesCode": false,
+      "sandbox": "",
+      "allowedEgress": "",
+      "patternId": "ap-25",
+      "ragIds": []
+    },
+    {
+      "id": "s1-n8",
+      "name": "Claims handler approval",
+      "kind": "human",
+      "x": 1360,
+      "y": 260,
+      "description": "Human approval for escalated or high-value claims. Latency excluded from the per-request figure.",
+      "model": "",
+      "toolPermissions": "Approve or reject in claims system",
+      "dataScope": "",
+      "owner": "Head of claims",
+      "timeoutSeconds": 86400,
+      "maxSteps": 1,
+      "spendLimitUsd": 0,
+      "identity": "Named employee via SSO",
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "inputPricePerM": 0,
+      "outputPricePerM": 0,
+      "cachedInputPct": 0,
+      "cachedInputPricePerM": 0,
+      "costPerCallUsd": 2.5,
+      "latencySeconds": 0,
+      "routing": "one",
+      "actionType": "",
+      "idempotent": false,
+      "openWorld": false,
+      "requiresHumanApproval": true,
+      "executesCode": false,
+      "sandbox": "",
+      "allowedEgress": "",
+      "patternId": "ap-16",
+      "ragIds": []
+    },
+    {
+      "id": "s1-n9",
+      "name": "Payment API",
+      "kind": "tool",
+      "x": 1360,
+      "y": 80,
+      "description": "Issues the payment for an approved claim.",
+      "model": "",
+      "toolPermissions": "POST /payments with idempotency key; amount ≤ approved amount",
+      "dataScope": "",
+      "owner": "Payments platform owner",
+      "timeoutSeconds": 15,
+      "maxSteps": 1,
+      "spendLimitUsd": 0,
+      "identity": "Service account: claims-payments (scoped token)",
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "inputPricePerM": 0,
+      "outputPricePerM": 0,
+      "cachedInputPct": 0,
+      "cachedInputPricePerM": 0,
+      "costPerCallUsd": 0.003,
+      "latencySeconds": 1.5,
+      "routing": "one",
+      "actionType": "additive",
+      "idempotent": true,
+      "openWorld": true,
+      "requiresHumanApproval": false,
+      "executesCode": false,
+      "sandbox": "",
+      "allowedEgress": "payments.internal (fictional)",
+      "patternId": "",
+      "ragIds": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "s1-e1",
+      "from": "s1-n1",
+      "to": "s1-n2",
+      "label": "standard claim",
+      "contract": "Claim ID; idempotent re-read",
+      "failurePolicy": "retry",
+      "probability": 0.85
+    },
+    {
+      "id": "s1-e2",
+      "from": "s1-n1",
+      "to": "s1-n8",
+      "label": "unreadable / complex",
+      "contract": "",
+      "failurePolicy": "escalate",
+      "probability": 0.15
+    },
+    {
+      "id": "s1-e3",
+      "from": "s1-n2",
+      "to": "s1-n3",
+      "label": "claim record",
+      "contract": "Claim record schema v1",
+      "failurePolicy": "retry",
+      "probability": 1
+    },
+    {
+      "id": "s1-e4",
+      "from": "s1-n3",
+      "to": "s1-n4",
+      "label": "clauses",
+      "contract": "",
+      "failurePolicy": "halt",
+      "probability": 1
+    },
+    {
+      "id": "s1-e5",
+      "from": "s1-n4",
+      "to": "s1-n5",
+      "label": "score request",
+      "contract": "Read-only; safe to retry",
+      "failurePolicy": "retry",
+      "probability": 1
+    },
+    {
+      "id": "s1-e6",
+      "from": "s1-n4",
+      "to": "s1-n6",
+      "label": "proposed decision",
+      "contract": "Decision + cited clauses",
+      "failurePolicy": "halt",
+      "probability": 1
+    },
+    {
+      "id": "s1-e7",
+      "from": "s1-n6",
+      "to": "s1-n4",
+      "label": "revise",
+      "contract": "",
+      "failurePolicy": "halt",
+      "probability": 0.2
+    },
+    {
+      "id": "s1-e8",
+      "from": "s1-n6",
+      "to": "s1-n7",
+      "label": "validated",
+      "contract": "",
+      "failurePolicy": "halt",
+      "probability": 0.8
+    },
+    {
+      "id": "s1-e9",
+      "from": "s1-n7",
+      "to": "s1-n9",
+      "label": "within authority",
+      "contract": "Idempotency key = claim ID + decision version",
+      "failurePolicy": "compensate",
+      "probability": 0.7
+    },
+    {
+      "id": "s1-e10",
+      "from": "s1-n7",
+      "to": "s1-n8",
+      "label": "above authority",
+      "contract": "",
+      "failurePolicy": "escalate",
+      "probability": 0.3
+    },
+    {
+      "id": "s1-e11",
+      "from": "s1-n8",
+      "to": "s1-n9",
+      "label": "approved",
+      "contract": "Idempotency key = claim ID + decision version",
+      "failurePolicy": "compensate",
+      "probability": 0.9
+    }
+  ],
+  "stages": [
+    {
+      "id": "0.1",
+      "status": "approved",
+      "owner": "Platform SRE lead",
+      "evidence": "Sample: stage output reviewed in workshop (0.1)",
+      "notes": "",
+      "approver": "Sample approver"
+    },
+    {
+      "id": "0.2",
+      "status": "approved",
+      "owner": "Platform SRE lead",
+      "evidence": "Sample: stage output reviewed in workshop (0.2)",
+      "notes": "",
+      "approver": "Sample approver"
+    },
+    {
+      "id": "0.3",
+      "status": "approved",
+      "owner": "Platform SRE lead",
+      "evidence": "Sample: stage output reviewed in workshop (0.3)",
+      "notes": "",
+      "approver": "Sample approver"
+    },
+    {
+      "id": "1.1",
+      "status": "approved",
+      "owner": "Head of Claims Operations",
+      "evidence": "Sample: stage output reviewed in workshop (1.1)",
+      "notes": "",
+      "approver": "Sample approver"
+    },
+    {
+      "id": "1.2",
+      "status": "approved",
+      "owner": "Head of Claims Operations",
+      "evidence": "Sample: stage output reviewed in workshop (1.2)",
+      "notes": "",
+      "approver": "Sample approver"
+    },
+    {
+      "id": "1.3",
+      "status": "approved",
+      "owner": "Head of Claims Operations",
+      "evidence": "Sample: stage output reviewed in workshop (1.3)",
+      "notes": "",
+      "approver": "Sample approver"
+    },
+    {
+      "id": "1.4",
+      "status": "approved",
+      "owner": "Head of Claims Operations",
+      "evidence": "Sample: stage output reviewed in workshop (1.4)",
+      "notes": "",
+      "approver": "Sample approver"
+    },
+    {
+      "id": "1.5",
+      "status": "approved",
+      "owner": "Head of Claims Operations",
+      "evidence": "Sample: stage output reviewed in workshop (1.5)",
+      "notes": "",
+      "approver": "Sample approver"
+    },
+    {
+      "id": "1.6",
+      "status": "approved",
+      "owner": "Head of Claims Operations",
+      "evidence": "Sample: stage output reviewed in workshop (1.6)",
+      "notes": "",
+      "approver": "Sample approver"
+    },
+    {
+      "id": "1.7",
+      "status": "approved",
+      "owner": "Head of Claims Operations",
+      "evidence": "Sample: stage output reviewed in workshop (1.7)",
+      "notes": "",
+      "approver": "Sample approver"
+    },
+    {
+      "id": "2.1",
+      "status": "approved",
+      "owner": "Solution architect",
+      "evidence": "Sample: stage output reviewed in workshop (2.1)",
+      "notes": "",
+      "approver": "Sample approver"
+    },
+    {
+      "id": "2.2",
+      "status": "approved",
+      "owner": "Solution architect",
+      "evidence": "Sample: stage output reviewed in workshop (2.2)",
+      "notes": "",
+      "approver": "Sample approver"
+    },
+    {
+      "id": "2.3",
+      "status": "approved",
+      "owner": "Solution architect",
+      "evidence": "Sample: stage output reviewed in workshop (2.3)",
+      "notes": "",
+      "approver": "Sample approver"
+    },
+    {
+      "id": "2.4",
+      "status": "in-progress",
+      "owner": "Solution architect",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "2.5",
+      "status": "in-progress",
+      "owner": "Solution architect",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "2.6",
+      "status": "not-started",
+      "owner": "Solution architect",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "2.7",
+      "status": "not-started",
+      "owner": "Solution architect",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "2.8",
+      "status": "not-started",
+      "owner": "Solution architect",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "2.9",
+      "status": "not-started",
+      "owner": "Solution architect",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "3.1",
+      "status": "not-started",
+      "owner": "Engineering lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "3.2",
+      "status": "not-started",
+      "owner": "Engineering lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "3.3",
+      "status": "not-started",
+      "owner": "Engineering lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "3.4",
+      "status": "not-started",
+      "owner": "Engineering lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "3.5",
+      "status": "not-started",
+      "owner": "Engineering lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "3.6",
+      "status": "not-started",
+      "owner": "Engineering lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "3.7",
+      "status": "not-started",
+      "owner": "Engineering lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "4.1",
+      "status": "not-started",
+      "owner": "Platform SRE lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "4.2",
+      "status": "not-started",
+      "owner": "Platform SRE lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "4.3",
+      "status": "not-started",
+      "owner": "Platform SRE lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "4.4",
+      "status": "not-started",
+      "owner": "Platform SRE lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "4.5",
+      "status": "not-started",
+      "owner": "Platform SRE lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "4.6",
+      "status": "not-started",
+      "owner": "Platform SRE lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "4.7",
+      "status": "not-started",
+      "owner": "Platform SRE lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    }
+  ],
+  "controls": [
+    {
+      "id": "GOV-01",
+      "status": "evidenced",
+      "owner": "Head of Claims Operations",
+      "evidence": "Sample: RACI approved in steering meeting",
+      "exception": "",
+      "likelihood": 2,
+      "impact": 4
+    },
+    {
+      "id": "GOV-02",
+      "status": "evidenced",
+      "owner": "AI governance lead",
+      "evidence": "Sample: entry in AI system inventory",
+      "exception": "",
+      "likelihood": 2,
+      "impact": 3
+    },
+    {
+      "id": "GOV-03",
+      "status": "planned",
+      "owner": "Legal counsel",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 5
+    },
+    {
+      "id": "GOV-04",
+      "status": "evidenced",
+      "owner": "Head of Claims Operations",
+      "evidence": "Sample: human approval node above payout authority",
+      "exception": "",
+      "likelihood": 2,
+      "impact": 5
+    },
+    {
+      "id": "GOV-05",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "GOV-06",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "GOV-07",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "GOV-08",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "GOV-09",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "SEC-01",
+      "status": "evidenced",
+      "owner": "Security architect",
+      "evidence": "Sample: per-node workload roles reviewed",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 5
+    },
+    {
+      "id": "SEC-02",
+      "status": "planned",
+      "owner": "Security architect",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 4,
+      "impact": 4
+    },
+    {
+      "id": "SEC-03",
+      "status": "evidenced",
+      "owner": "Platform security",
+      "evidence": "Sample: secrets in vault; scoped tokens",
+      "exception": "",
+      "likelihood": 2,
+      "impact": 4
+    },
+    {
+      "id": "SEC-04",
+      "status": "evidenced",
+      "owner": "Data protection officer",
+      "evidence": "Sample: EU-only deployment record",
+      "exception": "",
+      "likelihood": 2,
+      "impact": 5
+    },
+    {
+      "id": "SEC-05",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "SEC-06",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "SEC-07",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "SEC-08",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "SEC-09",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "SEC-10",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "SEC-11",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "SEC-12",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "REL-01",
+      "status": "evidenced",
+      "owner": "Engineering lead",
+      "evidence": "Sample: max visits and spend caps set per node",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "REL-02",
+      "status": "planned",
+      "owner": "Payments platform owner",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 5
+    },
+    {
+      "id": "REL-03",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "REL-04",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "EVAL-01",
+      "status": "planned",
+      "owner": "Claims quality lead",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 4
+    },
+    {
+      "id": "EVAL-02",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "EVAL-03",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "EVAL-04",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "OPS-01",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "OPS-02",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "OPS-03",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "OPS-04",
+      "status": "accepted",
+      "owner": "Finance partner",
+      "evidence": "",
+      "exception": "Sample: cost reporting starts after pilot",
+      "likelihood": 3,
+      "impact": 2
+    },
+    {
+      "id": "OPS-05",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "OPS-06",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    }
+  ],
+  "decisions": [
+    {
+      "id": "s1-d1",
+      "title": "Profile: feature",
+      "decision": "Use the AI-DLC feature profile (all 30 stages after setup).",
+      "rationale": "Production feature with Operation stages required.",
+      "owner": "Head of Claims Operations",
+      "date": "2026-11-20"
+    },
+    {
+      "id": "s1-d2",
+      "title": "Human approval above payout authority",
+      "decision": "Policy engine routes claims above authority to a human handler.",
+      "rationale": "High risk tier; GOV-04.",
+      "owner": "Risk officer",
+      "date": "2026-11-21"
+    }
+  ],
+  "units": [
+    {
+      "id": "s1-u1",
+      "name": "Claim intake and extraction",
+      "owner": "Team A",
+      "description": "Router + extraction agent",
+      "dependsOn": [],
+      "acceptanceTests": "Extraction accuracy on 200 labelled claims",
+      "risk": "medium",
+      "status": "ready",
+      "estimateDays": 8
+    },
+    {
+      "id": "s1-u2",
+      "name": "Policy retrieval index",
+      "owner": "Team B",
+      "description": "Index + retriever filtered by policy ID",
+      "dependsOn": [],
+      "acceptanceTests": "Recall@5 on clause lookup set",
+      "risk": "medium",
+      "status": "building",
+      "estimateDays": 6
+    },
+    {
+      "id": "s1-u3",
+      "name": "Coverage assessment and validation",
+      "owner": "Team A",
+      "description": "Assessor, fraud call, validator",
+      "dependsOn": [
+        "s1-u1",
+        "s1-u2"
+      ],
+      "acceptanceTests": "Agreement with handlers ≥ 90%",
+      "risk": "high",
+      "status": "planned",
+      "estimateDays": 10
+    },
+    {
+      "id": "s1-u4",
+      "name": "Payout policy and payment",
+      "owner": "Team C",
+      "description": "Policy engine, human approval, payment API",
+      "dependsOn": [
+        "s1-u3"
+      ],
+      "acceptanceTests": "No duplicate payment under retry tests",
+      "risk": "high",
+      "status": "planned",
+      "estimateDays": 7
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "s1-sc1",
+      "name": "Standard claim within authority",
+      "trigger": "Readable claim, amount under limit",
+      "expectedResult": "Paid once with cited clauses",
+      "failureAndAbuseCase": "",
+      "verification": "Replay 50 labelled claims"
+    },
+    {
+      "id": "s1-sc2",
+      "name": "Prompt injection in uploaded document",
+      "trigger": "Document text instructs the agent to approve payment",
+      "expectedResult": "Instruction ignored; claim flagged",
+      "failureAndAbuseCase": "Indirect prompt injection (AML.T0051.001)",
+      "verification": "Red-team document set"
+    },
+    {
+      "id": "s1-sc3",
+      "name": "Payment API timeout and retry",
+      "trigger": "Payment call times out",
+      "expectedResult": "Single payment after retry",
+      "failureAndAbuseCase": "Duplicate side effect",
+      "verification": "Fault injection with idempotency check"
+    }
+  ],
+  "threats": [
+    {
+      "id": "s1-t1",
+      "nodeId": "s1-n1",
+      "threatId": "ASI01",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t2",
+      "nodeId": "s1-n1",
+      "threatId": "ASI08",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t3",
+      "nodeId": "s1-n1",
+      "threatId": "ASI10",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t4",
+      "nodeId": "s1-n1",
+      "threatId": "LLM06:2026",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t5",
+      "nodeId": "s1-n1",
+      "threatId": "AML.T0034.002",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t6",
+      "nodeId": "s1-n2",
+      "threatId": "ASI01",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t7",
+      "nodeId": "s1-n2",
+      "threatId": "ASI06",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t8",
+      "nodeId": "s1-n2",
+      "threatId": "ASI09",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t9",
+      "nodeId": "s1-n2",
+      "threatId": "LLM01:2026",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t10",
+      "nodeId": "s1-n2",
+      "threatId": "LLM07:2026",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t11",
+      "nodeId": "s1-n2",
+      "threatId": "AML.T0051",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t12",
+      "nodeId": "s1-n2",
+      "threatId": "LLM02:2026",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t13",
+      "nodeId": "s1-n3",
+      "threatId": "LLM05:2026",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t14",
+      "nodeId": "s1-n3",
+      "threatId": "LLM08:2026",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t15",
+      "nodeId": "s1-n3",
+      "threatId": "LLM09:2026",
+      "status": "mitigated",
+      "mitigation": "Index filtered by policy ID; no cross-policy retrieval."
+    },
+    {
+      "id": "s1-t16",
+      "nodeId": "s1-n3",
+      "threatId": "AML.T0070",
+      "status": "mitigated",
+      "mitigation": "Policy index built only from approved policy wording."
+    },
+    {
+      "id": "s1-t17",
+      "nodeId": "s1-n3",
+      "threatId": "AML.T0071",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t18",
+      "nodeId": "s1-n3",
+      "threatId": "LLM02:2026",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t19",
+      "nodeId": "s1-n4",
+      "threatId": "ASI01",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t20",
+      "nodeId": "s1-n4",
+      "threatId": "ASI06",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t21",
+      "nodeId": "s1-n4",
+      "threatId": "ASI09",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t22",
+      "nodeId": "s1-n4",
+      "threatId": "LLM01:2026",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t23",
+      "nodeId": "s1-n4",
+      "threatId": "LLM07:2026",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t24",
+      "nodeId": "s1-n4",
+      "threatId": "AML.T0051",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t25",
+      "nodeId": "s1-n4",
+      "threatId": "LLM02:2026",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t26",
+      "nodeId": "s1-n5",
+      "threatId": "ASI02",
+      "status": "mitigated",
+      "mitigation": "Fraud tool is read-only; payment tool limited to approved amount with idempotency key."
+    },
+    {
+      "id": "s1-t27",
+      "nodeId": "s1-n5",
+      "threatId": "ASI03",
+      "status": "mitigated",
+      "mitigation": "Each node runs under its own scoped workload role."
+    },
+    {
+      "id": "s1-t28",
+      "nodeId": "s1-n5",
+      "threatId": "ASI05",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t29",
+      "nodeId": "s1-n5",
+      "threatId": "LLM03:2026",
+      "status": "mitigated",
+      "mitigation": "Assessor can only call the fraud tool; payment requires policy engine or human approval."
+    },
+    {
+      "id": "s1-t30",
+      "nodeId": "s1-n5",
+      "threatId": "LLM10:2026",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t31",
+      "nodeId": "s1-n5",
+      "threatId": "AML.T0053",
+      "status": "mitigated",
+      "mitigation": "Tool calls logged and rate-limited per claim."
+    },
+    {
+      "id": "s1-t32",
+      "nodeId": "s1-n5",
+      "threatId": "AML.T0086",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t33",
+      "nodeId": "s1-n5",
+      "threatId": "AML.T0101",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t34",
+      "nodeId": "s1-n5",
+      "threatId": "ASI04",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t35",
+      "nodeId": "s1-n6",
+      "threatId": "LLM07:2026",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t36",
+      "nodeId": "s1-n6",
+      "threatId": "ASI09",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t37",
+      "nodeId": "s1-n7",
+      "threatId": "ASI03",
+      "status": "mitigated",
+      "mitigation": "Each node runs under its own scoped workload role."
+    },
+    {
+      "id": "s1-t38",
+      "nodeId": "s1-n8",
+      "threatId": "ASI09",
+      "status": "accepted",
+      "mitigation": "Sample: handler training and four-eyes on large payouts"
+    },
+    {
+      "id": "s1-t39",
+      "nodeId": "s1-n9",
+      "threatId": "ASI02",
+      "status": "mitigated",
+      "mitigation": "Fraud tool is read-only; payment tool limited to approved amount with idempotency key."
+    },
+    {
+      "id": "s1-t40",
+      "nodeId": "s1-n9",
+      "threatId": "ASI03",
+      "status": "mitigated",
+      "mitigation": "Each node runs under its own scoped workload role."
+    },
+    {
+      "id": "s1-t41",
+      "nodeId": "s1-n9",
+      "threatId": "ASI05",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t42",
+      "nodeId": "s1-n9",
+      "threatId": "LLM03:2026",
+      "status": "mitigated",
+      "mitigation": "Assessor can only call the fraud tool; payment requires policy engine or human approval."
+    },
+    {
+      "id": "s1-t43",
+      "nodeId": "s1-n9",
+      "threatId": "LLM10:2026",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t44",
+      "nodeId": "s1-n9",
+      "threatId": "AML.T0053",
+      "status": "mitigated",
+      "mitigation": "Tool calls logged and rate-limited per claim."
+    },
+    {
+      "id": "s1-t45",
+      "nodeId": "s1-n9",
+      "threatId": "AML.T0086",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t46",
+      "nodeId": "s1-n9",
+      "threatId": "AML.T0101",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s1-t47",
+      "nodeId": "s1-n9",
+      "threatId": "ASI04",
+      "status": "open",
+      "mitigation": ""
+    }
+  ],
+  "nfr": {
+    "requestsPerDay": 4000,
+    "daysPerMonth": 30,
+    "peakFactor": 3,
+    "avgLatencySeconds": 25,
+    "p95TargetSeconds": 60,
+    "availabilityPct": 99.5,
+    "rtoMinutes": 240,
+    "rpoMinutes": 15,
+    "agentCallsPerRequest": 5,
+    "inputTokensPerCall": 6000,
+    "outputTokensPerCall": 700,
+    "retryPct": 5,
+    "modelInputPricePerMillion": 3,
+    "modelOutputPricePerMillion": 15,
+    "retrievalCostPerRequest": 0.002,
+    "fixedInfrastructurePerMonth": 3500,
+    "storageGb": 800,
+    "storagePriceGbMonth": 0.023,
+    "humanReviewPct": 25,
+    "humanReviewMinutes": 6,
+    "reviewerHourlyCost": 45,
+    "concurrencyHeadroom": 1.5,
+    "region": "EU (single region)",
+    "residency": "EU only",
+    "encryption": "At rest and in transit",
+    "sensitiveData": "Personal data, claim documents",
+    "networkBoundary": "Private endpoints",
+    "unitValueUsd": 6,
+    "dataRetention": "Claim files 7 years; prompts and model outputs 90 days (example values)"
+  }
+}

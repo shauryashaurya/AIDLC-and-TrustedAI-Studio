@@ -1,0 +1,908 @@
+[
+  {
+    "id": "GOV-01",
+    "name": "AI governance ownership",
+    "domain": "Governance",
+    "description": "Assign accountable business owner, risk owner and model owner.",
+    "critical": true,
+    "referenceIds": [
+      "nist",
+      "iso",
+      "csa-aicm"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "GOVERN 2.1",
+        "GOVERN 2.3",
+        "GOVERN 1.2",
+        "GOVERN 1.3"
+      ],
+      "owaspLlm2026": [],
+      "owaspAsi2026": [],
+      "atlas": []
+    },
+    "aidlcGatePhase": "Ideation"
+  },
+  {
+    "id": "GOV-02",
+    "name": "Inventory and use-case scope",
+    "domain": "Governance",
+    "description": "Maintain system inventory, intended use and impact boundaries.",
+    "critical": true,
+    "referenceIds": [
+      "nist",
+      "iso",
+      "iso-42005"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "GOVERN 1.6",
+        "MAP 1.1",
+        "MAP 3.3",
+        "MAP 1.3",
+        "MAP 1.4",
+        "MAP 1.6",
+        "MAP 2.1"
+      ],
+      "owaspLlm2026": [],
+      "owaspAsi2026": [],
+      "atlas": []
+    },
+    "aidlcGatePhase": "Ideation"
+  },
+  {
+    "id": "GOV-03",
+    "name": "Applicable law and regulation",
+    "domain": "Governance",
+    "description": "Determine applicable laws and risk categories with legal review.",
+    "critical": true,
+    "referenceIds": [
+      "eu",
+      "eu-commission",
+      "nist"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "GOVERN 1.1",
+        "MAP 4.1"
+      ],
+      "owaspLlm2026": [],
+      "owaspAsi2026": [],
+      "atlas": []
+    },
+    "aidlcGatePhase": "Ideation"
+  },
+  {
+    "id": "GOV-04",
+    "name": "Human oversight",
+    "domain": "Governance",
+    "description": "Define reviewable decisions, escalation and reversal authority.",
+    "critical": true,
+    "referenceIds": [
+      "nist",
+      "eu",
+      "aws-wa-rai"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "GOVERN 3.2",
+        "MAP 3.5",
+        "MANAGE 2.4",
+        "MAP 2.2"
+      ],
+      "owaspLlm2026": [],
+      "owaspAsi2026": [
+        "ASI09"
+      ],
+      "atlas": []
+    },
+    "aidlcGatePhase": "Ideation"
+  },
+  {
+    "id": "GOV-05",
+    "name": "Vendor and third-party assurance",
+    "domain": "Governance",
+    "description": "Review model/provider risk, processing terms, subcontractors and exit plans.",
+    "critical": false,
+    "referenceIds": [
+      "iso",
+      "nist",
+      "csa-aicm"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "GOVERN 6.1",
+        "GOVERN 6.2",
+        "MANAGE 3.1",
+        "MANAGE 3.2",
+        "MAP 4.2"
+      ],
+      "owaspLlm2026": [
+        "LLM04:2026"
+      ],
+      "owaspAsi2026": [
+        "ASI04"
+      ],
+      "atlas": [
+        "AML.T0010"
+      ]
+    },
+    "aidlcGatePhase": "Ideation"
+  },
+  {
+    "id": "GOV-06",
+    "name": "AI risk training and team competence",
+    "domain": "Governance",
+    "description": "Train the people who build, operate and oversee the system on its AI risks, and record who has the skills to operate it. Covers training, team diversity in risk decisions, a safety-first practice and operator proficiency.",
+    "critical": false,
+    "referenceIds": [
+      "nist"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "GOVERN 2.2",
+        "GOVERN 3.1",
+        "GOVERN 4.1",
+        "MAP 1.2",
+        "MAP 3.4"
+      ],
+      "owaspLlm2026": [],
+      "owaspAsi2026": [],
+      "atlas": []
+    },
+    "aidlcGatePhase": "Ideation"
+  },
+  {
+    "id": "GOV-07",
+    "name": "Impact assessment, risk tolerance and residual risk",
+    "domain": "Governance",
+    "description": "Assess likely benefits and harms with their likelihood and magnitude, set risk tolerance, prioritise risk treatment and record the residual risk that remains.",
+    "critical": true,
+    "referenceIds": [
+      "nist",
+      "iso-42005",
+      "eu"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "GOVERN 4.2",
+        "MAP 1.5",
+        "MAP 3.1",
+        "MAP 5.1",
+        "MANAGE 1.2",
+        "MANAGE 1.3",
+        "MANAGE 1.4"
+      ],
+      "owaspLlm2026": [],
+      "owaspAsi2026": [],
+      "atlas": []
+    },
+    "aidlcGatePhase": "Ideation"
+  },
+  {
+    "id": "GOV-08",
+    "name": "External feedback, appeal and engagement",
+    "domain": "Governance",
+    "description": "Give users and affected people a way to report problems and appeal outcomes, and feed that input back into evaluation and design.",
+    "critical": false,
+    "referenceIds": [
+      "nist"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "GOVERN 5.1",
+        "GOVERN 5.2",
+        "MAP 5.2",
+        "MEASURE 3.3"
+      ],
+      "owaspLlm2026": [],
+      "owaspAsi2026": [],
+      "atlas": []
+    },
+    "aidlcGatePhase": "Operation"
+  },
+  {
+    "id": "GOV-09",
+    "name": "Decommissioning and deactivation",
+    "domain": "Governance",
+    "description": "Define how the system, its agents and credentials are switched off, superseded or retired without raising risk, and who can do it.",
+    "critical": false,
+    "referenceIds": [
+      "nist"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "GOVERN 1.7",
+        "MANAGE 2.4"
+      ],
+      "owaspLlm2026": [],
+      "owaspAsi2026": [],
+      "atlas": []
+    },
+    "aidlcGatePhase": "Operation"
+  },
+  {
+    "id": "SEC-01",
+    "name": "Least-privilege tool execution",
+    "domain": "Security",
+    "description": "Authorize each agent tool against role, tenant and action context.",
+    "critical": true,
+    "referenceIds": [
+      "owasp-agent",
+      "owasp-aisvs",
+      "owasp-llm"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "MEASURE 2.7"
+      ],
+      "owaspLlm2026": [
+        "LLM03:2026"
+      ],
+      "owaspAsi2026": [
+        "ASI02",
+        "ASI03"
+      ],
+      "atlas": [
+        "AML.T0053",
+        "AML.T0101"
+      ]
+    },
+    "aidlcGatePhase": "Inception"
+  },
+  {
+    "id": "SEC-02",
+    "name": "Prompt injection and tool-output isolation",
+    "domain": "Security",
+    "description": "Treat retrieval and tool outputs as untrusted; adversarially test.",
+    "critical": true,
+    "referenceIds": [
+      "owasp-llm",
+      "owasp-aisvs",
+      "nist-aml"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "MEASURE 2.7"
+      ],
+      "owaspLlm2026": [
+        "LLM01:2026",
+        "LLM10:2026"
+      ],
+      "owaspAsi2026": [
+        "ASI01"
+      ],
+      "atlas": [
+        "AML.T0051",
+        "AML.T0054"
+      ]
+    },
+    "aidlcGatePhase": "Inception"
+  },
+  {
+    "id": "SEC-03",
+    "name": "Secrets and credentials",
+    "domain": "Security",
+    "description": "Avoid raw credentials in prompts; use scoped ephemeral identities.",
+    "critical": true,
+    "referenceIds": [
+      "owasp-aisvs",
+      "nist-csf",
+      "iso-27001"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "MEASURE 2.7"
+      ],
+      "owaspLlm2026": [
+        "LLM02:2026"
+      ],
+      "owaspAsi2026": [
+        "ASI03"
+      ],
+      "atlas": [
+        "AML.T0083",
+        "AML.T0098"
+      ]
+    },
+    "aidlcGatePhase": "Construction"
+  },
+  {
+    "id": "SEC-04",
+    "name": "Data classification and residency",
+    "domain": "Security",
+    "description": "Classify PII, financial and regulated data; enforce region and retention.",
+    "critical": true,
+    "referenceIds": [
+      "iso",
+      "iso-27001",
+      "nist",
+      "eu"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "MAP 4.1",
+        "MEASURE 2.10"
+      ],
+      "owaspLlm2026": [
+        "LLM02:2026"
+      ],
+      "owaspAsi2026": [],
+      "atlas": []
+    },
+    "aidlcGatePhase": "Construction"
+  },
+  {
+    "id": "SEC-05",
+    "name": "Tenant and retrieval authorization",
+    "domain": "Security",
+    "description": "Enforce ACLs before data retrieval and post-filter access.",
+    "critical": true,
+    "referenceIds": [
+      "owasp-llm",
+      "owasp-aisvs",
+      "nist"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "MEASURE 2.10"
+      ],
+      "owaspLlm2026": [
+        "LLM08:2026",
+        "LLM09:2026"
+      ],
+      "owaspAsi2026": [],
+      "atlas": [
+        "AML.T0070",
+        "AML.T0071"
+      ]
+    },
+    "aidlcGatePhase": "Inception"
+  },
+  {
+    "id": "SEC-06",
+    "name": "Agent-to-agent and MCP trust",
+    "domain": "Security",
+    "description": "Authenticate integrations, verify tool manifests and constrain remote agents.",
+    "critical": true,
+    "referenceIds": [
+      "mcp",
+      "a2a",
+      "owasp-agent"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "MEASURE 2.7"
+      ],
+      "owaspLlm2026": [],
+      "owaspAsi2026": [
+        "ASI04",
+        "ASI07"
+      ],
+      "atlas": [
+        "AML.T0010.005",
+        "AML.T0110"
+      ]
+    },
+    "aidlcGatePhase": "Inception"
+  },
+  {
+    "id": "SEC-07",
+    "name": "Threat modeling and red team",
+    "domain": "Security",
+    "description": "Test exfiltration, escalation, tool misuse, memory poisoning and goal hijack.",
+    "critical": true,
+    "referenceIds": [
+      "atlas",
+      "owasp-agentic-threats",
+      "nist-aml"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "MEASURE 1.3",
+        "MEASURE 2.7"
+      ],
+      "owaspLlm2026": [
+        "LLM01:2026"
+      ],
+      "owaspAsi2026": [
+        "ASI01"
+      ],
+      "atlas": [
+        "AML.T0051",
+        "AML.T0080"
+      ]
+    },
+    "aidlcGatePhase": "Inception"
+  },
+  {
+    "id": "SEC-08",
+    "name": "Code and command execution isolation",
+    "domain": "Security",
+    "description": "Run any agent-generated or tool-executed code and commands in a sandbox or container, and require extra authorization for potentially dangerous commands.",
+    "critical": true,
+    "referenceIds": [
+      "owasp-agent",
+      "mcp",
+      "atlas"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "MEASURE 2.7"
+      ],
+      "owaspLlm2026": [
+        "LLM10:2026"
+      ],
+      "owaspAsi2026": [
+        "ASI05"
+      ],
+      "atlas": [
+        "AML.T0053"
+      ]
+    },
+    "aidlcGatePhase": "Construction"
+  },
+  {
+    "id": "SEC-09",
+    "name": "Memory and context integrity",
+    "domain": "Security",
+    "description": "Control what can be written to agent memory and shared context, scope it per user or task, and detect or expire poisoned entries.",
+    "critical": true,
+    "referenceIds": [
+      "owasp-agent",
+      "atlas"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "MEASURE 2.7"
+      ],
+      "owaspLlm2026": [
+        "LLM02:2026"
+      ],
+      "owaspAsi2026": [
+        "ASI06"
+      ],
+      "atlas": [
+        "AML.T0080",
+        "AML.T0080.000"
+      ]
+    },
+    "aidlcGatePhase": "Inception"
+  },
+  {
+    "id": "SEC-10",
+    "name": "Training, fine-tuning and retrieval data integrity",
+    "domain": "Security",
+    "description": "Control the sources of training, fine-tuning and retrieval data, verify their provenance and detect poisoned content before it reaches the model or index.",
+    "critical": true,
+    "referenceIds": [
+      "owasp-llm",
+      "atlas",
+      "nist-aml"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "MAP 2.3",
+        "MEASURE 2.7"
+      ],
+      "owaspLlm2026": [
+        "LLM05:2026"
+      ],
+      "owaspAsi2026": [],
+      "atlas": [
+        "AML.T0020",
+        "AML.T0070",
+        "AML.T0071"
+      ]
+    },
+    "aidlcGatePhase": "Inception"
+  },
+  {
+    "id": "SEC-11",
+    "name": "MCP server and tool interface security",
+    "domain": "Security",
+    "description": "Each MCP tool server validates all inputs, enforces access control, rate-limits calls and sanitizes outputs. HTTP servers authenticate every request, validate token audience and accept no tokens issued for others, validate the Origin header and bind to localhost when local; stdio servers take credentials from the environment.",
+    "critical": true,
+    "referenceIds": [
+      "mcp",
+      "owasp-agent"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "MEASURE 2.7"
+      ],
+      "owaspLlm2026": [
+        "LLM03:2026",
+        "LLM10:2026"
+      ],
+      "owaspAsi2026": [
+        "ASI02",
+        "ASI03",
+        "ASI04"
+      ],
+      "atlas": [
+        "AML.T0053",
+        "AML.T0110"
+      ]
+    },
+    "aidlcGatePhase": "Construction"
+  },
+  {
+    "id": "SEC-12",
+    "name": "Human confirmation for state-changing tools",
+    "domain": "Security",
+    "description": "Tools that change or delete data, move money or act outside the system require a human confirmation step that can deny the call; the person sees the inputs before the call is made.",
+    "critical": true,
+    "referenceIds": [
+      "mcp",
+      "owasp-agent",
+      "nist"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "GOVERN 3.2",
+        "MAP 3.5"
+      ],
+      "owaspLlm2026": [
+        "LLM03:2026"
+      ],
+      "owaspAsi2026": [
+        "ASI02",
+        "ASI09"
+      ],
+      "atlas": [
+        "AML.T0101"
+      ]
+    },
+    "aidlcGatePhase": "Inception"
+  },
+  {
+    "id": "REL-01",
+    "name": "Bounded loops and budgets",
+    "domain": "Reliability",
+    "description": "Set timeouts, max steps, retries, spend ceilings and kill switches.",
+    "critical": true,
+    "referenceIds": [
+      "owasp-agent",
+      "owasp-llm",
+      "nist"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "MANAGE 2.4"
+      ],
+      "owaspLlm2026": [
+        "LLM06:2026"
+      ],
+      "owaspAsi2026": [
+        "ASI08"
+      ],
+      "atlas": [
+        "AML.T0029",
+        "AML.T0034",
+        "AML.T0034.002"
+      ]
+    },
+    "aidlcGatePhase": "Inception"
+  },
+  {
+    "id": "REL-02",
+    "name": "Idempotency and compensation",
+    "domain": "Reliability",
+    "description": "Protect side effects; define rollback and compensating transactions.",
+    "critical": true,
+    "referenceIds": [
+      "aws-wa",
+      "nist"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "MANAGE 2.3"
+      ],
+      "owaspLlm2026": [],
+      "owaspAsi2026": [
+        "ASI08"
+      ],
+      "atlas": []
+    },
+    "aidlcGatePhase": "Construction"
+  },
+  {
+    "id": "REL-03",
+    "name": "Failure isolation and degraded operation",
+    "domain": "Reliability",
+    "description": "Plan circuit breakers, fallback models and human escalation.",
+    "critical": false,
+    "referenceIds": [
+      "aws-wa",
+      "owasp-agent",
+      "nist"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "MEASURE 2.6"
+      ],
+      "owaspLlm2026": [],
+      "owaspAsi2026": [
+        "ASI08",
+        "ASI10"
+      ],
+      "atlas": []
+    },
+    "aidlcGatePhase": "Construction"
+  },
+  {
+    "id": "REL-04",
+    "name": "SLOs and capacity testing",
+    "domain": "Reliability",
+    "description": "Define latency, throughput, availability, RTO/RPO and load tests.",
+    "critical": true,
+    "referenceIds": [
+      "sre-slo",
+      "sre-workbook-slo",
+      "nist",
+      "dora"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "MEASURE 2.4",
+        "MEASURE 2.6"
+      ],
+      "owaspLlm2026": [
+        "LLM06:2026"
+      ],
+      "owaspAsi2026": [],
+      "atlas": [
+        "AML.T0029"
+      ]
+    },
+    "aidlcGatePhase": "Operation"
+  },
+  {
+    "id": "EVAL-01",
+    "name": "Independent task evaluation",
+    "domain": "Evaluation",
+    "description": "Maintain golden tasks, misuse tests, groundedness and acceptance thresholds.",
+    "critical": true,
+    "referenceIds": [
+      "nist",
+      "nist-gen",
+      "aws-wa-genai"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "MEASURE 1.3",
+        "MEASURE 2.3",
+        "MEASURE 2.5"
+      ],
+      "owaspLlm2026": [
+        "LLM07:2026"
+      ],
+      "owaspAsi2026": [],
+      "atlas": []
+    },
+    "aidlcGatePhase": "Construction"
+  },
+  {
+    "id": "EVAL-02",
+    "name": "RAG evidence integrity",
+    "domain": "Evaluation",
+    "description": "Validate citation attribution, provenance, freshness and refusal on no evidence.",
+    "critical": false,
+    "referenceIds": [
+      "nist",
+      "nist-gen",
+      "rag-ref"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "MEASURE 2.5",
+        "MEASURE 2.9"
+      ],
+      "owaspLlm2026": [
+        "LLM07:2026",
+        "LLM09:2026"
+      ],
+      "owaspAsi2026": [],
+      "atlas": [
+        "AML.T0070"
+      ]
+    },
+    "aidlcGatePhase": "Inception"
+  },
+  {
+    "id": "EVAL-03",
+    "name": "Bias and fairness analysis",
+    "domain": "Evaluation",
+    "description": "Measure harms for affected groups where relevant.",
+    "critical": false,
+    "referenceIds": [
+      "nist",
+      "eu",
+      "aws-wa-rai"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "MEASURE 2.2",
+        "MEASURE 2.11"
+      ],
+      "owaspLlm2026": [],
+      "owaspAsi2026": [],
+      "atlas": []
+    },
+    "aidlcGatePhase": "Construction"
+  },
+  {
+    "id": "EVAL-04",
+    "name": "Measurement plan and TEVV documentation",
+    "domain": "Evaluation",
+    "description": "Choose metrics for the most significant risks first, document test sets, tools and results, record what cannot be measured, and review whether the metrics and evaluation process still work.",
+    "critical": false,
+    "referenceIds": [
+      "nist",
+      "nist-gen"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "MEASURE 1.1",
+        "MEASURE 1.2",
+        "MEASURE 2.1",
+        "MEASURE 2.13",
+        "MEASURE 3.2",
+        "MEASURE 4.1",
+        "MEASURE 4.2",
+        "MEASURE 4.3"
+      ],
+      "owaspLlm2026": [],
+      "owaspAsi2026": [],
+      "atlas": []
+    },
+    "aidlcGatePhase": "Construction"
+  },
+  {
+    "id": "OPS-01",
+    "name": "End-to-end trace and audit",
+    "domain": "Operations",
+    "description": "Capture prompt/tool/model versions, decisions, approvals and cost.",
+    "critical": true,
+    "referenceIds": [
+      "iso",
+      "nist",
+      "otel-genai"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "MEASURE 2.8",
+        "MANAGE 4.1"
+      ],
+      "owaspLlm2026": [],
+      "owaspAsi2026": [
+        "ASI10"
+      ],
+      "atlas": []
+    },
+    "aidlcGatePhase": "Operation"
+  },
+  {
+    "id": "OPS-02",
+    "name": "Incident response and containment",
+    "domain": "Operations",
+    "description": "Define on-call, incident taxonomies, rollback and containment playbooks.",
+    "critical": true,
+    "referenceIds": [
+      "nist",
+      "nist-csf",
+      "atlas"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "GOVERN 4.3",
+        "MANAGE 2.3",
+        "MANAGE 4.1",
+        "MANAGE 4.3"
+      ],
+      "owaspLlm2026": [],
+      "owaspAsi2026": [
+        "ASI10"
+      ],
+      "atlas": []
+    },
+    "aidlcGatePhase": "Operation"
+  },
+  {
+    "id": "OPS-03",
+    "name": "Change and release control",
+    "domain": "Operations",
+    "description": "Maintain gated deployments, reproducible releases and rollback evidence.",
+    "critical": true,
+    "referenceIds": [
+      "iso",
+      "aws",
+      "nist-ssdf-ai"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "GOVERN 1.4",
+        "MANAGE 1.1"
+      ],
+      "owaspLlm2026": [
+        "LLM04:2026"
+      ],
+      "owaspAsi2026": [],
+      "atlas": [
+        "AML.T0010"
+      ]
+    },
+    "aidlcGatePhase": "Construction"
+  },
+  {
+    "id": "OPS-04",
+    "name": "Cost governance",
+    "domain": "Operations",
+    "description": "Track token budgets, utilization, unit economics and spend alerts.",
+    "critical": false,
+    "referenceIds": [
+      "nist",
+      "finops-framework",
+      "finops-ai",
+      "focus"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "MAP 3.2",
+        "MANAGE 2.1"
+      ],
+      "owaspLlm2026": [
+        "LLM06:2026"
+      ],
+      "owaspAsi2026": [],
+      "atlas": [
+        "AML.T0034"
+      ]
+    },
+    "aidlcGatePhase": "Operation"
+  },
+  {
+    "id": "OPS-05",
+    "name": "Continuous improvement and drift",
+    "domain": "Operations",
+    "description": "Monitor model/data/tool drift and route defects into backlog.",
+    "critical": false,
+    "referenceIds": [
+      "nist",
+      "aws-wa-genai"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "MEASURE 2.4",
+        "MEASURE 3.1",
+        "MANAGE 4.2",
+        "GOVERN 1.5",
+        "MANAGE 2.2"
+      ],
+      "owaspLlm2026": [],
+      "owaspAsi2026": [],
+      "atlas": []
+    },
+    "aidlcGatePhase": "Operation"
+  },
+  {
+    "id": "OPS-06",
+    "name": "Environmental impact",
+    "domain": "Operations",
+    "description": "Assess and record the energy and resource use of model training and operation.",
+    "critical": false,
+    "referenceIds": [
+      "nist"
+    ],
+    "frameworkIds": {
+      "nistAiRmf": [
+        "MEASURE 2.12"
+      ],
+      "owaspLlm2026": [],
+      "owaspAsi2026": [],
+      "atlas": []
+    },
+    "aidlcGatePhase": "Operation"
+  }
+]

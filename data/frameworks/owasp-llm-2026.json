@@ -1,0 +1,48 @@
+{
+ "referenceId": "owasp-llm",
+ "version": "2026",
+ "source": "https://genai.owasp.org/top-10-for-llm-applications-2026/",
+ "verifiedOn": "2026-11-25",
+ "items": [
+  {
+   "id": "LLM01:2026",
+   "name": "Prompt Injection"
+  },
+  {
+   "id": "LLM02:2026",
+   "name": "Sensitive Information Disclosure"
+  },
+  {
+   "id": "LLM03:2026",
+   "name": "Excessive Agency"
+  },
+  {
+   "id": "LLM04:2026",
+   "name": "Supply Chain"
+  },
+  {
+   "id": "LLM05:2026",
+   "name": "Data and Model Poisoning"
+  },
+  {
+   "id": "LLM06:2026",
+   "name": "Unbounded Consumption"
+  },
+  {
+   "id": "LLM07:2026",
+   "name": "Misinformation"
+  },
+  {
+   "id": "LLM08:2026",
+   "name": "Hidden Context Exposure"
+  },
+  {
+   "id": "LLM09:2026",
+   "name": "Vector and Embedding Weaknesses"
+  },
+  {
+   "id": "LLM10:2026",
+   "name": "Improper Output Handling"
+  }
+ ]
+}

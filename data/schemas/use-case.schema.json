@@ -1,0 +1,466 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "use-case.schema.json",
+  "title": "AI-DLC × Trusted AI Studio use case (schemaVersion 1)",
+  "description": "Validated on import. Fields added after the first release (node identity, cost and security attributes, nfr.dataRetention, edge probability, threats) are optional here and filled with defaults by migrateCase() in src/lib/model.ts.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schemaVersion",
+    "id",
+    "title",
+    "createdAt",
+    "updatedAt",
+    "nodes",
+    "edges",
+    "patternIds",
+    "ragIds",
+    "nfr",
+    "controls",
+    "stages",
+    "decisions",
+    "units",
+    "scenarios"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "createdAt": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "updatedAt": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "summary": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "problem": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "outcome": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "sponsor": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "accountableOwner": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "stakeholders": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "domain": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "jurisdictions": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "dataClassification": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "riskTier": {
+      "enum": [
+        "low",
+        "moderate",
+        "high",
+        "critical"
+      ]
+    },
+    "profile": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "inScope": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "outOfScope": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "constraints": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "successMetrics": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "assumptions": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "sourceUrl": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "sourceDate": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "patternIds": {
+      "type": "array",
+      "maxItems": 200,
+      "items": {
+        "type": "string"
+      }
+    },
+    "ragIds": {
+      "type": "array",
+      "maxItems": 200,
+      "items": {
+        "type": "string"
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "maxItems": 300,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "kind",
+          "x",
+          "y",
+          "maxSteps",
+          "timeoutSeconds",
+          "spendLimitUsd"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 20000
+          },
+          "kind": {
+            "enum": [
+              "agent",
+              "orchestrator",
+              "tool",
+              "retriever",
+              "validator",
+              "human",
+              "memory",
+              "event",
+              "policy",
+              "system"
+            ]
+          },
+          "x": {
+            "type": "number"
+          },
+          "y": {
+            "type": "number"
+          },
+          "maxSteps": {
+            "type": "number",
+            "minimum": 0
+          },
+          "timeoutSeconds": {
+            "type": "number",
+            "minimum": 0
+          },
+          "spendLimitUsd": {
+            "type": "number",
+            "minimum": 0
+          },
+          "identity": {
+            "type": "string",
+            "maxLength": 20000
+          },
+          "inputTokens": {
+            "type": "number",
+            "minimum": 0
+          },
+          "outputTokens": {
+            "type": "number",
+            "minimum": 0
+          },
+          "inputPricePerM": {
+            "type": "number",
+            "minimum": 0
+          },
+          "outputPricePerM": {
+            "type": "number",
+            "minimum": 0
+          },
+          "cachedInputPct": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "cachedInputPricePerM": {
+            "type": "number",
+            "minimum": 0
+          },
+          "costPerCallUsd": {
+            "type": "number",
+            "minimum": 0
+          },
+          "latencySeconds": {
+            "type": "number",
+            "minimum": 0
+          },
+          "routing": {
+            "enum": [
+              "one",
+              "all"
+            ]
+          },
+          "actionType": {
+            "enum": [
+              "",
+              "read-only",
+              "additive",
+              "destructive"
+            ]
+          },
+          "idempotent": {
+            "type": "boolean"
+          },
+          "openWorld": {
+            "type": "boolean"
+          },
+          "requiresHumanApproval": {
+            "type": "boolean"
+          },
+          "executesCode": {
+            "type": "boolean"
+          },
+          "sandbox": {
+            "type": "string",
+            "maxLength": 20000
+          },
+          "allowedEgress": {
+            "type": "string",
+            "maxLength": 20000
+          },
+          "patternId": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "ragIds": {
+            "type": "array",
+            "maxItems": 40,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "maxItems": 800,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "from",
+          "to",
+          "failurePolicy"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 20000
+          },
+          "contract": {
+            "type": "string",
+            "maxLength": 20000
+          },
+          "failurePolicy": {
+            "enum": [
+              "halt",
+              "retry",
+              "compensate",
+              "escalate"
+            ]
+          },
+          "probability": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      }
+    },
+    "stages": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^\\d\\.\\d$"
+          },
+          "status": {
+            "enum": [
+              "not-started",
+              "in-progress",
+              "in-review",
+              "approved",
+              "waived"
+            ]
+          }
+        }
+      }
+    },
+    "controls": {
+      "type": "array",
+      "maxItems": 150,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "unassessed",
+              "planned",
+              "evidenced",
+              "accepted"
+            ]
+          },
+          "likelihood": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "impact": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 5
+          }
+        }
+      }
+    },
+    "decisions": {
+      "type": "array",
+      "maxItems": 300,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "decision"
+        ]
+      }
+    },
+    "units": {
+      "type": "array",
+      "maxItems": 300,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "dependsOn",
+          "status"
+        ],
+        "properties": {
+          "dependsOn": {
+            "type": "array",
+            "maxItems": 300,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "scenarios": {
+      "type": "array",
+      "maxItems": 300,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "trigger",
+          "expectedResult"
+        ]
+      }
+    },
+    "threats": {
+      "type": "array",
+      "maxItems": 5000,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "nodeId",
+          "threatId",
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "enum": [
+              "open",
+              "mitigated",
+              "accepted",
+              "not-applicable"
+            ]
+          },
+          "mitigation": {
+            "type": "string",
+            "maxLength": 20000
+          }
+        }
+      }
+    },
+    "nfr": {
+      "type": "object",
+      "required": [
+        "requestsPerDay",
+        "peakFactor",
+        "agentCallsPerRequest",
+        "modelInputPricePerMillion",
+        "modelOutputPricePerMillion"
+      ]
+    }
+  }
+}

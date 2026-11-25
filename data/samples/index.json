@@ -1,0 +1,19 @@
+{
+  "note": "Fictional sample shipped with the studio to demonstrate every page. The organisation, volumes, prices and evidence are invented example values, not quotes or measurements.",
+  "samples": [
+    {
+      "id": "sample-claims-triage",
+      "title": "Sample: Insurance claims triage agents",
+      "profile": "feature",
+      "riskTier": "high",
+      "summary": "Agents extract claim details, find the relevant policy wording, propose a coverage decision and pay approved claims, with a human handler for complex or high-value claims."
+    },
+    {
+      "id": "sample-service-desk",
+      "title": "Sample: IT service desk resolution agents",
+      "profile": "mvp",
+      "riskTier": "moderate",
+      "summary": "Agents classify tickets, draft answers from the knowledge base, check them, and post replies; engineers take tickets that need hands-on work."
+    }
+  ]
+}

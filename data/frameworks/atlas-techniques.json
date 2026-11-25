@@ -1,0 +1,101 @@
+{
+ "referenceId": "atlas",
+ "version": "2026.10",
+ "source": "https://raw.githubusercontent.com/mitre-atlas/atlas-data/main/dist/v6/ATLAS-2026.10.yaml",
+ "verifiedOn": "2026-11-25",
+ "note": "Subset of techniques used by this app. Names read from the ATLAS 2026.10 data file; sub-technique names are shown as \"Parent: Sub-technique\".",
+ "items": [
+  {
+   "id": "AML.T0010",
+   "name": "Supply Chain Compromise"
+  },
+  {
+   "id": "AML.T0010.005",
+   "name": "Supply Chain Compromise: AI Agent Tool"
+  },
+  {
+   "id": "AML.T0020",
+   "name": "Training Data Poisoning"
+  },
+  {
+   "id": "AML.T0024",
+   "name": "Exfiltration via AI Inference API"
+  },
+  {
+   "id": "AML.T0029",
+   "name": "Denial of AI Service"
+  },
+  {
+   "id": "AML.T0031",
+   "name": "Erode AI Model Integrity"
+  },
+  {
+   "id": "AML.T0034",
+   "name": "Cost Harvesting"
+  },
+  {
+   "id": "AML.T0034.002",
+   "name": "Cost Harvesting: Agentic Resource Consumption"
+  },
+  {
+   "id": "AML.T0051",
+   "name": "LLM Prompt Injection"
+  },
+  {
+   "id": "AML.T0051.000",
+   "name": "LLM Prompt Injection: Direct"
+  },
+  {
+   "id": "AML.T0051.001",
+   "name": "LLM Prompt Injection: Indirect"
+  },
+  {
+   "id": "AML.T0053",
+   "name": "AI Agent Tool Invocation"
+  },
+  {
+   "id": "AML.T0054",
+   "name": "LLM Jailbreak"
+  },
+  {
+   "id": "AML.T0070",
+   "name": "RAG Poisoning"
+  },
+  {
+   "id": "AML.T0071",
+   "name": "False RAG Entry Injection"
+  },
+  {
+   "id": "AML.T0080",
+   "name": "AI Agent Context Poisoning"
+  },
+  {
+   "id": "AML.T0080.000",
+   "name": "AI Agent Context Poisoning: Memory"
+  },
+  {
+   "id": "AML.T0081",
+   "name": "Modify AI Agent Configuration"
+  },
+  {
+   "id": "AML.T0083",
+   "name": "Credentials from AI Agent Configuration"
+  },
+  {
+   "id": "AML.T0086",
+   "name": "Exfiltration via AI Agent Tool Invocation"
+  },
+  {
+   "id": "AML.T0098",
+   "name": "AI Agent Tool Credential Harvesting"
+  },
+  {
+   "id": "AML.T0101",
+   "name": "Data Destruction via AI Agent Tool Invocation"
+  },
+  {
+   "id": "AML.T0110",
+   "name": "AI Agent Tool Poisoning"
+  }
+ ]
+}

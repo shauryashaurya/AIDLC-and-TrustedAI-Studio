@@ -1,0 +1,1577 @@
+{
+  "$schema": "./schemas/references.schema.json",
+  "catalogVersion": "2026-11-25",
+  "provenance": "Checked against official pages on 2026-11-25. Each entry contains only what the source states, what the check observed, and where this app uses it. Missing values are null. Entries that could not be checked are marked unverified.",
+  "types": [
+    "Book chapter",
+    "Community security guide",
+    "Community security list",
+    "Community verification standard",
+    "Data specification",
+    "Framework (US government, voluntary)",
+    "Framework profile (US government, voluntary)",
+    "Government guidance",
+    "Government publication",
+    "Industry control framework",
+    "Intergovernmental recommendation",
+    "International standard",
+    "Knowledge base",
+    "Law (EU regulation)",
+    "Methodology and tooling (open source)",
+    "Methodology documentation",
+    "Methodology source (open source)",
+    "Open format",
+    "Practitioner framework",
+    "Practitioner guidance",
+    "Project file",
+    "Protocol specification",
+    "Research report",
+    "SDK",
+    "Sample documentation",
+    "Sample repository",
+    "Specification",
+    "Vendor documentation"
+  ],
+  "domains": [
+    {
+      "id": "aidlc",
+      "label": "AI-DLC methodology"
+    },
+    {
+      "id": "aws",
+      "label": "AWS samples & documentation"
+    },
+    {
+      "id": "governance",
+      "label": "AI governance & law"
+    },
+    {
+      "id": "security",
+      "label": "AI security"
+    },
+    {
+      "id": "protocols",
+      "label": "Agent protocols"
+    },
+    {
+      "id": "tooling",
+      "label": "Coding-agent formats & SDKs"
+    },
+    {
+      "id": "finops",
+      "label": "FinOps & cost"
+    },
+    {
+      "id": "reliability",
+      "label": "Reliability & SLOs"
+    },
+    {
+      "id": "observability",
+      "label": "Observability"
+    },
+    {
+      "id": "delivery",
+      "label": "Software delivery"
+    },
+    {
+      "id": "project",
+      "label": "Project files"
+    }
+  ],
+  "references": [
+    {
+      "id": "aws",
+      "title": "AI-DLC Workflows (awslabs/aidlc-workflows)",
+      "publisher": "Amazon Web Services (AWS Labs)",
+      "domain": "aidlc",
+      "type": "Methodology and tooling (open source)",
+      "version": "v2.11.5",
+      "publishedDate": "2026-11-25",
+      "verifiedOn": "2026-11-25",
+      "url": "https://github.com/awslabs/aidlc-workflows",
+      "pinnedUrl": "https://github.com/awslabs/aidlc-workflows/releases/tag/v2.11.5",
+      "access": "free",
+      "license": "MIT-0",
+      "summary": "AWS Labs repository for AI-DLC. Its README states: \"One harness-neutral core runs natively in Claude Code, Kiro CLI, Kiro IDE, Codex CLI, Cursor, opencode, and GitHub Copilot.\" The guide documents 5 phases with 33 stages, 11 workflow profiles and 14 agents.",
+      "usedIn": "Source of data/aidlc-stages.json, data/aidlc-profiles.json and data/aidlc-agents.json (Lifecycle page). This app does not run AI-DLC.",
+      "verificationNotes": "The release page shows \"25 Nov 06:43\" without a year; the year is taken from the preceding tag v2.11.5-preview.20261124.1.",
+      "citedBy": {
+        "pages": [
+          "lifecycle",
+          "home"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "aidlc-stages",
+      "title": "AI-DLC guide 04: Phases and stages",
+      "publisher": "Amazon Web Services (AWS Labs)",
+      "domain": "aidlc",
+      "type": "Methodology documentation",
+      "version": "v2.11.5",
+      "publishedDate": "2026-11-25",
+      "verifiedOn": "2026-11-25",
+      "url": "https://github.com/awslabs/aidlc-workflows/blob/main/docs/guide/04-phases-and-stages.md",
+      "pinnedUrl": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/docs/guide/04-phases-and-stages.md",
+      "access": "free",
+      "license": "MIT-0",
+      "summary": "Lists the 33 stages in 5 phases with lead agent, supporting agents, outputs and execution mode. States: \"Every stage your scope runs, outside Initialization, ends with an approval gate.\"",
+      "usedIn": "Stage purpose, gate, mode, agents and conditions in data/aidlc-stages.json.",
+      "verificationNotes": "",
+      "citedBy": {
+        "pages": [
+          "lifecycle"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "aidlc-scopes",
+      "title": "AI-DLC guide 05: Scopes and depth",
+      "publisher": "Amazon Web Services (AWS Labs)",
+      "domain": "aidlc",
+      "type": "Methodology documentation",
+      "version": "v2.11.5",
+      "publishedDate": "2026-11-25",
+      "verifiedOn": "2026-11-25",
+      "url": "https://github.com/awslabs/aidlc-workflows/blob/main/docs/guide/05-scopes-and-depth.md",
+      "pinnedUrl": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/docs/guide/05-scopes-and-depth.md",
+      "access": "free",
+      "license": "MIT-0",
+      "summary": "Defines the 3 depth levels (Minimal, Standard, Comprehensive), the 3 test-strategy levels, review levels, and a stage-by-scope matrix.",
+      "usedIn": "Depth and test-strategy values in data/aidlc-profiles.json.",
+      "verificationNotes": "Per-scope sections count stages after Initialization (workshop: \"23 of 30\"); the routing table counts Initialization too (workshop: \"26 / 33\").",
+      "citedBy": {
+        "pages": [
+          "lifecycle"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "aidlc-profiles",
+      "title": "AI-DLC guide: Workflow profiles",
+      "publisher": "Amazon Web Services (AWS Labs)",
+      "domain": "aidlc",
+      "type": "Methodology documentation",
+      "version": "v2.11.5",
+      "publishedDate": "2026-11-25",
+      "verifiedOn": "2026-11-25",
+      "url": "https://github.com/awslabs/aidlc-workflows/blob/main/docs/guide/workflow-profiles.md",
+      "pinnedUrl": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/docs/guide/workflow-profiles.md",
+      "access": "free",
+      "license": "MIT-0",
+      "summary": "Describes the 11 workflow profiles: classic, express, feature, enterprise, mvp, poc, bugfix, refactor, infra, security-patch and workshop.",
+      "usedIn": "Profile list and stage selection in data/aidlc-profiles.json (Use-case framing and Lifecycle pages).",
+      "verificationNotes": "On classic, this page says support agents are unchanged; the scopes page says \"collaborators are off\" for classic.",
+      "citedBy": {
+        "pages": [
+          "ideate",
+          "lifecycle"
+        ],
+        "stages": [
+          "0.3"
+        ]
+      },
+      "status": "current"
+    },
+    {
+      "id": "aidlc-agents",
+      "title": "AI-DLC guide 06: Agents",
+      "publisher": "Amazon Web Services (AWS Labs)",
+      "domain": "aidlc",
+      "type": "Methodology documentation",
+      "version": "v2.11.5",
+      "publishedDate": "2026-11-25",
+      "verifiedOn": "2026-11-25",
+      "url": "https://github.com/awslabs/aidlc-workflows/blob/main/docs/guide/06-agents.md",
+      "pinnedUrl": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/docs/guide/06-agents.md",
+      "access": "free",
+      "license": "MIT-0",
+      "summary": "Describes 14 agents: 11 domain agents, 2 reviewer agents that \"do not produce artifacts\", and 1 composer agent, with the stages each one leads and supports.",
+      "usedIn": "data/aidlc-agents.json; lead and supporting agents shown on each stage.",
+      "verificationNotes": "",
+      "citedBy": {
+        "pages": [
+          "lifecycle"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "aidlc-artifacts",
+      "title": "AI-DLC guide 14: Artifacts reference",
+      "publisher": "Amazon Web Services (AWS Labs)",
+      "domain": "aidlc",
+      "type": "Methodology documentation",
+      "version": "v2.11.5",
+      "publishedDate": "2026-11-25",
+      "verifiedOn": "2026-11-25",
+      "url": "https://github.com/awslabs/aidlc-workflows/blob/main/docs/guide/14-artifacts-reference.md",
+      "pinnedUrl": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/docs/guide/14-artifacts-reference.md",
+      "access": "free",
+      "license": "MIT-0",
+      "summary": "Lists the files each stage writes under aidlc/spaces/<space>/intents/<YYMMDD>-<label>/.",
+      "usedIn": "Output file names shown on each stage.",
+      "verificationNotes": "File names are not listed for 2.1 Reverse Engineering beyond architecture.md, code-structure.md and technology-stack.md.",
+      "citedBy": {
+        "pages": [
+          "lifecycle"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "aidlc-state-audit",
+      "title": "AI-DLC guide 10: State and audit",
+      "publisher": "Amazon Web Services (AWS Labs)",
+      "domain": "aidlc",
+      "type": "Methodology documentation",
+      "version": "v2.11.5",
+      "publishedDate": "2026-11-25",
+      "verifiedOn": "2026-11-25",
+      "url": "https://github.com/awslabs/aidlc-workflows/blob/main/docs/guide/10-state-and-audit.md",
+      "pinnedUrl": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/docs/guide/10-state-and-audit.md",
+      "access": "free",
+      "license": "MIT-0",
+      "summary": "aidlc-state.md is \"the single source of truth for that intent's workflow progress\"; audit/ holds append-only Markdown shards recording stage events, gate decisions, question answers, file writes and errors.",
+      "usedIn": "Lifecycle page note on where AI-DLC keeps state and audit.",
+      "verificationNotes": "",
+      "citedBy": {
+        "pages": [
+          "lifecycle"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "aidlc-vision",
+      "title": "AI-DLC guide: Writing a vision document",
+      "publisher": "Amazon Web Services (AWS Labs)",
+      "domain": "aidlc",
+      "type": "Methodology documentation",
+      "version": "v2.11.5",
+      "publishedDate": "2026-11-25",
+      "verifiedOn": "2026-11-25",
+      "url": "https://github.com/awslabs/aidlc-workflows/blob/main/docs/guide/writing-inputs/vision-document-guide.md",
+      "pinnedUrl": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/docs/guide/writing-inputs/vision-document-guide.md",
+      "access": "free",
+      "license": "MIT-0",
+      "summary": "Describes the vision document as \"the main input to a new workflow\" (optional) and gives its section headings.",
+      "usedIn": "Headings of the vision.md export (Reports page).",
+      "verificationNotes": "",
+      "citedBy": {
+        "pages": [
+          "reports",
+          "ideate"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "aidlc-workshop",
+      "title": "AI-DLC guide: Multi-Team Construction and Workshop Mode",
+      "publisher": "Amazon Web Services (AWS Labs)",
+      "domain": "aidlc",
+      "type": "Methodology documentation",
+      "version": "v2.11.5",
+      "publishedDate": "2026-11-25",
+      "verifiedOn": "2026-11-25",
+      "url": "https://github.com/awslabs/aidlc-workflows/blob/main/docs/guide/workshop-mode.md",
+      "pinnedUrl": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/docs/guide/workshop-mode.md",
+      "access": "free",
+      "license": "MIT-0",
+      "summary": "Roles: integration lead, Unit team, review group. Teams claim a Unit, run stages 3.1–3.5 and publish it; the integration lead pins it, records the merge gate and lands it on main. Includes a two-day walkthrough without durations.",
+      "usedIn": "Workshop module 8 (hand-off to a real AI-DLC workshop run).",
+      "verificationNotes": "",
+      "citedBy": {
+        "pages": [
+          "workshop"
+        ],
+        "stages": [
+          "2.7",
+          "2.9"
+        ]
+      },
+      "status": "current"
+    },
+    {
+      "id": "aidlc-facilitator",
+      "title": "AI-DLC guide: Facilitator guide",
+      "publisher": "Amazon Web Services (AWS Labs)",
+      "domain": "aidlc",
+      "type": "Methodology documentation",
+      "version": "v2.11.5",
+      "publishedDate": "2026-11-25",
+      "verifiedOn": "2026-11-25",
+      "url": "https://github.com/awslabs/aidlc-workflows/blob/main/docs/guide/facilitator-guide.md",
+      "pinnedUrl": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/docs/guide/facilitator-guide.md",
+      "access": "free",
+      "license": "MIT-0",
+      "summary": "For \"the person running an AI-DLC workshop\". Covers a five-step readiness pass mark, a vision note and a tech-environment note as pre-work, scope and depth settings, and a recovery playbook.",
+      "usedIn": "Workshop module 0 (readiness) and facilitator notes.",
+      "verificationNotes": "Contains no agenda or session durations.",
+      "citedBy": {
+        "pages": [
+          "workshop"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "aidlc-onboarding",
+      "title": "AI-DLC guide: Onboarding, a guided first week",
+      "publisher": "Amazon Web Services (AWS Labs)",
+      "domain": "aidlc",
+      "type": "Methodology documentation",
+      "version": "v2.11.5",
+      "publishedDate": "2026-11-25",
+      "verifiedOn": "2026-11-25",
+      "url": "https://github.com/awslabs/aidlc-workflows/blob/main/docs/guide/onboarding.md",
+      "pinnedUrl": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/docs/guide/onboarding.md",
+      "access": "free",
+      "license": "MIT-0",
+      "summary": "Five ordered runs for new users: an Express run (\"15 minutes\"), the same idea as poc, requesting changes at a gate, inspecting the record dir, and a real feature.",
+      "usedIn": "Workshop module 0 (self-paced preparation).",
+      "verificationNotes": "",
+      "citedBy": {
+        "pages": [
+          "workshop"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "aidlc-stage-rules",
+      "title": "AI-DLC stage rule files (core/aidlc-common/stages)",
+      "publisher": "Amazon Web Services (AWS Labs)",
+      "domain": "aidlc",
+      "type": "Methodology source (open source)",
+      "version": "v2.11.5",
+      "publishedDate": "2026-11-25",
+      "verifiedOn": "2026-11-25",
+      "url": "https://github.com/awslabs/aidlc-workflows/tree/main/core/aidlc-common/stages",
+      "pinnedUrl": "https://github.com/awslabs/aidlc-workflows/tree/v2.11.5/core/aidlc-common/stages",
+      "access": "free",
+      "license": "MIT-0",
+      "summary": "One Markdown rule file per stage with frontmatter (slug, lead_agent, produces, sensors, scopes) and the steps the stage follows, including what each artifact must contain.",
+      "usedIn": "Per-stage artifact lists (produces) in data/aidlc-stages.json and the section headings of the team templates in data/aidlc-artifact-templates.json.",
+      "verificationNotes": "",
+      "citedBy": {
+        "pages": [
+          "reports",
+          "lifecycle"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "aidlc-stage-protocol",
+      "title": "AI-DLC stage protocol: template overrides",
+      "publisher": "Amazon Web Services (AWS Labs)",
+      "domain": "aidlc",
+      "type": "Methodology source (open source)",
+      "version": "v2.11.5",
+      "publishedDate": "2026-11-25",
+      "verifiedOn": "2026-11-25",
+      "url": "https://github.com/awslabs/aidlc-workflows/blob/main/core/aidlc-common/protocols/stage-protocol.md",
+      "pinnedUrl": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/core/aidlc-common/protocols/stage-protocol.md",
+      "access": "free",
+      "license": "MIT-0",
+      "summary": "Before writing artifact X, the stage resolves a team template at aidlc/spaces/<space>/memory/templates/X.md first; a resolved template is used whole-doc, its ## headings are the skeleton, and the required-sections sensor checks the output against the same file.",
+      "usedIn": "Location and behaviour of the team templates in the workspace package.",
+      "verificationNotes": "The protocol states that no framework default templates ship at GA, so without team templates the stage prose decides the structure.",
+      "citedBy": {
+        "pages": [
+          "reports"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "aws-guide",
+      "title": "AI-DLC guide 16: Worked examples",
+      "publisher": "Amazon Web Services (AWS Labs)",
+      "domain": "aidlc",
+      "type": "Methodology documentation",
+      "version": "v2.11.5",
+      "publishedDate": "2026-11-25",
+      "verifiedOn": "2026-11-25",
+      "url": "https://github.com/awslabs/aidlc-workflows/blob/main/docs/guide/16-worked-examples.md",
+      "pinnedUrl": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/docs/guide/16-worked-examples.md",
+      "access": "free",
+      "license": "MIT-0",
+      "summary": "Chapter 16 of the AI-DLC guide.",
+      "usedIn": "Listed on the References page.",
+      "verificationNotes": "Page load confirmed on 2026-11-25; contents not reviewed for this catalog.",
+      "citedBy": {
+        "pages": [],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "aidlc-glossary",
+      "title": "AI-DLC guide: Glossary",
+      "publisher": "Amazon Web Services (AWS Labs)",
+      "domain": "aidlc",
+      "type": "Methodology documentation",
+      "version": "v2.11.5",
+      "publishedDate": "2026-11-25",
+      "verifiedOn": "2026-11-25",
+      "url": "https://github.com/awslabs/aidlc-workflows/blob/main/docs/guide/glossary.md",
+      "pinnedUrl": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/docs/guide/glossary.md",
+      "access": "free",
+      "license": "MIT-0",
+      "summary": "Glossary of AI-DLC terms.",
+      "usedIn": "Listed on the References page.",
+      "verificationNotes": "Page load confirmed on 2026-11-25; contents not reviewed for this catalog.",
+      "citedBy": {
+        "pages": [
+          "lifecycle"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "aws-samples",
+      "title": "AI for software engineering on AWS (samples)",
+      "publisher": "Amazon Web Services (aws-samples)",
+      "domain": "aws",
+      "type": "Sample repository",
+      "version": "main @ d311330",
+      "publishedDate": "2026-11-25",
+      "verifiedOn": "2026-11-25",
+      "url": "https://github.com/aws-samples/sample-ai-for-software-engineering-on-aws",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": "MIT-0",
+      "summary": "AI-DLC samples on a team's own toolchain, one engineering domain at a time. Marked \"early development\". Sample status on 2026-11-25: agent-team-on-kiro-crew \"Available\"; embedded-development \"Open for contributions\"; enterprise and mobile \"Planned\".",
+      "usedIn": "AWS live samples page. Fetched only when the user clicks; nothing is bundled.",
+      "verificationNotes": "",
+      "citedBy": {
+        "pages": [
+          "discover"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "aws-collab",
+      "title": "Collaborative AI-DLC (sample)",
+      "publisher": "Amazon Web Services (aws-samples)",
+      "domain": "aws",
+      "type": "Sample repository",
+      "version": "main @ 0038b3d",
+      "publishedDate": "2026-11-25",
+      "verifiedOn": "2026-11-25",
+      "url": "https://github.com/aws-samples/sample-collaborative-ai-dlc",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": "MIT-0",
+      "summary": "Early-preview sample deployed into your own AWS account. Runs Kiro, Claude Code, OpenCode and Codex in isolated cloud sessions with human approval gates and a traceability graph, on top of AI-DLC.",
+      "usedIn": "Listed on the References page.",
+      "verificationNotes": "No GitHub releases listed; commit messages mention \"prepare v2.4.1\".",
+      "citedBy": {
+        "pages": [
+          "discover"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "aws-collab-method",
+      "title": "Collaborative AI-DLC: Methodology",
+      "publisher": "Amazon Web Services (aws-samples)",
+      "domain": "aws",
+      "type": "Sample documentation",
+      "version": "main",
+      "publishedDate": null,
+      "verifiedOn": "2026-11-25",
+      "url": "https://github.com/aws-samples/sample-collaborative-ai-dlc/blob/main/docs/getting-started/methodology.md",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": "MIT-0",
+      "summary": "Describes AI-DLC phases, stages, agent personas, scopes, verification, traceability and parallel construction as used by the sample, with a table of limitations when running as markdown only.",
+      "usedIn": "Listed on the References page.",
+      "verificationNotes": "Read from main, not a tag.",
+      "citedBy": {
+        "pages": [
+          "discover"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "aws-wa",
+      "title": "AWS Well-Architected Framework",
+      "publisher": "Amazon Web Services",
+      "domain": "aws",
+      "type": "Vendor documentation",
+      "version": null,
+      "publishedDate": "2026-11-16",
+      "verifiedOn": "2026-11-25",
+      "url": "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": null,
+      "summary": "AWS Well-Architected Framework documentation.",
+      "usedIn": "Cited by REL-02 and REL-03.",
+      "verificationNotes": "Date is the page's \"last updated\" date; no version number shown.",
+      "citedBy": {
+        "pages": [
+          "nfr"
+        ],
+        "stages": [
+          "3.3",
+          "3.4"
+        ]
+      },
+      "status": "current"
+    },
+    {
+      "id": "aws-wa-genai",
+      "title": "AWS Well-Architected Generative AI Lens",
+      "publisher": "Amazon Web Services",
+      "domain": "aws",
+      "type": "Vendor documentation",
+      "version": null,
+      "publishedDate": "2025-11-19",
+      "verifiedOn": "2026-11-25",
+      "url": "https://docs.aws.amazon.com/wellarchitected/latest/generative-ai-lens/generative-ai-lens.html",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": null,
+      "summary": "Generative AI Lens for the AWS Well-Architected Framework.",
+      "usedIn": "Cited by EVAL-01 and OPS-05.",
+      "verificationNotes": "Date is the publication date shown on the page.",
+      "citedBy": {
+        "pages": [
+          "nfr"
+        ],
+        "stages": [
+          "3.2",
+          "3.3"
+        ]
+      },
+      "status": "current"
+    },
+    {
+      "id": "aws-wa-rai",
+      "title": "AWS Well-Architected Responsible AI Lens",
+      "publisher": "Amazon Web Services",
+      "domain": "aws",
+      "type": "Vendor documentation",
+      "version": null,
+      "publishedDate": "2025-11-19",
+      "verifiedOn": "2026-11-25",
+      "url": "https://docs.aws.amazon.com/wellarchitected/latest/responsible-ai-lens/responsible-ai-lens.html",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": null,
+      "summary": "Responsible AI Lens for the AWS Well-Architected Framework.",
+      "usedIn": "Cited by GOV-04 and EVAL-03.",
+      "verificationNotes": "Date is the publication date shown on the page.",
+      "citedBy": {
+        "pages": [
+          "trust"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "aws-agentcore",
+      "title": "Amazon Bedrock AgentCore Developer Guide",
+      "publisher": "Amazon Web Services",
+      "domain": "aws",
+      "type": "Vendor documentation",
+      "version": null,
+      "publishedDate": null,
+      "verifiedOn": "2026-11-25",
+      "url": "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": null,
+      "summary": "Describes AgentCore as \"an agentic platform for building, deploying, and operating highly effective agents securely at scale using any framework and foundation model.\"",
+      "usedIn": "Listed on the References page.",
+      "verificationNotes": "No date shown on the page.",
+      "citedBy": {
+        "pages": [],
+        "stages": [
+          "3.4",
+          "4.2"
+        ]
+      },
+      "status": "current"
+    },
+    {
+      "id": "nist",
+      "title": "NIST AI Risk Management Framework 1.0 (NIST AI 100-1)",
+      "publisher": "National Institute of Standards and Technology",
+      "domain": "governance",
+      "type": "Framework (US government, voluntary)",
+      "version": "1.0",
+      "publishedDate": "2023-01-26",
+      "verifiedOn": "2026-11-25",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "pinnedUrl": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+      "access": "free",
+      "license": null,
+      "summary": "Core functions GOVERN, MAP, MEASURE and MANAGE, with 72 subcategories in Tables 1–4.",
+      "usedIn": "Subcategory IDs on every control. Subcategory text in data/frameworks/nist-ai-rmf-1.0-subcategories.json was extracted from the PDF.",
+      "verificationNotes": "NIST page: \"The AI RMF 1.0 is being revised as part of the White House AI Action Plan.\" No revised version was published as of 2026-11-25.",
+      "citedBy": {
+        "pages": [
+          "trust"
+        ],
+        "stages": [
+          "1.3",
+          "1.7"
+        ]
+      },
+      "status": "current"
+    },
+    {
+      "id": "nist-gen",
+      "title": "NIST AI 600-1: Generative AI Profile",
+      "publisher": "National Institute of Standards and Technology",
+      "domain": "governance",
+      "type": "Framework profile (US government, voluntary)",
+      "version": "600-1",
+      "publishedDate": "2024-07-26",
+      "verifiedOn": "2026-11-25",
+      "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence",
+      "pinnedUrl": "https://doi.org/10.6028/NIST.AI.600-1",
+      "access": "free",
+      "license": null,
+      "summary": "Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile.",
+      "usedIn": "Cited by EVAL-01 and EVAL-02.",
+      "verificationNotes": "Publication page shows \"Updated April 8, 2026\" without saying what changed.",
+      "citedBy": {
+        "pages": [
+          "trust"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "nist-csf",
+      "title": "NIST Cybersecurity Framework 2.0",
+      "publisher": "National Institute of Standards and Technology",
+      "domain": "governance",
+      "type": "Framework (US government, voluntary)",
+      "version": "2.0 (NIST CSWP 29)",
+      "publishedDate": null,
+      "verifiedOn": "2026-11-25",
+      "url": "https://www.nist.gov/cyberframework",
+      "pinnedUrl": "https://doi.org/10.6028/NIST.CSWP.29",
+      "access": "free",
+      "license": null,
+      "summary": "NIST Cybersecurity Framework 2.0, published as NIST CSWP 29.",
+      "usedIn": "Cited by SEC-03 and OPS-02.",
+      "verificationNotes": "Publication date not shown on the page checked.",
+      "citedBy": {
+        "pages": [
+          "trust"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "iso",
+      "title": "ISO/IEC 42001",
+      "publisher": "ISO / IEC",
+      "domain": "governance",
+      "type": "International standard",
+      "version": "2023",
+      "publishedDate": null,
+      "verifiedOn": null,
+      "url": "https://www.iso.org/standard/42001",
+      "pinnedUrl": null,
+      "access": "paid",
+      "license": null,
+      "summary": "This project's data/trusted-ai-and-practices-guide.md describes ISO/IEC 42001:2023 as an AI management-system standard that organizations may use for certification.",
+      "usedIn": "Cited by GOV-01, GOV-02, GOV-05, SEC-04, OPS-01, OPS-03. The app does not reproduce ISO text.",
+      "verificationNotes": "iso.org returned HTTP 403 to the automated check on 2026-11-25; edition and amendments not verified.",
+      "citedBy": {
+        "pages": [
+          "trust"
+        ],
+        "stages": []
+      },
+      "status": "unverified"
+    },
+    {
+      "id": "iso-23894",
+      "title": "ISO/IEC 23894",
+      "publisher": "ISO / IEC",
+      "domain": "governance",
+      "type": "International standard",
+      "version": "2023",
+      "publishedDate": null,
+      "verifiedOn": null,
+      "url": "https://www.iso.org/standard/77304.html",
+      "pinnedUrl": null,
+      "access": "paid",
+      "license": null,
+      "summary": "ISO/IEC standard on AI risk management (title not verified).",
+      "usedIn": "Listed on the References page.",
+      "verificationNotes": "iso.org returned HTTP 403 to the automated check on 2026-11-25; title, edition and date not verified.",
+      "citedBy": {
+        "pages": [],
+        "stages": []
+      },
+      "status": "unverified"
+    },
+    {
+      "id": "iso-42005",
+      "title": "ISO/IEC 42005",
+      "publisher": "ISO / IEC",
+      "domain": "governance",
+      "type": "International standard",
+      "version": null,
+      "publishedDate": null,
+      "verifiedOn": null,
+      "url": "https://www.iso.org/standard/42005",
+      "pinnedUrl": null,
+      "access": "paid",
+      "license": null,
+      "summary": "ISO/IEC standard on AI system impact assessment (title not verified).",
+      "usedIn": "Cited by GOV-02.",
+      "verificationNotes": "iso.org returned HTTP 403 to the automated check on 2026-11-25; title, edition and date not verified.",
+      "citedBy": {
+        "pages": [],
+        "stages": []
+      },
+      "status": "unverified"
+    },
+    {
+      "id": "iso-27001",
+      "title": "ISO/IEC 27001",
+      "publisher": "ISO / IEC",
+      "domain": "governance",
+      "type": "International standard",
+      "version": null,
+      "publishedDate": null,
+      "verifiedOn": null,
+      "url": "https://www.iso.org/standard/27001",
+      "pinnedUrl": null,
+      "access": "paid",
+      "license": null,
+      "summary": "ISO/IEC standard for information security management systems (title not verified).",
+      "usedIn": "Cited by SEC-03 and SEC-04.",
+      "verificationNotes": "iso.org returned HTTP 403 to the automated check on 2026-11-25; edition and date not verified.",
+      "citedBy": {
+        "pages": [],
+        "stages": []
+      },
+      "status": "unverified"
+    },
+    {
+      "id": "eu",
+      "title": "EU AI Act: Regulation (EU) 2024/1689",
+      "publisher": "European Union",
+      "domain": "governance",
+      "type": "Law (EU regulation)",
+      "version": "2024/1689, amended by the AI Omnibus",
+      "publishedDate": "2024-08-01",
+      "verifiedOn": "2026-11-25",
+      "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": null,
+      "summary": "Regulation (EU) 2024/1689. Dates from the European Commission page (last update 25 Nov 2026): entered into force 1 Aug 2024; prohibitions and AI literacy apply from 2 Feb 2025; governance rules and GPAI obligations from 2 Aug 2025; general application 2 Aug 2026. The AI Omnibus (in force 27 Jul 2026) moves Annex III high-risk obligations to 2 Dec 2027 and Annex I to 2 Aug 2028.",
+      "usedIn": "Jurisdiction and risk-tier fields on Use-case framing; cited by GOV-03, GOV-04, SEC-04, EVAL-03.",
+      "verificationNotes": "EUR-Lex returned an empty response to the automated check; dates were taken from the Commission page. The date shown is entry into force.",
+      "citedBy": {
+        "pages": [
+          "ideate",
+          "trust"
+        ],
+        "stages": [
+          "1.3"
+        ]
+      },
+      "status": "current"
+    },
+    {
+      "id": "eu-commission",
+      "title": "European Commission: AI Act regulatory framework page",
+      "publisher": "European Commission",
+      "domain": "governance",
+      "type": "Government guidance",
+      "version": null,
+      "publishedDate": "2026-11-25",
+      "verifiedOn": "2026-11-25",
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": null,
+      "summary": "Commission page describing the AI Act and its application timeline, including changes made by the AI Omnibus.",
+      "usedIn": "Source of the AI Act dates in this catalog; cited by GOV-03.",
+      "verificationNotes": "Date is the page's \"last update\".",
+      "citedBy": {
+        "pages": [
+          "trust"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "oecd",
+      "title": "OECD AI Principles",
+      "publisher": "OECD",
+      "domain": "governance",
+      "type": "Intergovernmental recommendation",
+      "version": "OECD-LEGAL-0449 (updated May 2024)",
+      "publishedDate": "2019-05",
+      "verifiedOn": "2026-11-25",
+      "url": "https://oecd.ai/en/ai-principles",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": null,
+      "summary": "Adopted May 2019, updated May 2024. The page lists 47 adherents.",
+      "usedIn": "Listed on the References page.",
+      "verificationNotes": "",
+      "citedBy": {
+        "pages": [],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "owasp-llm",
+      "title": "OWASP Top 10 for LLM Applications 2026",
+      "publisher": "OWASP Gen AI Security Project",
+      "domain": "security",
+      "type": "Community security list",
+      "version": "2026",
+      "publishedDate": null,
+      "verifiedOn": "2026-11-25",
+      "url": "https://genai.owasp.org/top-10-for-llm-applications-2026/",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": null,
+      "summary": "LLM01 Prompt Injection; LLM02 Sensitive Information Disclosure; LLM03 Excessive Agency; LLM04 Supply Chain; LLM05 Data and Model Poisoning; LLM06 Unbounded Consumption; LLM07 Misinformation; LLM08 Hidden Context Exposure; LLM09 Vector and Embedding Weaknesses; LLM10 Improper Output Handling.",
+      "usedIn": "Item IDs on controls and in the per-node threat model (data/frameworks/owasp-llm-2026.json).",
+      "verificationNotes": "No publication date shown. Item numbers differ from the 2025 edition.",
+      "citedBy": {
+        "pages": [
+          "trust",
+          "patterns"
+        ],
+        "stages": [
+          "3.3",
+          "3.6"
+        ]
+      },
+      "status": "current"
+    },
+    {
+      "id": "owasp-llm-2025",
+      "title": "OWASP Top 10 for LLM Applications 2025",
+      "publisher": "OWASP Gen AI Security Project",
+      "domain": "security",
+      "type": "Community security list",
+      "version": "2025",
+      "publishedDate": null,
+      "verifiedOn": "2026-11-25",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": null,
+      "summary": "LLM01 Prompt Injection; LLM02 Sensitive Information Disclosure; LLM03 Supply Chain; LLM04 Data and Model Poisoning; LLM05 Improper Output Handling; LLM06 Excessive Agency; LLM07 System Prompt Leakage; LLM08 Vector and Embedding Weaknesses; LLM09 Misinformation; LLM10 Unbounded Consumption.",
+      "usedIn": "Kept for reading older documents that cite 2025 IDs.",
+      "verificationNotes": "genai.owasp.org lists \"LLM Top 10 for 2026\" in its navigation; the OWASP Foundation project page still lists version 2025.",
+      "citedBy": {
+        "pages": [],
+        "stages": []
+      },
+      "status": "superseded"
+    },
+    {
+      "id": "owasp-agent",
+      "title": "OWASP Top 10 for Agentic Applications 2026",
+      "publisher": "OWASP Gen AI Security Project",
+      "domain": "security",
+      "type": "Community security list",
+      "version": "2026",
+      "publishedDate": "2025-12-09",
+      "verifiedOn": "2026-11-25",
+      "url": "https://genai.owasp.org/top-10-for-agentic-applications-2026/",
+      "pinnedUrl": "https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/",
+      "access": "free",
+      "license": null,
+      "summary": "ASI01 Agent Goal Hijack; ASI02 Tool Misuse and Exploitation; ASI03 Identity and Privilege Abuse; ASI04 Agentic Supply Chain Vulnerabilities; ASI05 Unexpected Code Execution (RCE); ASI06 Memory & Context Poisoning; ASI07 Insecure Inter-Agent Communication; ASI08 Cascading Failures; ASI09 Human-Agent Trust Exploitation; ASI10 Rogue Agents.",
+      "usedIn": "Item IDs on controls and in the per-node threat model (data/frameworks/owasp-asi-2026.json).",
+      "verificationNotes": "",
+      "citedBy": {
+        "pages": [
+          "patterns",
+          "trust"
+        ],
+        "stages": [
+          "3.3",
+          "3.6"
+        ]
+      },
+      "status": "current"
+    },
+    {
+      "id": "owasp-agentic-threats",
+      "title": "OWASP Agentic AI – Threats and Mitigations",
+      "publisher": "OWASP Gen AI Security Project",
+      "domain": "security",
+      "type": "Community security guide",
+      "version": "1.0",
+      "publishedDate": "2025-02-17",
+      "verifiedOn": "2026-11-25",
+      "url": "https://genai.owasp.org/resource/agentic-ai-threats-and-mitigations/",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": null,
+      "summary": "Published by the OWASP Agentic Security Initiative; described on the page as the first in a series.",
+      "usedIn": "Cited by SEC-07.",
+      "verificationNotes": "",
+      "citedBy": {
+        "pages": [],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "owasp-aisvs",
+      "title": "OWASP AI Security Verification Standard (AISVS)",
+      "publisher": "OWASP Foundation",
+      "domain": "security",
+      "type": "Community verification standard",
+      "version": "1.01",
+      "publishedDate": null,
+      "verifiedOn": "2026-11-25",
+      "url": "https://github.com/OWASP/AISVS",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": "CC BY-SA 4.0",
+      "summary": "OWASP Artificial Intelligence Security Verification Standard.",
+      "usedIn": "Cited by SEC-01, SEC-02, SEC-03, SEC-05.",
+      "verificationNotes": "The GitHub README says \"The latest stable version is AISVS 1.01\" (1.02 in development); the OWASP project page says 1.0 is the latest stable release. No release date found.",
+      "citedBy": {
+        "pages": [
+          "trust"
+        ],
+        "stages": [
+          "3.6"
+        ]
+      },
+      "status": "current"
+    },
+    {
+      "id": "atlas",
+      "title": "MITRE ATLAS",
+      "publisher": "MITRE",
+      "domain": "security",
+      "type": "Knowledge base",
+      "version": "atlas-data v2026.10",
+      "publishedDate": "2026-10-28",
+      "verifiedOn": "2026-11-25",
+      "url": "https://atlas.mitre.org/",
+      "pinnedUrl": "https://github.com/mitre-atlas/atlas-data/releases/tag/v2026.10",
+      "access": "free",
+      "license": null,
+      "summary": "Adversarial Threat Landscape for AI Systems. Release v2026.10: 16 tactics, 129 techniques, 92 sub-techniques, 44 mitigations, 77 case studies.",
+      "usedIn": "Technique IDs on controls and in the per-node threat model; names read from dist/v6/ATLAS-2026.10.yaml (data/frameworks/atlas-techniques.json).",
+      "verificationNotes": "atlas.mitre.org is rendered by JavaScript and showed no version. dist/ATLAS.yaml in the repository is marked deprecated (version 5.6.0); dist/v6/ATLAS-2026.10.yaml is current.",
+      "citedBy": {
+        "pages": [
+          "trust",
+          "patterns"
+        ],
+        "stages": [
+          "3.6"
+        ]
+      },
+      "status": "current"
+    },
+    {
+      "id": "nist-aml",
+      "title": "NIST AI 100-2 E2025: Adversarial Machine Learning",
+      "publisher": "National Institute of Standards and Technology",
+      "domain": "security",
+      "type": "Government publication",
+      "version": "E2025",
+      "publishedDate": "2025-03-24",
+      "verifiedOn": "2026-11-25",
+      "url": "https://csrc.nist.gov/pubs/ai/100/2/e2025/final",
+      "pinnedUrl": "https://doi.org/10.6028/NIST.AI.100-2e2025",
+      "access": "free",
+      "license": null,
+      "summary": "Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations.",
+      "usedIn": "Cited by SEC-02 and SEC-07.",
+      "verificationNotes": "Errata notice dated 2025-06-03; NIST says fixes will come in a future revision.",
+      "citedBy": {
+        "pages": [],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "nist-ssdf-ai",
+      "title": "NIST SP 800-218A",
+      "publisher": "National Institute of Standards and Technology",
+      "domain": "security",
+      "type": "Government publication",
+      "version": "SP 800-218A (final)",
+      "publishedDate": "2024-07-26",
+      "verifiedOn": "2026-11-25",
+      "url": "https://csrc.nist.gov/pubs/sp/800/218/a/final",
+      "pinnedUrl": "https://doi.org/10.6028/NIST.SP.800-218A",
+      "access": "free",
+      "license": null,
+      "summary": "Secure Software Development Practices for Generative AI and Dual-Use Foundation Models: An SSDF Community Profile. Companion to SP 800-218 (SSDF v1.1).",
+      "usedIn": "Cited by OPS-03.",
+      "verificationNotes": "",
+      "citedBy": {
+        "pages": [],
+        "stages": [
+          "3.5",
+          "3.6",
+          "3.7"
+        ]
+      },
+      "status": "current"
+    },
+    {
+      "id": "csa-aicm",
+      "title": "CSA AI Controls Matrix (AICM)",
+      "publisher": "Cloud Security Alliance",
+      "domain": "security",
+      "type": "Industry control framework",
+      "version": "v1.1",
+      "publishedDate": "2026-06-22",
+      "verifiedOn": "2026-11-25",
+      "url": "https://cloudsecurityalliance.org/artifacts/ai-controls-matrix-v1-1",
+      "pinnedUrl": null,
+      "access": "unknown",
+      "license": null,
+      "summary": "247 control objectives across 18 security domains. Mapped to ISO 42001, ISO 27001, BSI AIC4, NIST AI RMF and AI 600-1, and the EU AI Act.",
+      "usedIn": "Cited by GOV-01 and GOV-05.",
+      "verificationNotes": "Previous version v1 (released 2025-07-09, 243 control objectives). Download terms not checked.",
+      "citedBy": {
+        "pages": [],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "mcp",
+      "title": "Model Context Protocol specification",
+      "publisher": "Model Context Protocol project",
+      "domain": "protocols",
+      "type": "Protocol specification",
+      "version": "2026-07-28",
+      "publishedDate": null,
+      "verifiedOn": "2026-11-25",
+      "url": "https://modelcontextprotocol.io/specification",
+      "pinnedUrl": "https://modelcontextprotocol.io/specification/2026-07-28/",
+      "access": "free",
+      "license": null,
+      "summary": "Model Context Protocol specification. Latest dated revision linked from the specification page: 2026-07-28.",
+      "usedIn": "Cited by SEC-06.",
+      "verificationNotes": "Pinned URL inferred from the revision's section links; release date not shown.",
+      "citedBy": {
+        "pages": [
+          "patterns"
+        ],
+        "stages": [
+          "2.8"
+        ]
+      },
+      "status": "current"
+    },
+    {
+      "id": "a2a",
+      "title": "Agent2Agent (A2A) protocol specification",
+      "publisher": "A2A project (a2aproject)",
+      "domain": "protocols",
+      "type": "Protocol specification",
+      "version": "v1.0.1",
+      "publishedDate": "2026-05-26",
+      "verifiedOn": "2026-11-25",
+      "url": "https://a2a-protocol.org/latest/specification/",
+      "pinnedUrl": "https://a2a-protocol.org/v1.0.0/specification",
+      "access": "free",
+      "license": null,
+      "summary": "Agent2Agent (A2A) Protocol Specification.",
+      "usedIn": "Cited by SEC-06.",
+      "verificationNotes": "The specification page states \"Latest Released Version: 1.0.0\"; GitHub releases list v1.0.1 as latest (changelog dated 2026-05-26).",
+      "citedBy": {
+        "pages": [
+          "patterns"
+        ],
+        "stages": [
+          "2.8"
+        ]
+      },
+      "status": "current"
+    },
+    {
+      "id": "claude-code-memory",
+      "title": "Claude Code docs: memory (CLAUDE.md)",
+      "publisher": "Anthropic",
+      "domain": "tooling",
+      "type": "Vendor documentation",
+      "version": null,
+      "publishedDate": null,
+      "verifiedOn": "2026-11-25",
+      "url": "https://code.claude.com/docs/en/memory",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": null,
+      "summary": "Project instructions live in ./CLAUDE.md or ./.claude/CLAUDE.md; @path imports other files; \"target under 200 lines per CLAUDE.md file\". Claude Code reads AGENTS.md only when no CLAUDE.md exists, or via an @AGENTS.md import.",
+      "usedIn": "The implementation kit’s CLAUDE.md starts with @AGENTS.md.",
+      "verificationNotes": "",
+      "citedBy": {
+        "pages": [
+          "reports"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "claude-code-skills",
+      "title": "Claude Code docs: skills",
+      "publisher": "Anthropic",
+      "domain": "tooling",
+      "type": "Vendor documentation",
+      "version": null,
+      "publishedDate": null,
+      "verifiedOn": "2026-11-25",
+      "url": "https://code.claude.com/docs/en/skills",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": null,
+      "summary": "Project skills live in .claude/skills/<skill-name>/SKILL.md with YAML frontmatter; all fields are optional and description is recommended; name defaults to the directory name.",
+      "usedIn": "The kit’s three skills (trust review, budget guard, AI-DLC hand-off).",
+      "verificationNotes": "",
+      "citedBy": {
+        "pages": [
+          "reports"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "claude-code-subagents",
+      "title": "Claude Code docs: subagents",
+      "publisher": "Anthropic",
+      "domain": "tooling",
+      "type": "Vendor documentation",
+      "version": null,
+      "publishedDate": null,
+      "verifiedOn": "2026-11-25",
+      "url": "https://code.claude.com/docs/en/sub-agents",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": null,
+      "summary": "Project subagents live in .claude/agents/ as Markdown with YAML frontmatter; name and description are required; the body is the system prompt.",
+      "usedIn": "The kit writes one subagent per agent, orchestrator and validator node.",
+      "verificationNotes": "",
+      "citedBy": {
+        "pages": [
+          "reports"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "claude-code-mcp",
+      "title": "Claude Code docs: MCP (.mcp.json)",
+      "publisher": "Anthropic",
+      "domain": "tooling",
+      "type": "Vendor documentation",
+      "version": null,
+      "publishedDate": null,
+      "verifiedOn": "2026-11-25",
+      "url": "https://code.claude.com/docs/en/mcp",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": null,
+      "summary": "Project MCP servers are configured in .mcp.json under mcpServers; stdio entries use command/args/env, HTTP entries use type \"http\" and url; ${VAR} and ${VAR:-default} are expanded.",
+      "usedIn": "The kit’s .mcp.json (stdio for TypeScript, HTTP with a URL variable for Python).",
+      "verificationNotes": "",
+      "citedBy": {
+        "pages": [
+          "reports"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "agents-md",
+      "title": "AGENTS.md",
+      "publisher": "Agentic AI Foundation (Linux Foundation)",
+      "domain": "tooling",
+      "type": "Open format",
+      "version": null,
+      "publishedDate": null,
+      "verifiedOn": "2026-11-25",
+      "url": "https://agents.md/",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": null,
+      "summary": "\"A simple, open format for guiding coding agents\", placed at the repository root. No required fields; suggested sections include project overview, build and test commands, code style guidelines, testing instructions and security considerations.",
+      "usedIn": "Section layout of the kit’s AGENTS.md.",
+      "verificationNotes": "",
+      "citedBy": {
+        "pages": [
+          "reports"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "mcp-ts-sdk",
+      "title": "MCP TypeScript SDK",
+      "publisher": "Model Context Protocol project",
+      "domain": "tooling",
+      "type": "SDK",
+      "version": "2.4.0",
+      "publishedDate": null,
+      "verifiedOn": "2026-11-25",
+      "url": "https://github.com/modelcontextprotocol/typescript-sdk",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": null,
+      "summary": "Package @modelcontextprotocol/server; README example: new McpServer({ name, version }), server.registerTool(name, { description, inputSchema: z.object(...) }, handler), StdioServerTransport from @modelcontextprotocol/server/stdio.",
+      "usedIn": "TypeScript scaffold mcp/server.ts in the kit.",
+      "verificationNotes": "Release page shows 2.4.0 as Latest, dated 23 Oct without a year.",
+      "citedBy": {
+        "pages": [
+          "reports"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "mcp-py-sdk",
+      "title": "MCP Python SDK",
+      "publisher": "Model Context Protocol project",
+      "domain": "tooling",
+      "type": "SDK",
+      "version": "v2.3.0",
+      "publishedDate": null,
+      "verifiedOn": "2026-11-25",
+      "url": "https://github.com/modelcontextprotocol/python-sdk",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": null,
+      "summary": "PyPI package mcp; requires Python 3.11+. README example: from mcp.server import MCPServer; mcp = MCPServer(\"Demo\"); @mcp.tool(). Run commands shown: uv run mcp dev server.py and uv run mcp run server.py --transport streamable-http.",
+      "usedIn": "Python scaffold mcp/server.py and pyproject.toml in the kit.",
+      "verificationNotes": "The README does not show a stdio run command, so the kit uses HTTP for Python.",
+      "citedBy": {
+        "pages": [
+          "reports"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "finops-framework",
+      "title": "FinOps Framework",
+      "publisher": "FinOps Foundation (Linux Foundation)",
+      "domain": "finops",
+      "type": "Practitioner framework",
+      "version": null,
+      "publishedDate": "2026-03-20",
+      "verifiedOn": "2026-11-25",
+      "url": "https://www.finops.org/framework/",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": "CC BY 4.0",
+      "summary": "FinOps Framework overview from the FinOps Foundation, licensed CC BY 4.0.",
+      "usedIn": "Cited by OPS-04; NFR & cost lab.",
+      "verificationNotes": "No version number shown; date is the \"2026 Framework Updates\" post.",
+      "citedBy": {
+        "pages": [
+          "nfr"
+        ],
+        "stages": [
+          "4.7"
+        ]
+      },
+      "status": "current"
+    },
+    {
+      "id": "finops-ai",
+      "title": "FinOps Foundation: AI FinOps topic page",
+      "publisher": "FinOps Foundation (Linux Foundation)",
+      "domain": "finops",
+      "type": "Practitioner guidance",
+      "version": null,
+      "publishedDate": null,
+      "verifiedOn": "2026-11-25",
+      "url": "https://www.finops.org/topic/finops-for-ai/",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": null,
+      "summary": "Page titled \"AI FinOps: Managing AI Cost and Usage\". Links working-group material including Total Cost of AI (TCA), AI Spend Budget Busters and \"What is AI Tokenomics?\".",
+      "usedIn": "Cited by OPS-04; NFR & cost lab.",
+      "verificationNotes": "Topic page with articles of different dates.",
+      "citedBy": {
+        "pages": [
+          "nfr"
+        ],
+        "stages": [
+          "3.2"
+        ]
+      },
+      "status": "current"
+    },
+    {
+      "id": "focus",
+      "title": "FOCUS: FinOps Open Cost & Usage Specification",
+      "publisher": "FOCUS (Joint Development Foundation Projects, LLC)",
+      "domain": "finops",
+      "type": "Data specification",
+      "version": "1.4",
+      "publishedDate": null,
+      "verifiedOn": "2026-11-25",
+      "url": "https://focus.finops.org/",
+      "pinnedUrl": "https://focus.finops.org/docs/specification/v1-4/",
+      "access": "free",
+      "license": null,
+      "summary": "FinOps Open Cost & Usage Specification, current version 1.4.",
+      "usedIn": "Cited by OPS-04.",
+      "verificationNotes": "No release date shown on the homepage.",
+      "citedBy": {
+        "pages": [],
+        "stages": [
+          "4.7"
+        ]
+      },
+      "status": "current"
+    },
+    {
+      "id": "sre-slo",
+      "title": "Site Reliability Engineering, chapter 4: Service Level Objectives",
+      "publisher": "Google (O'Reilly Media)",
+      "domain": "reliability",
+      "type": "Book chapter",
+      "version": null,
+      "publishedDate": null,
+      "verifiedOn": "2026-11-25",
+      "url": "https://sre.google/sre-book/service-level-objectives/",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": "CC BY-NC-ND 4.0",
+      "summary": "Chapter 4 of Google's SRE book. Authors: Chris Jones, John Wilkes, Niall Murphy with Cody Smith; edited by Betsy Beyer.",
+      "usedIn": "Cited by REL-04; error-budget panel in the NFR & cost lab.",
+      "verificationNotes": "",
+      "citedBy": {
+        "pages": [
+          "nfr"
+        ],
+        "stages": [
+          "3.2",
+          "4.4",
+          "4.6"
+        ]
+      },
+      "status": "current"
+    },
+    {
+      "id": "sre-workbook-slo",
+      "title": "The Site Reliability Workbook, chapter 2: Implementing SLOs",
+      "publisher": "Google (O'Reilly Media)",
+      "domain": "reliability",
+      "type": "Book chapter",
+      "version": null,
+      "publishedDate": null,
+      "verifiedOn": "2026-11-25",
+      "url": "https://sre.google/workbook/implementing-slos/",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": null,
+      "summary": "Chapter 2 of the SRE workbook. Authors: Steven Thurgood and David Ferguson with Alex Hidalgo and Betsy Beyer.",
+      "usedIn": "Cited by REL-04.",
+      "verificationNotes": "Publication year not confirmed from the page text.",
+      "citedBy": {
+        "pages": [
+          "nfr"
+        ],
+        "stages": [
+          "4.4"
+        ]
+      },
+      "status": "current"
+    },
+    {
+      "id": "otel-genai",
+      "title": "OpenTelemetry semantic conventions for generative AI",
+      "publisher": "OpenTelemetry",
+      "domain": "observability",
+      "type": "Specification",
+      "version": null,
+      "publishedDate": null,
+      "verifiedOn": null,
+      "url": "https://github.com/open-telemetry/semantic-conventions-genai",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": null,
+      "summary": "The opentelemetry.io page \"Moved: Generative AI semantic conventions\" says these conventions are now maintained in this repository.",
+      "usedIn": "Cited by OPS-01.",
+      "verificationNotes": "Repository not fetched; version and stability status not verified.",
+      "citedBy": {
+        "pages": [],
+        "stages": [
+          "4.4"
+        ]
+      },
+      "status": "unverified"
+    },
+    {
+      "id": "dora",
+      "title": "DORA research",
+      "publisher": "DORA (Google Cloud)",
+      "domain": "delivery",
+      "type": "Research report",
+      "version": "2025 report",
+      "publishedDate": "2025",
+      "verifiedOn": "2026-11-25",
+      "url": "https://dora.dev/research/",
+      "pinnedUrl": "https://dora.dev/research/2025/",
+      "access": "free",
+      "license": null,
+      "summary": "Latest annual research listed: 2025, with the line \"AI acts as an amplifier, but the greatest returns come from focusing on the underlying sociotechnical systems.\"",
+      "usedIn": "Cited by REL-04.",
+      "verificationNotes": "",
+      "citedBy": {
+        "pages": [],
+        "stages": [
+          "3.7",
+          "4.7"
+        ]
+      },
+      "status": "current"
+    },
+    {
+      "id": "rag-ref",
+      "title": "RAG techniques and AI agent design patterns: master reference",
+      "publisher": "Project file (user-supplied)",
+      "domain": "project",
+      "type": "Project file",
+      "version": "Research snapshot 2026-11-25",
+      "publishedDate": "2026-11-25",
+      "verifiedOn": "2026-11-25",
+      "url": "data/rag_and_agent_patterns_master_reference.md",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": null,
+      "summary": "Source of the 40 RAG techniques and 15 core agent patterns in data/pattern-catalog.json. Its scope note says benchmark figures were \"carried forward from the preceding discussion, not independently reverified\".",
+      "usedIn": "Agentic designer pattern library; cited by EVAL-02.",
+      "verificationNotes": "",
+      "citedBy": {
+        "pages": [
+          "patterns"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "prior-practices",
+      "title": "Enterprise AI Practices executive blueprint (Marp deck)",
+      "publisher": "Project file (user-supplied)",
+      "domain": "project",
+      "type": "Project file",
+      "version": null,
+      "publishedDate": "2026-11-23",
+      "verifiedOn": "2026-11-25",
+      "url": "data/reference/enterprise-practices-40-slide-marp.md",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": null,
+      "summary": "Deck opening with \"Build three enterprise AI practices as one industrialized capability\".",
+      "usedIn": "Listed on the References page.",
+      "verificationNotes": "",
+      "citedBy": {
+        "pages": [],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "training-tracks",
+      "title": "Enterprise AI Practices: Expertise Coaching tracks (Marp deck)",
+      "publisher": "Project file (user-supplied)",
+      "domain": "project",
+      "type": "Project file",
+      "version": null,
+      "publishedDate": null,
+      "verifiedOn": "2026-11-25",
+      "url": "data/reference/expertise-training-tracks-marp.md",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": null,
+      "summary": "\"Six tracks · 42 topics · Three enterprise practices\". States: \"Each topic: 90 min facilitated session + 45 min Q&A + 45 min timed capstone.\"",
+      "usedIn": "Session format (90 + 45 + 45 minutes) used for workshop modules.",
+      "verificationNotes": "",
+      "citedBy": {
+        "pages": [
+          "workshop"
+        ],
+        "stages": []
+      },
+      "status": "current"
+    },
+    {
+      "id": "coaching-workbook",
+      "title": "AI expertise coaching workbook (6 tracks)",
+      "publisher": "Project file (user-supplied)",
+      "domain": "project",
+      "type": "Project file",
+      "version": null,
+      "publishedDate": null,
+      "verifiedOn": "2026-11-25",
+      "url": "data/reference/ai-expertise-coaching-6-tracks.xlsx",
+      "pinnedUrl": null,
+      "access": "free",
+      "license": null,
+      "summary": "Excel workbook with sheets including START HERE, PATHWAY MAP, per-track sheets, FINAL CAPSTONES and FINAL RUBRICS.",
+      "usedIn": "Listed on the References page; not read by the app.",
+      "verificationNotes": "",
+      "citedBy": {
+        "pages": [],
+        "stages": []
+      },
+      "status": "current"
+    }
+  ]
+}

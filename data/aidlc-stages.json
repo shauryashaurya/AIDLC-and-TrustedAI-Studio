@@ -1,0 +1,1086 @@
+{
+  "upstream": {
+    "repo": "https://github.com/awslabs/aidlc-workflows",
+    "tag": "v2.11.5",
+    "verifiedOn": "2026-11-25",
+    "referenceId": "aidlc-stages",
+    "sources": {
+      "stages": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/docs/guide/04-phases-and-stages.md",
+      "artifacts": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/docs/guide/14-artifacts-reference.md",
+      "agents": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/docs/guide/06-agents.md",
+      "profiles": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/docs/guide/workflow-profiles.md",
+      "scopes": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/docs/guide/05-scopes-and-depth.md",
+      "stageRules": "https://github.com/awslabs/aidlc-workflows/tree/v2.11.5/core/aidlc-common/stages"
+    }
+  },
+  "note": "Copied from the AI-DLC v2.11.5 guide (chapters 04, 06, 14) and stage rule files (core/aidlc-common/stages, produces: lists). This app plans with this data; it does not run AI-DLC.",
+  "rules": [
+    "Every stage your scope runs, outside Initialization, ends with an approval gate. (04-phases-and-stages)",
+    "A verification gate runs at each phase boundary except Initialization → Ideation. (04-phases-and-stages)",
+    "Stages 3.1–3.5 run per Unit; 3.6 and 3.7 run once after all Units. (04-phases-and-stages)",
+    "Execution modes: 29 inline, 2 subagent (2.2, 3.5), 1 pipeline (2.1), 1 mob (2.4). (04-phases-and-stages)",
+    "Supporting agents take part only when the collaborators setting is on; otherwise the lead agent works alone. (04-phases-and-stages)",
+    "Each stage writes its files under aidlc/spaces/<space>/intents/<YYMMDD>-<label>/. (14-artifacts-reference)",
+    "A team template at aidlc/spaces/<space>/memory/templates/<artifact>.md is used whole-doc: its ## headings become the artifact skeleton and the required-sections sensor checks them. (core/aidlc-common/protocols/stage-protocol.md, Template overrides)"
+  ],
+  "phases": [
+    {
+      "id": 0,
+      "name": "Initialization",
+      "purpose": "Bootstrap the workspace: create the intent's record dir, detect the workspace, and initialize state."
+    },
+    {
+      "id": 1,
+      "name": "Ideation",
+      "purpose": "Validate the initiative — capture intent, assess feasibility, define scope, form the team, and secure approval to proceed."
+    },
+    {
+      "id": 2,
+      "name": "Inception",
+      "purpose": "Elaborate the requirements — analyze the codebase, elicit requirements, design architecture, decompose into units of work, and plan delivery."
+    },
+    {
+      "id": 3,
+      "name": "Construction",
+      "purpose": "Build the solution — design, implement, and test — in reviewable slices."
+    },
+    {
+      "id": 4,
+      "name": "Operation",
+      "purpose": "Deploy and operate — set up deployment pipelines, provision environments, configure observability, and establish feedback loops."
+    }
+  ],
+  "stages": [
+    {
+      "id": "0.1",
+      "phase": "Initialization",
+      "name": "Workspace Scaffold",
+      "slug": null,
+      "gate": false,
+      "gateNote": null,
+      "mode": "inline (auto-proceed)",
+      "lead": "orchestrator",
+      "support": [],
+      "reviewer": null,
+      "outputs": [],
+      "outputsNote": "Creates the intent's record dir aidlc/spaces/<space>/intents/<YYMMDD>-<label>/.",
+      "runs": "always",
+      "condition": null,
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/initialization/workspace-scaffold.md",
+      "produces": [],
+      "recordDir": null
+    },
+    {
+      "id": "0.2",
+      "phase": "Initialization",
+      "name": "Workspace Detection",
+      "slug": null,
+      "gate": false,
+      "gateNote": null,
+      "mode": "inline (auto-proceed)",
+      "lead": "orchestrator",
+      "support": [],
+      "reviewer": null,
+      "outputs": [
+        "aidlc-state.md"
+      ],
+      "outputsNote": "Rule-based scan of file extensions, known config filenames and package manifests.",
+      "runs": "always",
+      "condition": null,
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/initialization/workspace-detection.md",
+      "produces": [],
+      "recordDir": null
+    },
+    {
+      "id": "0.3",
+      "phase": "Initialization",
+      "name": "State Initialization",
+      "slug": null,
+      "gate": false,
+      "gateNote": null,
+      "mode": "inline (auto-proceed)",
+      "lead": "orchestrator",
+      "support": [],
+      "reviewer": null,
+      "outputs": [
+        "aidlc-state.md",
+        "audit/"
+      ],
+      "outputsNote": null,
+      "runs": "always",
+      "condition": null,
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/initialization/state-init.md",
+      "produces": [],
+      "recordDir": null
+    },
+    {
+      "id": "1.1",
+      "phase": "Ideation",
+      "name": "Intent Capture & Framing",
+      "slug": "intent-capture",
+      "gate": true,
+      "gateNote": "Retained assumptions require explicit confirmation before the Product Lead reviewer and approval gate run.",
+      "mode": "inline",
+      "lead": "aidlc-product-agent",
+      "support": [
+        "aidlc-architect-agent"
+      ],
+      "reviewer": "aidlc-product-lead-agent",
+      "outputs": [
+        "intent-statement.md",
+        "stakeholder-map.md",
+        "intent-capture-questions.md"
+      ],
+      "outputsNote": null,
+      "runs": "always",
+      "condition": null,
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/ideation/intent-capture.md",
+      "produces": [
+        "intent-statement",
+        "stakeholder-map",
+        "intent-capture-questions"
+      ],
+      "recordDir": "ideation/intent-capture/"
+    },
+    {
+      "id": "1.2",
+      "phase": "Ideation",
+      "name": "Market Research",
+      "slug": "market-research",
+      "gate": true,
+      "gateNote": null,
+      "mode": "inline",
+      "lead": "aidlc-product-agent",
+      "support": [],
+      "reviewer": null,
+      "outputs": [
+        "competitive-analysis.md",
+        "market-trends.md",
+        "build-vs-buy.md",
+        "market-research-questions.md"
+      ],
+      "outputsNote": null,
+      "runs": "conditional",
+      "condition": null,
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/ideation/market-research.md",
+      "produces": [
+        "competitive-analysis",
+        "market-trends",
+        "build-vs-buy",
+        "market-research-questions"
+      ],
+      "recordDir": "ideation/market-research/"
+    },
+    {
+      "id": "1.3",
+      "phase": "Ideation",
+      "name": "Feasibility & Constraints",
+      "slug": "feasibility",
+      "gate": true,
+      "gateNote": null,
+      "mode": "inline",
+      "lead": "aidlc-architect-agent",
+      "support": [
+        "aidlc-aws-platform-agent",
+        "aidlc-compliance-agent"
+      ],
+      "reviewer": null,
+      "outputs": [
+        "feasibility-assessment.md",
+        "constraint-register.md",
+        "raid-log.md",
+        "feasibility-questions.md"
+      ],
+      "outputsNote": null,
+      "runs": "conditional",
+      "condition": null,
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/ideation/feasibility.md",
+      "produces": [
+        "feasibility-assessment",
+        "constraint-register",
+        "raid-log",
+        "feasibility-questions"
+      ],
+      "recordDir": "ideation/feasibility/"
+    },
+    {
+      "id": "1.4",
+      "phase": "Ideation",
+      "name": "Scope Definition",
+      "slug": "scope-definition",
+      "gate": true,
+      "gateNote": null,
+      "mode": "inline",
+      "lead": "aidlc-product-agent",
+      "support": [
+        "aidlc-delivery-agent"
+      ],
+      "reviewer": null,
+      "outputs": [
+        "scope-document.md",
+        "intent-backlog.md",
+        "scope-definition-questions.md"
+      ],
+      "outputsNote": null,
+      "runs": "always",
+      "condition": null,
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/ideation/scope-definition.md",
+      "produces": [
+        "scope-document",
+        "intent-backlog",
+        "scope-definition-questions"
+      ],
+      "recordDir": "ideation/scope-definition/"
+    },
+    {
+      "id": "1.5",
+      "phase": "Ideation",
+      "name": "Team Formation",
+      "slug": "team-formation",
+      "gate": true,
+      "gateNote": null,
+      "mode": "inline",
+      "lead": "aidlc-delivery-agent",
+      "support": [],
+      "reviewer": null,
+      "outputs": [
+        "team-assessment.md",
+        "skill-matrix.md",
+        "mob-composition.md",
+        "team-formation-questions.md"
+      ],
+      "outputsNote": null,
+      "runs": "conditional",
+      "condition": null,
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/ideation/team-formation.md",
+      "produces": [
+        "team-assessment",
+        "skill-matrix",
+        "mob-composition",
+        "team-formation-questions"
+      ],
+      "recordDir": "ideation/team-formation/"
+    },
+    {
+      "id": "1.6",
+      "phase": "Ideation",
+      "name": "Rough Mockups",
+      "slug": "rough-mockups",
+      "gate": true,
+      "gateNote": null,
+      "mode": "inline",
+      "lead": "aidlc-design-agent",
+      "support": [
+        "aidlc-product-agent"
+      ],
+      "reviewer": "aidlc-product-lead-agent",
+      "outputs": [
+        "wireframes.md",
+        "user-flow.md",
+        "rough-mockups-questions.md"
+      ],
+      "outputsNote": null,
+      "runs": "conditional",
+      "condition": null,
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/ideation/rough-mockups.md",
+      "produces": [
+        "wireframes",
+        "user-flow",
+        "rough-mockups-questions"
+      ],
+      "recordDir": "ideation/rough-mockups/"
+    },
+    {
+      "id": "1.7",
+      "phase": "Ideation",
+      "name": "Approval & Handoff",
+      "slug": "approval-handoff",
+      "gate": true,
+      "gateNote": "Followed by the Ideation → Inception verification gate.",
+      "mode": "inline",
+      "lead": "aidlc-delivery-agent",
+      "support": [
+        "aidlc-product-agent"
+      ],
+      "reviewer": null,
+      "outputs": [
+        "initiative-brief.md",
+        "decision-log.md",
+        "approval-handoff-questions.md",
+        "verification/phase-check-ideation.md"
+      ],
+      "outputsNote": null,
+      "runs": "always",
+      "condition": null,
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/ideation/approval-handoff.md",
+      "produces": [
+        "initiative-brief",
+        "decision-log",
+        "approval-handoff-questions"
+      ],
+      "recordDir": "ideation/approval-handoff/"
+    },
+    {
+      "id": "2.1",
+      "phase": "Inception",
+      "name": "Reverse Engineering",
+      "slug": "reverse-engineering",
+      "gate": true,
+      "gateNote": "Approval gate only.",
+      "mode": "pipeline",
+      "lead": "aidlc-developer-agent",
+      "support": [
+        "aidlc-architect-agent"
+      ],
+      "reviewer": null,
+      "outputs": [
+        "business-overview.md",
+        "architecture.md",
+        "code-structure.md",
+        "api-documentation.md",
+        "component-inventory.md",
+        "technology-stack.md",
+        "dependencies.md",
+        "code-quality-assessment.md",
+        "reverse-engineering-timestamp.md"
+      ],
+      "outputsNote": "Written to aidlc/spaces/<space>/codekb/<repo>/, not the record dir.",
+      "runs": "brownfield only",
+      "condition": "\"It only executes for brownfield projects.\"",
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/inception/reverse-engineering.md",
+      "produces": [
+        "business-overview",
+        "architecture",
+        "code-structure",
+        "api-documentation",
+        "component-inventory",
+        "technology-stack",
+        "dependencies",
+        "code-quality-assessment",
+        "reverse-engineering-timestamp"
+      ],
+      "recordDir": "aidlc/spaces/<space>/codekb/<repo>/"
+    },
+    {
+      "id": "2.2",
+      "phase": "Inception",
+      "name": "Practices Discovery",
+      "slug": "practices-discovery",
+      "gate": true,
+      "gateNote": "Practices interview + final gate.",
+      "mode": "subagent",
+      "lead": "aidlc-pipeline-deploy-agent",
+      "support": [
+        "aidlc-quality-agent",
+        "aidlc-developer-agent",
+        "aidlc-devsecops-agent"
+      ],
+      "reviewer": null,
+      "outputs": [
+        "team-practices.md",
+        "discovered-rules.md",
+        "evidence.md",
+        "practices-discovery-timestamp.md"
+      ],
+      "outputsNote": null,
+      "runs": "conditional",
+      "condition": null,
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/inception/practices-discovery.md",
+      "produces": [
+        "team-practices",
+        "discovered-rules",
+        "evidence",
+        "practices-discovery-timestamp"
+      ],
+      "recordDir": "inception/practices-discovery/"
+    },
+    {
+      "id": "2.3",
+      "phase": "Inception",
+      "name": "Requirements Analysis",
+      "slug": "requirements-analysis",
+      "gate": true,
+      "gateNote": null,
+      "mode": "inline",
+      "lead": "aidlc-product-agent",
+      "support": [],
+      "reviewer": "aidlc-product-lead-agent",
+      "outputs": [
+        "requirements.md",
+        "requirements-analysis-questions.md"
+      ],
+      "outputsNote": null,
+      "runs": "always",
+      "condition": null,
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/inception/requirements-analysis.md",
+      "produces": [
+        "requirements",
+        "requirements-analysis-questions"
+      ],
+      "recordDir": "inception/requirements-analysis/"
+    },
+    {
+      "id": "2.4",
+      "phase": "Inception",
+      "name": "User Stories",
+      "slug": "user-stories",
+      "gate": true,
+      "gateNote": "Mid-stage judgment questions + approval gate.",
+      "mode": "mob",
+      "lead": "aidlc-product-agent",
+      "support": [
+        "aidlc-design-agent",
+        "aidlc-developer-agent",
+        "aidlc-quality-agent"
+      ],
+      "reviewer": "aidlc-product-lead-agent",
+      "outputs": [
+        "stories.md",
+        "personas.md",
+        "user-stories-assessment.md",
+        "traceability.json"
+      ],
+      "outputsNote": null,
+      "runs": "conditional",
+      "condition": "User-facing features.",
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/inception/user-stories.md",
+      "produces": [
+        "stories",
+        "personas",
+        "user-stories-assessment",
+        "traceability"
+      ],
+      "recordDir": "inception/user-stories/"
+    },
+    {
+      "id": "2.5",
+      "phase": "Inception",
+      "name": "Refined Mockups",
+      "slug": "refined-mockups",
+      "gate": true,
+      "gateNote": null,
+      "mode": "inline",
+      "lead": "aidlc-design-agent",
+      "support": [
+        "aidlc-product-agent"
+      ],
+      "reviewer": "aidlc-product-lead-agent",
+      "outputs": [
+        "mockups.md",
+        "interaction-spec.md",
+        "design-system-mapping.md",
+        "accessibility-checklist.md",
+        "refined-mockups-questions.md"
+      ],
+      "outputsNote": null,
+      "runs": "conditional",
+      "condition": "UI projects.",
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/inception/refined-mockups.md",
+      "produces": [
+        "mockups",
+        "interaction-spec",
+        "design-system-mapping",
+        "accessibility-checklist",
+        "refined-mockups-questions"
+      ],
+      "recordDir": "inception/refined-mockups/"
+    },
+    {
+      "id": "2.6",
+      "phase": "Inception",
+      "name": "Domain Design",
+      "slug": "domain-design",
+      "gate": true,
+      "gateNote": null,
+      "mode": "inline",
+      "lead": "aidlc-architect-agent",
+      "support": [
+        "aidlc-aws-platform-agent",
+        "aidlc-design-agent"
+      ],
+      "reviewer": "aidlc-architecture-reviewer-agent",
+      "outputs": [
+        "components.md",
+        "decisions.md",
+        "traceability.json"
+      ],
+      "outputsNote": null,
+      "runs": "conditional",
+      "condition": "Per execution plan (when new components are needed).",
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/inception/domain-design.md",
+      "produces": [
+        "components",
+        "decisions",
+        "traceability"
+      ],
+      "recordDir": "inception/domain-design/"
+    },
+    {
+      "id": "2.7",
+      "phase": "Inception",
+      "name": "Units Generation",
+      "slug": "units-generation",
+      "gate": true,
+      "gateNote": null,
+      "mode": "inline",
+      "lead": "aidlc-architect-agent",
+      "support": [
+        "aidlc-delivery-agent"
+      ],
+      "reviewer": "aidlc-architecture-reviewer-agent",
+      "outputs": [
+        "unit-of-work.md",
+        "unit-of-work-dependency.md",
+        "unit-of-work-story-map.md",
+        "traceability.json"
+      ],
+      "outputsNote": null,
+      "runs": "always",
+      "condition": null,
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/inception/units-generation.md",
+      "produces": [
+        "unit-of-work",
+        "unit-of-work-dependency",
+        "unit-of-work-story-map",
+        "traceability"
+      ],
+      "recordDir": "inception/units-generation/"
+    },
+    {
+      "id": "2.8",
+      "phase": "Inception",
+      "name": "Contract Design",
+      "slug": "contract-design",
+      "gate": true,
+      "gateNote": null,
+      "mode": "inline",
+      "lead": "aidlc-architect-agent",
+      "support": [
+        "aidlc-aws-platform-agent"
+      ],
+      "reviewer": "aidlc-architecture-reviewer-agent",
+      "outputs": [
+        "contract-summary.md"
+      ],
+      "outputsNote": null,
+      "runs": "conditional",
+      "condition": "More than one Unit, or an externally used API.",
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/inception/contract-design.md",
+      "produces": [
+        "contract-summary"
+      ],
+      "recordDir": "inception/contract-design/"
+    },
+    {
+      "id": "2.9",
+      "phase": "Inception",
+      "name": "Delivery Planning",
+      "slug": "delivery-planning",
+      "gate": true,
+      "gateNote": "Followed by the Inception → Construction verification gate.",
+      "mode": "inline",
+      "lead": "aidlc-delivery-agent",
+      "support": [
+        "aidlc-architect-agent"
+      ],
+      "reviewer": null,
+      "outputs": [
+        "bolt-plan.md",
+        "team-allocation.md",
+        "risk-and-sequencing-rationale.md",
+        "external-dependency-map.md",
+        "delivery-planning-questions.md",
+        "verification/phase-check-inception.md"
+      ],
+      "outputsNote": null,
+      "runs": "always",
+      "condition": null,
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/inception/delivery-planning.md",
+      "produces": [
+        "bolt-plan",
+        "team-allocation",
+        "risk-and-sequencing-rationale",
+        "external-dependency-map",
+        "delivery-planning-questions"
+      ],
+      "recordDir": "inception/delivery-planning/"
+    },
+    {
+      "id": "3.1",
+      "phase": "Construction",
+      "name": "Functional Design",
+      "slug": "functional-design",
+      "gate": true,
+      "gateNote": null,
+      "mode": "inline",
+      "lead": "aidlc-architect-agent",
+      "support": [
+        "aidlc-developer-agent"
+      ],
+      "reviewer": "aidlc-architecture-reviewer-agent",
+      "outputs": [
+        "entities.md",
+        "rules.md",
+        "functional-spec.md",
+        "traceability.json"
+      ],
+      "outputsNote": null,
+      "runs": "conditional",
+      "condition": "Per execution plan.",
+      "perUnit": true,
+      "ruleFile": "core/aidlc-common/stages/construction/functional-design.md",
+      "produces": [
+        "entities",
+        "rules",
+        "functional-spec",
+        "traceability"
+      ],
+      "recordDir": "construction/<unit-name>/functional-design/"
+    },
+    {
+      "id": "3.2",
+      "phase": "Construction",
+      "name": "NFR Requirements",
+      "slug": "nfr-requirements",
+      "gate": true,
+      "gateNote": null,
+      "mode": "inline",
+      "lead": "aidlc-architect-agent",
+      "support": [
+        "aidlc-devsecops-agent",
+        "aidlc-compliance-agent",
+        "aidlc-quality-agent"
+      ],
+      "reviewer": "aidlc-architecture-reviewer-agent",
+      "outputs": [
+        "performance-requirements.md",
+        "security-requirements.md",
+        "scalability-requirements.md",
+        "reliability-requirements.md",
+        "observability-requirements.md",
+        "tech-stack-decisions.md",
+        "traceability.json"
+      ],
+      "outputsNote": null,
+      "runs": "conditional",
+      "condition": "Per execution plan. observability-requirements.md for service Units only.",
+      "perUnit": true,
+      "ruleFile": "core/aidlc-common/stages/construction/nfr-requirements.md",
+      "produces": [
+        "performance-requirements",
+        "security-requirements",
+        "scalability-requirements",
+        "reliability-requirements",
+        "observability-requirements",
+        "tech-stack-decisions",
+        "traceability"
+      ],
+      "recordDir": "construction/<unit-name>/nfr-requirements/"
+    },
+    {
+      "id": "3.3",
+      "phase": "Construction",
+      "name": "NFR Design",
+      "slug": "nfr-design",
+      "gate": true,
+      "gateNote": null,
+      "mode": "inline",
+      "lead": "aidlc-architect-agent",
+      "support": [
+        "aidlc-aws-platform-agent"
+      ],
+      "reviewer": "aidlc-architecture-reviewer-agent",
+      "outputs": [
+        "performance-design.md",
+        "security-design.md",
+        "scalability-design.md",
+        "reliability-design.md",
+        "observability-design.md",
+        "logical-components.md",
+        "traceability.json"
+      ],
+      "outputsNote": null,
+      "runs": "conditional",
+      "condition": "Per execution plan. observability-design.md for service Units only.",
+      "perUnit": true,
+      "ruleFile": "core/aidlc-common/stages/construction/nfr-design.md",
+      "produces": [
+        "performance-design",
+        "security-design",
+        "scalability-design",
+        "reliability-design",
+        "observability-design",
+        "logical-components",
+        "traceability"
+      ],
+      "recordDir": "construction/<unit-name>/nfr-design/"
+    },
+    {
+      "id": "3.4",
+      "phase": "Construction",
+      "name": "Infrastructure Design",
+      "slug": "infrastructure-design",
+      "gate": true,
+      "gateNote": null,
+      "mode": "inline",
+      "lead": "aidlc-aws-platform-agent",
+      "support": [
+        "aidlc-devsecops-agent",
+        "aidlc-compliance-agent"
+      ],
+      "reviewer": "aidlc-architecture-reviewer-agent",
+      "outputs": [
+        "infrastructure-specification.md",
+        "monitoring-design.md",
+        "cicd-pipeline.md",
+        "traceability.json"
+      ],
+      "outputsNote": null,
+      "runs": "conditional",
+      "condition": "Per execution plan.",
+      "perUnit": true,
+      "ruleFile": "core/aidlc-common/stages/construction/infrastructure-design.md",
+      "produces": [
+        "infrastructure-specification",
+        "monitoring-design",
+        "cicd-pipeline",
+        "traceability"
+      ],
+      "recordDir": "construction/<unit-name>/infrastructure-design/"
+    },
+    {
+      "id": "3.5",
+      "phase": "Construction",
+      "name": "Code Generation",
+      "slug": "code-generation",
+      "gate": true,
+      "gateNote": "Plan Approval is mandatory during Code Generation.",
+      "mode": "subagent",
+      "lead": "aidlc-developer-agent",
+      "support": [],
+      "reviewer": "aidlc-architecture-reviewer-agent",
+      "outputs": [
+        "code-generation-plan.md",
+        "unit-test-instructions.md",
+        "code-summary.md",
+        "traceability.json",
+        "source-manifest.json"
+      ],
+      "outputsNote": "Application code goes to the workspace root, not the record dir.",
+      "runs": "always",
+      "condition": null,
+      "perUnit": true,
+      "ruleFile": "core/aidlc-common/stages/construction/code-generation.md",
+      "produces": [
+        "code-generation-plan",
+        "unit-test-instructions",
+        "code-summary",
+        "traceability"
+      ],
+      "recordDir": "construction/<unit-name>/code-generation/"
+    },
+    {
+      "id": "3.6",
+      "phase": "Construction",
+      "name": "Build and Test",
+      "slug": "build-and-test",
+      "gate": true,
+      "gateNote": null,
+      "mode": "inline",
+      "lead": "aidlc-quality-agent",
+      "support": [
+        "aidlc-devsecops-agent"
+      ],
+      "reviewer": null,
+      "outputs": [
+        "build-instructions.md",
+        "build-and-test-summary.md",
+        "build-test-results.md",
+        "cross-unit-traceability.md"
+      ],
+      "outputsNote": null,
+      "runs": "always",
+      "condition": "Runs once after all Units; reads every Unit's code.",
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/construction/build-and-test.md",
+      "produces": [
+        "build-instructions",
+        "build-and-test-summary",
+        "build-test-results",
+        "cross-unit-traceability"
+      ],
+      "recordDir": "construction/build-and-test/"
+    },
+    {
+      "id": "3.7",
+      "phase": "Construction",
+      "name": "CI Pipeline",
+      "slug": "ci-pipeline",
+      "gate": true,
+      "gateNote": "Followed by the Construction → Operation verification gate.",
+      "mode": "inline",
+      "lead": "aidlc-pipeline-deploy-agent",
+      "support": [],
+      "reviewer": null,
+      "outputs": [
+        "ci-config.md",
+        "quality-gates.md",
+        "ci-pipeline-questions.md",
+        "verification/phase-check-construction.md"
+      ],
+      "outputsNote": null,
+      "runs": "conditional",
+      "condition": "Runs once after all Units.",
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/construction/ci-pipeline.md",
+      "produces": [
+        "ci-config",
+        "quality-gates",
+        "ci-pipeline-questions"
+      ],
+      "recordDir": "construction/ci-pipeline/"
+    },
+    {
+      "id": "4.1",
+      "phase": "Operation",
+      "name": "Deployment Pipeline",
+      "slug": "deployment-pipeline",
+      "gate": true,
+      "gateNote": null,
+      "mode": "inline",
+      "lead": "aidlc-pipeline-deploy-agent",
+      "support": [],
+      "reviewer": null,
+      "outputs": [
+        "cd-config.md",
+        "deployment-strategy.md",
+        "rollback-runbook.md",
+        "deployment-pipeline-questions.md"
+      ],
+      "outputsNote": null,
+      "runs": "conditional",
+      "condition": null,
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/operation/deployment-pipeline.md",
+      "produces": [
+        "cd-config",
+        "deployment-strategy",
+        "rollback-runbook",
+        "deployment-pipeline-questions"
+      ],
+      "recordDir": "operation/deployment-pipeline/"
+    },
+    {
+      "id": "4.2",
+      "phase": "Operation",
+      "name": "Environment Provisioning",
+      "slug": "environment-provisioning",
+      "gate": true,
+      "gateNote": null,
+      "mode": "inline",
+      "lead": "aidlc-aws-platform-agent",
+      "support": [
+        "aidlc-devsecops-agent",
+        "aidlc-compliance-agent"
+      ],
+      "reviewer": null,
+      "outputs": [
+        "environment-inventory.md",
+        "validation-report.md",
+        "environment-provisioning-questions.md"
+      ],
+      "outputsNote": null,
+      "runs": "conditional",
+      "condition": null,
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/operation/environment-provisioning.md",
+      "produces": [
+        "environment-inventory",
+        "validation-report",
+        "environment-provisioning-questions"
+      ],
+      "recordDir": "operation/environment-provisioning/"
+    },
+    {
+      "id": "4.3",
+      "phase": "Operation",
+      "name": "Deployment Execution",
+      "slug": "deployment-execution",
+      "gate": true,
+      "gateNote": null,
+      "mode": "inline",
+      "lead": "aidlc-pipeline-deploy-agent",
+      "support": [
+        "aidlc-developer-agent"
+      ],
+      "reviewer": null,
+      "outputs": [
+        "deployment-log.md",
+        "smoke-test-results.md",
+        "health-check-report.md",
+        "deployment-execution-questions.md"
+      ],
+      "outputsNote": null,
+      "runs": "conditional",
+      "condition": null,
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/operation/deployment-execution.md",
+      "produces": [
+        "deployment-log",
+        "smoke-test-results",
+        "health-check-report",
+        "deployment-execution-questions"
+      ],
+      "recordDir": "operation/deployment-execution/"
+    },
+    {
+      "id": "4.4",
+      "phase": "Operation",
+      "name": "Observability Setup",
+      "slug": "observability-setup",
+      "gate": true,
+      "gateNote": null,
+      "mode": "inline",
+      "lead": "aidlc-operations-agent",
+      "support": [],
+      "reviewer": null,
+      "outputs": [
+        "dashboards.md",
+        "alarms.md",
+        "slo-config.md",
+        "log-queries.md",
+        "tracing-config.md",
+        "anomaly-config.md",
+        "observability-setup-questions.md"
+      ],
+      "outputsNote": null,
+      "runs": "conditional",
+      "condition": null,
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/operation/observability-setup.md",
+      "produces": [
+        "dashboards",
+        "alarms",
+        "slo-config",
+        "log-queries",
+        "tracing-config",
+        "anomaly-config",
+        "observability-setup-questions"
+      ],
+      "recordDir": "operation/observability-setup/"
+    },
+    {
+      "id": "4.5",
+      "phase": "Operation",
+      "name": "Incident Response",
+      "slug": "incident-response",
+      "gate": true,
+      "gateNote": null,
+      "mode": "inline",
+      "lead": "aidlc-operations-agent",
+      "support": [],
+      "reviewer": null,
+      "outputs": [
+        "runbooks.md",
+        "incident-plan.md",
+        "escalation-matrix.md",
+        "incident-response-questions.md"
+      ],
+      "outputsNote": null,
+      "runs": "conditional",
+      "condition": null,
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/operation/incident-response.md",
+      "produces": [
+        "runbooks",
+        "incident-plan",
+        "escalation-matrix",
+        "incident-response-questions"
+      ],
+      "recordDir": "operation/incident-response/"
+    },
+    {
+      "id": "4.6",
+      "phase": "Operation",
+      "name": "Performance Validation",
+      "slug": "performance-validation",
+      "gate": true,
+      "gateNote": null,
+      "mode": "inline",
+      "lead": "aidlc-quality-agent",
+      "support": [],
+      "reviewer": null,
+      "outputs": [
+        "load-test-plan.md",
+        "load-test-results.md",
+        "nfr-validation-matrix.md",
+        "performance-validation-questions.md"
+      ],
+      "outputsNote": null,
+      "runs": "conditional",
+      "condition": null,
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/operation/performance-validation.md",
+      "produces": [
+        "load-test-plan",
+        "load-test-results",
+        "nfr-validation-matrix",
+        "performance-validation-questions"
+      ],
+      "recordDir": "operation/performance-validation/"
+    },
+    {
+      "id": "4.7",
+      "phase": "Operation",
+      "name": "Feedback & Optimization",
+      "slug": "feedback-optimization",
+      "gate": true,
+      "gateNote": "\"On approval, the workflow is complete.\"",
+      "mode": "inline",
+      "lead": "aidlc-operations-agent",
+      "support": [
+        "aidlc-aws-platform-agent"
+      ],
+      "reviewer": null,
+      "outputs": [
+        "slo-report.md",
+        "cost-analysis.md",
+        "drift-report.md",
+        "feedback-loop.md",
+        "feedback-optimization-questions.md"
+      ],
+      "outputsNote": null,
+      "runs": "conditional",
+      "condition": null,
+      "perUnit": false,
+      "ruleFile": "core/aidlc-common/stages/operation/feedback-optimization.md",
+      "produces": [
+        "slo-report",
+        "cost-analysis",
+        "drift-report",
+        "feedback-loop",
+        "feedback-optimization-questions"
+      ],
+      "recordDir": "operation/feedback-optimization/"
+    }
+  ]
+}

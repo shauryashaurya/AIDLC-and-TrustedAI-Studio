@@ -1,0 +1,33 @@
+{
+  "name": "aidlc-trust-studio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Client-side AI-DLC + Trusted AI use-case and agentic system planning studio",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "test:logic": "node --experimental-strip-types --test tests/*.test.mjs",
+    "test:e2e": "playwright test",
+    "report:reference": "node scripts/gen-reference-report.mjs",
+    "docs:gen": "node --experimental-strip-types scripts/gen-docs.mjs",
+    "docs:check": "node --experimental-strip-types scripts/gen-docs.mjs --check",
+    "samples:gen": "node scripts/gen-samples.mjs"
+  },
+  "dependencies": {
+    "ajv": "^8.20.0",
+    "svelte": "^5.19.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.1",
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "svelte-check": "^4.2.0",
+    "typescript": "^5.7.3",
+    "vite": "^6.1.0"
+  },
+  "engines": {
+    "node": ">=20.19"
+  }
+}

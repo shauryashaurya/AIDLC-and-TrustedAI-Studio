@@ -1,0 +1,227 @@
+{
+  "source": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/docs/guide/06-agents.md",
+  "tag": "v2.11.5",
+  "verifiedOn": "2026-11-25",
+  "agents": [
+    {
+      "id": "aidlc-product-agent",
+      "kind": "domain",
+      "domain": "Requirements, user stories, scope, market research",
+      "role": "Product manager and business analyst: captures intent, does market research, defines scope, elicits requirements, produces user stories.",
+      "leads": [
+        "intent-capture",
+        "market-research",
+        "scope-definition",
+        "requirements-analysis",
+        "user-stories"
+      ],
+      "supports": [
+        "rough-mockups",
+        "approval-handoff",
+        "refined-mockups"
+      ],
+      "reviews": []
+    },
+    {
+      "id": "aidlc-design-agent",
+      "kind": "domain",
+      "domain": "UX/UI design, wireframes, interaction design, accessibility",
+      "role": "Creates wireframes, mockups and interaction specs.",
+      "leads": [
+        "rough-mockups",
+        "refined-mockups"
+      ],
+      "supports": [
+        "user-stories",
+        "domain-design"
+      ],
+      "reviews": []
+    },
+    {
+      "id": "aidlc-delivery-agent",
+      "kind": "domain",
+      "domain": "Team formation, capacity planning, delivery sequencing",
+      "role": "Engineering manager: assesses capacity, forms mob composition, plans sequencing, manages phase handoffs.",
+      "leads": [
+        "team-formation",
+        "approval-handoff",
+        "delivery-planning"
+      ],
+      "supports": [
+        "scope-definition",
+        "units-generation"
+      ],
+      "reviews": []
+    },
+    {
+      "id": "aidlc-architect-agent",
+      "kind": "domain",
+      "domain": "Domain design, domain modelling, NFRs, component decomposition",
+      "role": "Described as the \"central design authority\"; involved in 10 stages across 3 phases.",
+      "leads": [
+        "feasibility",
+        "domain-design",
+        "units-generation",
+        "contract-design",
+        "functional-design",
+        "nfr-requirements",
+        "nfr-design"
+      ],
+      "supports": [
+        "intent-capture",
+        "reverse-engineering",
+        "delivery-planning"
+      ],
+      "reviews": []
+    },
+    {
+      "id": "aidlc-aws-platform-agent",
+      "kind": "domain",
+      "domain": "AWS infrastructure, CDK/CloudFormation, cost optimization",
+      "role": "Designs infrastructure, provisions environments, optimizes costs.",
+      "leads": [
+        "infrastructure-design",
+        "environment-provisioning"
+      ],
+      "supports": [
+        "feasibility",
+        "domain-design",
+        "contract-design",
+        "nfr-design",
+        "feedback-optimization"
+      ],
+      "reviews": []
+    },
+    {
+      "id": "aidlc-compliance-agent",
+      "kind": "domain",
+      "domain": "Regulatory scanning, data classification, risk assessment",
+      "role": "Advisory only; \"has no lead stages\".",
+      "leads": [],
+      "supports": [
+        "feasibility",
+        "nfr-requirements",
+        "infrastructure-design",
+        "environment-provisioning"
+      ],
+      "reviews": []
+    },
+    {
+      "id": "aidlc-devsecops-agent",
+      "kind": "domain",
+      "domain": "Threat modelling, security scanning, DevSecOps pipelines",
+      "role": "Reviews designs for security, defines security requirements, integrates security into CI/CD. Support role only.",
+      "leads": [],
+      "supports": [
+        "practices-discovery",
+        "nfr-requirements",
+        "infrastructure-design",
+        "build-and-test",
+        "environment-provisioning"
+      ],
+      "reviews": []
+    },
+    {
+      "id": "aidlc-developer-agent",
+      "kind": "domain",
+      "domain": "Code implementation, code analysis, data modelling",
+      "role": "Spans Inception through Operation.",
+      "leads": [
+        "reverse-engineering",
+        "code-generation"
+      ],
+      "supports": [
+        "practices-discovery",
+        "user-stories",
+        "functional-design",
+        "deployment-execution"
+      ],
+      "reviews": []
+    },
+    {
+      "id": "aidlc-quality-agent",
+      "kind": "domain",
+      "domain": "Test strategy, test generation, performance validation",
+      "role": "Defines test strategy, generates test suites, validates quality gates, runs performance testing.",
+      "leads": [
+        "build-and-test",
+        "performance-validation"
+      ],
+      "supports": [
+        "practices-discovery",
+        "user-stories",
+        "nfr-requirements"
+      ],
+      "reviews": []
+    },
+    {
+      "id": "aidlc-pipeline-deploy-agent",
+      "kind": "domain",
+      "domain": "CI/CD pipelines, deployment strategy, release execution",
+      "role": "Configures CI/CD, plans deployment strategy, executes releases with rollback.",
+      "leads": [
+        "practices-discovery",
+        "ci-pipeline",
+        "deployment-pipeline",
+        "deployment-execution"
+      ],
+      "supports": [],
+      "reviews": []
+    },
+    {
+      "id": "aidlc-operations-agent",
+      "kind": "domain",
+      "domain": "Observability, incident response, SLO tracking, feedback loops",
+      "role": "Sets up monitoring, defines incident response, feeds insights back to the product agent.",
+      "leads": [
+        "observability-setup",
+        "incident-response",
+        "feedback-optimization"
+      ],
+      "supports": [],
+      "reviews": []
+    },
+    {
+      "id": "aidlc-product-lead-agent",
+      "kind": "reviewer",
+      "domain": "Review of requirements, stories and UX artifacts",
+      "role": "Reviewer; reviewers \"do not produce artifacts\".",
+      "leads": [],
+      "supports": [],
+      "reviews": [
+        "intent-capture",
+        "rough-mockups",
+        "refined-mockups",
+        "requirements-analysis",
+        "user-stories"
+      ]
+    },
+    {
+      "id": "aidlc-architecture-reviewer-agent",
+      "kind": "reviewer",
+      "domain": "Review of technical design artifacts",
+      "role": "Reviewer; reviewers \"do not produce artifacts\".",
+      "leads": [],
+      "supports": [],
+      "reviews": [
+        "domain-design",
+        "units-generation",
+        "contract-design",
+        "functional-design",
+        "nfr-requirements",
+        "nfr-design",
+        "infrastructure-design",
+        "code-generation"
+      ]
+    },
+    {
+      "id": "aidlc-composer-agent",
+      "kind": "composer",
+      "domain": "Adaptive workflows",
+      "role": "Estimates implementation entropy and proposes an EXECUTE/SKIP stage grid for approval. Dispatched by /aidlc compose.",
+      "leads": [],
+      "supports": [],
+      "reviews": []
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "tag": "v2.11.5",
+  "verifiedOn": "2026-11-25",
+  "note": "Gate types stated in the AI-DLC v2.11.5 guide and rule files (kind \"aidlc\"), plus the studio's Trusted AI gates (kind \"studio\").",
+  "gates": [
+    {
+      "id": "stage-approval",
+      "kind": "aidlc",
+      "name": "Stage approval gate",
+      "appliesTo": "every planned stage outside Initialization",
+      "rule": "Every stage your scope runs, outside Initialization, ends with an approval gate. A gate needs a real human message to approve.",
+      "source": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/docs/guide/04-phases-and-stages.md"
+    },
+    {
+      "id": "assumption-confirmation",
+      "kind": "aidlc",
+      "name": "Assumption Confirmation",
+      "appliesTo": "1.1",
+      "rule": "Retained assumptions require explicit confirmation before the Product Lead reviewer and approval gate run.",
+      "source": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/core/aidlc-common/stages/ideation/intent-capture.md"
+    },
+    {
+      "id": "reviewer-pass",
+      "kind": "aidlc",
+      "name": "Reviewer pass",
+      "appliesTo": "stages with a reviewer (product lead or architecture reviewer)",
+      "rule": "Reviewer agents review the stage artifacts and do not produce artifacts; under classic, reviews are advisory: one pass per stage, findings at the approval gate.",
+      "source": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/docs/guide/06-agents.md"
+    },
+    {
+      "id": "practices-interview",
+      "kind": "aidlc",
+      "name": "Practices interview and final gate",
+      "appliesTo": "2.2",
+      "rule": "Practices interview + final gate. On affirmation, content is promoted to memory/team.md and project.md.",
+      "source": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/core/aidlc-common/stages/inception/practices-discovery.md"
+    },
+    {
+      "id": "phase-ideation",
+      "kind": "aidlc",
+      "name": "Phase verification: Ideation → Inception",
+      "appliesTo": "1.7",
+      "rule": "Intent captured, scope defined, feasibility confirmed, initiative approved. Written to verification/phase-check-ideation.md.",
+      "source": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/core/aidlc-common/protocols/stage-protocol-governance.md"
+    },
+    {
+      "id": "phase-inception",
+      "kind": "aidlc",
+      "name": "Phase verification: Inception → Construction",
+      "appliesTo": "2.9",
+      "rule": "All requirements traced to designs, units defined, delivery plan approved. Written to verification/phase-check-inception.md with a pass/fail verdict; if any finding remains, stop the transition and revisit the owning stage.",
+      "source": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/core/aidlc-common/protocols/stage-protocol-governance.md"
+    },
+    {
+      "id": "phase-construction",
+      "kind": "aidlc",
+      "name": "Phase verification: Construction → Operation",
+      "appliesTo": "3.7",
+      "rule": "All units built and tested, CI pipeline configured, infrastructure designed. If any traceability file is missing or any unresolved finding remains, stop the Construction → Operation transition.",
+      "source": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/core/aidlc-common/protocols/stage-protocol-governance.md"
+    },
+    {
+      "id": "plan-approval",
+      "kind": "aidlc",
+      "name": "Plan Approval (Code Generation)",
+      "appliesTo": "3.5",
+      "rule": "The person approves the code-generation plan before code is written; infrastructure-as-code is under the same Plan Approval. Never relax, lower, or disable a defined quality target to make a step pass; surface the gap instead.",
+      "source": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/core/aidlc-common/stages/construction/code-generation.md"
+    },
+    {
+      "id": "unit-checkpoint",
+      "kind": "aidlc",
+      "name": "Verified Unit checkpoint",
+      "appliesTo": "3.1–3.5 per Unit",
+      "rule": "Applies to solo workflows with a real Unit DAG and a stage that produces workspace source: each Unit is approved at a verified Unit checkpoint.",
+      "source": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/core/aidlc-common/protocols/stage-protocol-construction.md"
+    },
+    {
+      "id": "skeleton-approval",
+      "kind": "aidlc",
+      "name": "Walking skeleton approval",
+      "appliesTo": "first Unit when skeleton is on",
+      "rule": "The first Unit must pass a real end-to-end check and the person approves the verified skeleton before later Units begin.",
+      "source": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/docs/guide/04-phases-and-stages.md"
+    },
+    {
+      "id": "merge-gate",
+      "kind": "aidlc",
+      "name": "Merge gate (team ownership / workshop mode)",
+      "appliesTo": "each team-built Unit",
+      "rule": "The integration lead pins one exact candidate, presents the evidence and pinned OID to a human, and records the merge gate; a rejection keeps the candidate unmerged.",
+      "source": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/docs/guide/workshop-mode.md"
+    },
+    {
+      "id": "trusted-ai-phase",
+      "kind": "studio",
+      "name": "Trusted AI checks at each phase's gates",
+      "appliesTo": "every phase in the plan",
+      "rule": "Controls assigned to the phase (studio mapping) are reviewed for owner, status and evidence before the phase's gates are approved.",
+      "source": "data/trust-controls.json (aidlcGatePhase)"
+    },
+    {
+      "id": "release-decision",
+      "kind": "studio",
+      "name": "Release decision (go / no-go)",
+      "appliesTo": "before 4.3 Deployment Execution",
+      "rule": "NIST AI RMF MANAGE 1.1: “A determination is made as to whether the AI system achieves its intended purposes and stated objectives and whether its development or deployment should proceed.” Recorded in docs/trusted-ai/release-decision.md by the accountable owner.",
+      "source": "nist"
+    }
+  ]
+}

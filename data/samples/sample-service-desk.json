@@ -1,0 +1,1207 @@
+{
+  "schemaVersion": 1,
+  "id": "sample-service-desk",
+  "createdAt": "2026-11-25T00:00:00.000Z",
+  "updatedAt": "2026-11-25T00:00:00.000Z",
+  "title": "Sample: IT service desk resolution agents",
+  "summary": "Agents classify tickets, draft answers from the knowledge base, check them, and post replies; engineers take tickets that need hands-on work.",
+  "problem": "Most tickets are repeat questions already answered in the knowledge base, but each waits in the queue for an engineer.",
+  "outcome": "Repeat questions answered within minutes with a KB citation; engineers see only tickets that need them.",
+  "sponsor": "CIO (fictional)",
+  "accountableOwner": "Service desk manager (fictional)",
+  "stakeholders": "Employees, service desk engineers, knowledge manager, security",
+  "domain": "Internal IT support",
+  "jurisdictions": "India",
+  "dataClassification": "Internal",
+  "riskTier": "moderate",
+  "profile": "mvp",
+  "inScope": "Password and access how-to questions, software install guidance, known-issue answers.",
+  "outOfScope": "Account changes, access grants, hardware orders.",
+  "constraints": "The bot cannot change accounts or permissions. Replies must cite a KB article.",
+  "successMetrics": "40% of eligible tickets resolved without an engineer; reopened rate below 10%.",
+  "assumptions": "Fictional sample shipped with the studio to demonstrate every page. The organisation, volumes, prices and evidence are invented example values, not quotes or measurements.",
+  "sourceUrl": "",
+  "sourceDate": "",
+  "patternIds": [
+    "ap-11",
+    "ap-3",
+    "ap-16"
+  ],
+  "ragIds": [
+    "rag-3",
+    "rag-28",
+    "rag-38"
+  ],
+  "nodes": [
+    {
+      "id": "s2-n1",
+      "name": "Ticket classifier",
+      "kind": "agent",
+      "x": 60,
+      "y": 80,
+      "description": "Classifies the ticket and decides whether self-service resolution is allowed.",
+      "model": "Small model",
+      "toolPermissions": "Read new ticket",
+      "dataScope": "",
+      "owner": "Service desk manager",
+      "timeoutSeconds": 15,
+      "maxSteps": 1,
+      "spendLimitUsd": 0.01,
+      "identity": "Workload role: desk-classifier",
+      "inputTokens": 800,
+      "outputTokens": 60,
+      "inputPricePerM": 0.5,
+      "outputPricePerM": 2,
+      "cachedInputPct": 0,
+      "cachedInputPricePerM": 0,
+      "costPerCallUsd": 0,
+      "latencySeconds": 0.7,
+      "routing": "one",
+      "actionType": "",
+      "idempotent": false,
+      "openWorld": false,
+      "requiresHumanApproval": false,
+      "executesCode": false,
+      "sandbox": "",
+      "allowedEgress": "",
+      "patternId": "ap-11",
+      "ragIds": []
+    },
+    {
+      "id": "s2-n2",
+      "name": "Knowledge base retriever",
+      "kind": "retriever",
+      "x": 320,
+      "y": 80,
+      "description": "",
+      "model": "",
+      "toolPermissions": "Read published KB articles",
+      "dataScope": "Published KB only",
+      "owner": "Knowledge manager",
+      "timeoutSeconds": 5,
+      "maxSteps": 3,
+      "spendLimitUsd": 0,
+      "identity": "Workload role: kb-reader",
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "inputPricePerM": 0,
+      "outputPricePerM": 0,
+      "cachedInputPct": 0,
+      "cachedInputPricePerM": 0,
+      "costPerCallUsd": 0.001,
+      "latencySeconds": 0.4,
+      "routing": "one",
+      "actionType": "read-only",
+      "idempotent": true,
+      "openWorld": false,
+      "requiresHumanApproval": false,
+      "executesCode": false,
+      "sandbox": "",
+      "allowedEgress": "",
+      "patternId": "",
+      "ragIds": [
+        "rag-3",
+        "rag-28"
+      ]
+    },
+    {
+      "id": "s2-n3",
+      "name": "Resolver agent",
+      "kind": "agent",
+      "x": 580,
+      "y": 80,
+      "description": "Drafts a resolution from KB articles and conversation history.",
+      "model": "Medium model",
+      "toolPermissions": "Draft reply; no direct system changes",
+      "dataScope": "",
+      "owner": "Service desk manager",
+      "timeoutSeconds": 60,
+      "maxSteps": 3,
+      "spendLimitUsd": 0.05,
+      "identity": "Workload role: desk-resolver",
+      "inputTokens": 4000,
+      "outputTokens": 500,
+      "inputPricePerM": 1,
+      "outputPricePerM": 4,
+      "cachedInputPct": 50,
+      "cachedInputPricePerM": 0.1,
+      "costPerCallUsd": 0,
+      "latencySeconds": 4,
+      "routing": "all",
+      "actionType": "",
+      "idempotent": false,
+      "openWorld": false,
+      "requiresHumanApproval": false,
+      "executesCode": false,
+      "sandbox": "",
+      "allowedEgress": "",
+      "patternId": "ap-3",
+      "ragIds": []
+    },
+    {
+      "id": "s2-n4",
+      "name": "Answer critic",
+      "kind": "validator",
+      "x": 840,
+      "y": 80,
+      "description": "Checks the draft against the KB article; sends it back or forward.",
+      "model": "Medium model",
+      "toolPermissions": "None",
+      "dataScope": "",
+      "owner": "Service desk quality lead",
+      "timeoutSeconds": 30,
+      "maxSteps": 3,
+      "spendLimitUsd": 0.02,
+      "identity": "Workload role: desk-critic",
+      "inputTokens": 2500,
+      "outputTokens": 200,
+      "inputPricePerM": 1,
+      "outputPricePerM": 4,
+      "cachedInputPct": 0,
+      "cachedInputPricePerM": 0,
+      "costPerCallUsd": 0,
+      "latencySeconds": 2,
+      "routing": "one",
+      "actionType": "",
+      "idempotent": false,
+      "openWorld": false,
+      "requiresHumanApproval": false,
+      "executesCode": false,
+      "sandbox": "",
+      "allowedEgress": "",
+      "patternId": "ap-3",
+      "ragIds": []
+    },
+    {
+      "id": "s2-n5",
+      "name": "Conversation memory",
+      "kind": "memory",
+      "x": 580,
+      "y": 260,
+      "description": "",
+      "model": "",
+      "toolPermissions": "Read/write current ticket thread",
+      "dataScope": "Current ticket only",
+      "owner": "Platform team",
+      "timeoutSeconds": 60,
+      "maxSteps": 3,
+      "spendLimitUsd": 0,
+      "identity": "Workload role: desk-memory",
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "inputPricePerM": 0,
+      "outputPricePerM": 0,
+      "cachedInputPct": 0,
+      "cachedInputPricePerM": 0,
+      "costPerCallUsd": 0.0002,
+      "latencySeconds": 0.05,
+      "routing": "one",
+      "actionType": "",
+      "idempotent": false,
+      "openWorld": false,
+      "requiresHumanApproval": false,
+      "executesCode": false,
+      "sandbox": "",
+      "allowedEgress": "",
+      "patternId": "",
+      "ragIds": []
+    },
+    {
+      "id": "s2-n6",
+      "name": "Ticketing API",
+      "kind": "tool",
+      "x": 1100,
+      "y": 80,
+      "description": "",
+      "model": "",
+      "toolPermissions": "Post reply; set status resolved",
+      "dataScope": "",
+      "owner": "ITSM platform owner",
+      "timeoutSeconds": 10,
+      "maxSteps": 1,
+      "spendLimitUsd": 0,
+      "identity": "Service account: desk-bot (scoped)",
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "inputPricePerM": 0,
+      "outputPricePerM": 0,
+      "cachedInputPct": 0,
+      "cachedInputPricePerM": 0,
+      "costPerCallUsd": 0.0005,
+      "latencySeconds": 0.8,
+      "routing": "one",
+      "actionType": "additive",
+      "idempotent": true,
+      "openWorld": false,
+      "requiresHumanApproval": false,
+      "executesCode": false,
+      "sandbox": "",
+      "allowedEgress": "",
+      "patternId": "",
+      "ragIds": []
+    },
+    {
+      "id": "s2-n7",
+      "name": "Escalation to engineer",
+      "kind": "human",
+      "x": 320,
+      "y": 260,
+      "description": "",
+      "model": "",
+      "toolPermissions": "Assign ticket in ITSM",
+      "dataScope": "",
+      "owner": "Service desk manager",
+      "timeoutSeconds": 60,
+      "maxSteps": 1,
+      "spendLimitUsd": 0,
+      "identity": "Named engineer via SSO",
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "inputPricePerM": 0,
+      "outputPricePerM": 0,
+      "cachedInputPct": 0,
+      "cachedInputPricePerM": 0,
+      "costPerCallUsd": 4,
+      "latencySeconds": 0,
+      "routing": "one",
+      "actionType": "",
+      "idempotent": false,
+      "openWorld": false,
+      "requiresHumanApproval": true,
+      "executesCode": false,
+      "sandbox": "",
+      "allowedEgress": "",
+      "patternId": "",
+      "ragIds": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "s2-e1",
+      "from": "s2-n1",
+      "to": "s2-n2",
+      "label": "self-service eligible",
+      "contract": "",
+      "failurePolicy": "retry",
+      "probability": 0.7
+    },
+    {
+      "id": "s2-e2",
+      "from": "s2-n1",
+      "to": "s2-n7",
+      "label": "needs engineer",
+      "contract": "",
+      "failurePolicy": "escalate",
+      "probability": 0.3
+    },
+    {
+      "id": "s2-e3",
+      "from": "s2-n2",
+      "to": "s2-n3",
+      "label": "articles",
+      "contract": "",
+      "failurePolicy": "halt",
+      "probability": 1
+    },
+    {
+      "id": "s2-e4",
+      "from": "s2-n3",
+      "to": "s2-n4",
+      "label": "draft",
+      "contract": "",
+      "failurePolicy": "halt",
+      "probability": 1
+    },
+    {
+      "id": "s2-e5",
+      "from": "s2-n3",
+      "to": "s2-n5",
+      "label": "thread update",
+      "contract": "",
+      "failurePolicy": "retry",
+      "probability": 1
+    },
+    {
+      "id": "s2-e6",
+      "from": "s2-n4",
+      "to": "s2-n3",
+      "label": "revise",
+      "contract": "",
+      "failurePolicy": "halt",
+      "probability": 0.35
+    },
+    {
+      "id": "s2-e7",
+      "from": "s2-n4",
+      "to": "s2-n6",
+      "label": "approved reply",
+      "contract": "Idempotency key = ticket ID + draft version",
+      "failurePolicy": "retry",
+      "probability": 0.6
+    },
+    {
+      "id": "s2-e8",
+      "from": "s2-n4",
+      "to": "s2-n7",
+      "label": "not resolvable",
+      "contract": "",
+      "failurePolicy": "escalate",
+      "probability": 0.05
+    }
+  ],
+  "stages": [
+    {
+      "id": "0.1",
+      "status": "approved",
+      "owner": "Engineering lead",
+      "evidence": "Sample: stage output reviewed in workshop (0.1)",
+      "notes": "",
+      "approver": "Sample approver"
+    },
+    {
+      "id": "0.2",
+      "status": "approved",
+      "owner": "Engineering lead",
+      "evidence": "Sample: stage output reviewed in workshop (0.2)",
+      "notes": "",
+      "approver": "Sample approver"
+    },
+    {
+      "id": "0.3",
+      "status": "approved",
+      "owner": "Engineering lead",
+      "evidence": "Sample: stage output reviewed in workshop (0.3)",
+      "notes": "",
+      "approver": "Sample approver"
+    },
+    {
+      "id": "1.1",
+      "status": "approved",
+      "owner": "Service desk manager",
+      "evidence": "Sample: stage output reviewed in workshop (1.1)",
+      "notes": "",
+      "approver": "Sample approver"
+    },
+    {
+      "id": "1.3",
+      "status": "approved",
+      "owner": "Service desk manager",
+      "evidence": "Sample: stage output reviewed in workshop (1.3)",
+      "notes": "",
+      "approver": "Sample approver"
+    },
+    {
+      "id": "1.4",
+      "status": "approved",
+      "owner": "Service desk manager",
+      "evidence": "Sample: stage output reviewed in workshop (1.4)",
+      "notes": "",
+      "approver": "Sample approver"
+    },
+    {
+      "id": "1.6",
+      "status": "approved",
+      "owner": "Service desk manager",
+      "evidence": "Sample: stage output reviewed in workshop (1.6)",
+      "notes": "",
+      "approver": "Sample approver"
+    },
+    {
+      "id": "2.1",
+      "status": "not-started",
+      "owner": "Engineering lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "2.2",
+      "status": "not-started",
+      "owner": "Engineering lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "2.3",
+      "status": "not-started",
+      "owner": "Engineering lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "2.4",
+      "status": "not-started",
+      "owner": "Engineering lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "2.5",
+      "status": "not-started",
+      "owner": "Engineering lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "2.6",
+      "status": "not-started",
+      "owner": "Engineering lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "2.7",
+      "status": "not-started",
+      "owner": "Engineering lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "2.8",
+      "status": "not-started",
+      "owner": "Engineering lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "2.9",
+      "status": "not-started",
+      "owner": "Engineering lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "3.1",
+      "status": "not-started",
+      "owner": "Engineering lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "3.2",
+      "status": "not-started",
+      "owner": "Engineering lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "3.3",
+      "status": "not-started",
+      "owner": "Engineering lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "3.4",
+      "status": "not-started",
+      "owner": "Engineering lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "3.5",
+      "status": "not-started",
+      "owner": "Engineering lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "3.6",
+      "status": "not-started",
+      "owner": "Engineering lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    },
+    {
+      "id": "3.7",
+      "status": "not-started",
+      "owner": "Engineering lead",
+      "evidence": "",
+      "notes": "",
+      "approver": ""
+    }
+  ],
+  "controls": [
+    {
+      "id": "GOV-01",
+      "status": "evidenced",
+      "owner": "Service desk manager",
+      "evidence": "Sample: owner named in charter",
+      "exception": "",
+      "likelihood": 2,
+      "impact": 2
+    },
+    {
+      "id": "GOV-02",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "GOV-03",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "GOV-04",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "GOV-05",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "GOV-06",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "GOV-07",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "GOV-08",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "GOV-09",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "SEC-01",
+      "status": "evidenced",
+      "owner": "Security engineer",
+      "evidence": "Sample: bot token can only post replies",
+      "exception": "",
+      "likelihood": 2,
+      "impact": 3
+    },
+    {
+      "id": "SEC-02",
+      "status": "planned",
+      "owner": "Security engineer",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "SEC-03",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "SEC-04",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "SEC-05",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "SEC-06",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "SEC-07",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "SEC-08",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "SEC-09",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "SEC-10",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "SEC-11",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "SEC-12",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "REL-01",
+      "status": "evidenced",
+      "owner": "Engineering lead",
+      "evidence": "Sample: resolver max 3 visits",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 2
+    },
+    {
+      "id": "REL-02",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "REL-03",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "REL-04",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "EVAL-01",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "EVAL-02",
+      "status": "planned",
+      "owner": "Knowledge manager",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "EVAL-03",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "EVAL-04",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "OPS-01",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "OPS-02",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "OPS-03",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "OPS-04",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "OPS-05",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    },
+    {
+      "id": "OPS-06",
+      "status": "unassessed",
+      "owner": "",
+      "evidence": "",
+      "exception": "",
+      "likelihood": 3,
+      "impact": 3
+    }
+  ],
+  "decisions": [
+    {
+      "id": "s2-d1",
+      "title": "Profile: mvp",
+      "decision": "Use the AI-DLC mvp profile (no Operation stages yet).",
+      "rationale": "First increment for one site.",
+      "owner": "Service desk manager",
+      "date": "2026-11-22"
+    }
+  ],
+  "units": [
+    {
+      "id": "s2-u1",
+      "name": "Classifier and routing",
+      "owner": "Team D",
+      "description": "",
+      "dependsOn": [],
+      "acceptanceTests": "Routing accuracy on 300 historical tickets",
+      "risk": "low",
+      "status": "ready",
+      "estimateDays": 4
+    },
+    {
+      "id": "s2-u2",
+      "name": "KB retrieval and resolver",
+      "owner": "Team D",
+      "description": "",
+      "dependsOn": [
+        "s2-u1"
+      ],
+      "acceptanceTests": "Answers cite a KB article in 100% of cases",
+      "risk": "medium",
+      "status": "planned",
+      "estimateDays": 7
+    },
+    {
+      "id": "s2-u3",
+      "name": "Ticketing integration",
+      "owner": "Team E",
+      "description": "",
+      "dependsOn": [
+        "s2-u2"
+      ],
+      "acceptanceTests": "No duplicate replies under retry",
+      "risk": "medium",
+      "status": "planned",
+      "estimateDays": 3
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "s2-sc1",
+      "name": "Known password-reset question",
+      "trigger": "Ticket matches KB article",
+      "expectedResult": "Reply with article link; ticket resolved",
+      "failureAndAbuseCase": "",
+      "verification": "Replay labelled tickets"
+    },
+    {
+      "id": "s2-sc2",
+      "name": "Request to grant admin access",
+      "trigger": "User asks the bot for admin rights",
+      "expectedResult": "Escalated to engineer; no change made",
+      "failureAndAbuseCase": "Excessive agency (LLM03:2026)",
+      "verification": "Red-team prompts"
+    }
+  ],
+  "threats": [
+    {
+      "id": "s2-t1",
+      "nodeId": "s2-n1",
+      "threatId": "ASI01",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t2",
+      "nodeId": "s2-n1",
+      "threatId": "ASI06",
+      "status": "mitigated",
+      "mitigation": "Memory scoped to the current ticket."
+    },
+    {
+      "id": "s2-t3",
+      "nodeId": "s2-n1",
+      "threatId": "ASI09",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t4",
+      "nodeId": "s2-n1",
+      "threatId": "LLM01:2026",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t5",
+      "nodeId": "s2-n1",
+      "threatId": "LLM07:2026",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t6",
+      "nodeId": "s2-n1",
+      "threatId": "AML.T0051",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t7",
+      "nodeId": "s2-n1",
+      "threatId": "LLM02:2026",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t8",
+      "nodeId": "s2-n2",
+      "threatId": "LLM05:2026",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t9",
+      "nodeId": "s2-n2",
+      "threatId": "LLM08:2026",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t10",
+      "nodeId": "s2-n2",
+      "threatId": "LLM09:2026",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t11",
+      "nodeId": "s2-n2",
+      "threatId": "AML.T0070",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t12",
+      "nodeId": "s2-n2",
+      "threatId": "AML.T0071",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t13",
+      "nodeId": "s2-n2",
+      "threatId": "LLM02:2026",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t14",
+      "nodeId": "s2-n3",
+      "threatId": "ASI01",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t15",
+      "nodeId": "s2-n3",
+      "threatId": "ASI06",
+      "status": "mitigated",
+      "mitigation": "Memory scoped to the current ticket."
+    },
+    {
+      "id": "s2-t16",
+      "nodeId": "s2-n3",
+      "threatId": "ASI09",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t17",
+      "nodeId": "s2-n3",
+      "threatId": "LLM01:2026",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t18",
+      "nodeId": "s2-n3",
+      "threatId": "LLM07:2026",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t19",
+      "nodeId": "s2-n3",
+      "threatId": "AML.T0051",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t20",
+      "nodeId": "s2-n3",
+      "threatId": "LLM02:2026",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t21",
+      "nodeId": "s2-n4",
+      "threatId": "LLM07:2026",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t22",
+      "nodeId": "s2-n4",
+      "threatId": "ASI09",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t23",
+      "nodeId": "s2-n5",
+      "threatId": "ASI06",
+      "status": "mitigated",
+      "mitigation": "Memory scoped to the current ticket."
+    },
+    {
+      "id": "s2-t24",
+      "nodeId": "s2-n5",
+      "threatId": "AML.T0080",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t25",
+      "nodeId": "s2-n5",
+      "threatId": "AML.T0080.000",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t26",
+      "nodeId": "s2-n5",
+      "threatId": "LLM02:2026",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t27",
+      "nodeId": "s2-n6",
+      "threatId": "ASI02",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t28",
+      "nodeId": "s2-n6",
+      "threatId": "ASI03",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t29",
+      "nodeId": "s2-n6",
+      "threatId": "ASI05",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t30",
+      "nodeId": "s2-n6",
+      "threatId": "LLM03:2026",
+      "status": "mitigated",
+      "mitigation": "Bot token cannot change accounts."
+    },
+    {
+      "id": "s2-t31",
+      "nodeId": "s2-n6",
+      "threatId": "LLM10:2026",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t32",
+      "nodeId": "s2-n6",
+      "threatId": "AML.T0053",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t33",
+      "nodeId": "s2-n6",
+      "threatId": "AML.T0086",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t34",
+      "nodeId": "s2-n6",
+      "threatId": "AML.T0101",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t35",
+      "nodeId": "s2-n6",
+      "threatId": "ASI04",
+      "status": "open",
+      "mitigation": ""
+    },
+    {
+      "id": "s2-t36",
+      "nodeId": "s2-n7",
+      "threatId": "ASI09",
+      "status": "open",
+      "mitigation": ""
+    }
+  ],
+  "nfr": {
+    "requestsPerDay": 1500,
+    "daysPerMonth": 22,
+    "peakFactor": 4,
+    "avgLatencySeconds": 10,
+    "p95TargetSeconds": 20,
+    "availabilityPct": 99,
+    "rtoMinutes": 480,
+    "rpoMinutes": 60,
+    "agentCallsPerRequest": 4,
+    "inputTokensPerCall": 2500,
+    "outputTokensPerCall": 250,
+    "retryPct": 5,
+    "modelInputPricePerMillion": 1,
+    "modelOutputPricePerMillion": 4,
+    "retrievalCostPerRequest": 0.001,
+    "fixedInfrastructurePerMonth": 600,
+    "storageGb": 50,
+    "storagePriceGbMonth": 0.023,
+    "humanReviewPct": 30,
+    "humanReviewMinutes": 10,
+    "reviewerHourlyCost": 20,
+    "concurrencyHeadroom": 1.5,
+    "region": "India (single region)",
+    "residency": "India",
+    "encryption": "At rest and in transit",
+    "sensitiveData": "Employee names and ticket text",
+    "networkBoundary": "Corporate network only",
+    "unitValueUsd": 3,
+    "dataRetention": "Ticket threads 1 year; conversation memory deleted when the ticket closes (example values)"
+  }
+}

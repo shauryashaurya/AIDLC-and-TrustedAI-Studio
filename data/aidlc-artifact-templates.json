@@ -1,0 +1,722 @@
+{
+  "tag": "v2.11.5",
+  "verifiedOn": "2026-11-25",
+  "templateDir": "aidlc/spaces/<space>/memory/templates/",
+  "source": "https://github.com/awslabs/aidlc-workflows/blob/v2.11.5/core/aidlc-common/protocols/stage-protocol.md",
+  "rule": "Before writing artifact X, AI-DLC resolves aidlc/spaces/<space>/memory/templates/X.md first. A resolved template is used whole-doc: its ## headings are the skeleton, and the required-sections sensor checks the output against the same file.",
+  "selection": "Only artifacts whose stage rule lists their sections are templated. Artifacts with machine-checked blocks (component catalogue, Unit edge block, entity and rule YAML, contract specs, traceability.json), question files, and artifacts whose rule names no sections are left to the stage rules. Conditional sections are left out so they are not made mandatory.",
+  "templates": [
+    {
+      "stem": "intent-statement",
+      "title": "Intent Statement",
+      "stage": "1.1",
+      "stageSlug": "intent-capture",
+      "recordPath": "ideation/intent-capture/intent-statement.md",
+      "ruleFile": "core/aidlc-common/stages/ideation/intent-capture.md",
+      "ruleText": "Create intent-statement.md containing: Problem Statement, Target Customer, Success Metrics, Initiative Trigger, Initial Scope Signal. Each artifact MUST contain ## Assumptions & Open Questions.",
+      "sections": [
+        {
+          "heading": "Problem Statement",
+          "note": "What business problem is being solved"
+        },
+        {
+          "heading": "Target Customer",
+          "note": "Who benefits and how"
+        },
+        {
+          "heading": "Success Metrics",
+          "note": "Measurable outcomes"
+        },
+        {
+          "heading": "Initiative Trigger",
+          "note": "Why now"
+        },
+        {
+          "heading": "Initial Scope Signal",
+          "note": "Show the workflow-selected scope separately from the user-confirmed product boundary"
+        },
+        {
+          "heading": "Assumptions & Open Questions",
+          "note": "Write None. when there are none"
+        }
+      ]
+    },
+    {
+      "stem": "stakeholder-map",
+      "title": "Stakeholder Map",
+      "stage": "1.1",
+      "stageSlug": "intent-capture",
+      "recordPath": "ideation/intent-capture/stakeholder-map.md",
+      "ruleFile": "core/aidlc-common/stages/ideation/intent-capture.md",
+      "ruleText": "Create stakeholder-map.md containing: key stakeholders and their interests; decision-makers vs. influencers; communication requirements. Each artifact MUST contain ## Assumptions & Open Questions.",
+      "sections": [
+        {
+          "heading": "Key Stakeholders and Interests",
+          "note": "Key stakeholders and their interests; each row carries its source tag in a Source column"
+        },
+        {
+          "heading": "Decision-makers vs. Influencers",
+          "note": "Decision-makers vs. influencers"
+        },
+        {
+          "heading": "Communication Requirements",
+          "note": "Communication requirements"
+        },
+        {
+          "heading": "Assumptions & Open Questions",
+          "note": "Write None. when there are none"
+        }
+      ]
+    },
+    {
+      "stem": "feasibility-assessment",
+      "title": "Feasibility Assessment",
+      "stage": "1.3",
+      "stageSlug": "feasibility",
+      "recordPath": "ideation/feasibility/feasibility-assessment.md",
+      "ruleFile": "core/aidlc-common/stages/ideation/feasibility.md",
+      "ruleText": "Create feasibility assessment (technical viability, risk analysis)",
+      "sections": [
+        {
+          "heading": "Technical Viability",
+          "note": "Technical viability"
+        },
+        {
+          "heading": "Risk Analysis",
+          "note": "Risk analysis"
+        }
+      ]
+    },
+    {
+      "stem": "constraint-register",
+      "title": "Constraint Register",
+      "stage": "1.3",
+      "stageSlug": "feasibility",
+      "recordPath": "ideation/feasibility/constraint-register.md",
+      "ruleFile": "core/aidlc-common/stages/ideation/feasibility.md",
+      "ruleText": "constraint register (technical, organizational, regulatory)",
+      "sections": [
+        {
+          "heading": "Technical Constraints",
+          "note": "Technical"
+        },
+        {
+          "heading": "Organizational Constraints",
+          "note": "Organizational"
+        },
+        {
+          "heading": "Regulatory Constraints",
+          "note": "Regulatory"
+        }
+      ]
+    },
+    {
+      "stem": "raid-log",
+      "title": "RAID Log",
+      "stage": "1.3",
+      "stageSlug": "feasibility",
+      "recordPath": "ideation/feasibility/raid-log.md",
+      "ruleFile": "core/aidlc-common/stages/ideation/feasibility.md",
+      "ruleText": "RAID log (Risks, Assumptions, Issues, Dependencies)",
+      "sections": [
+        {
+          "heading": "Risks",
+          "note": "Risks"
+        },
+        {
+          "heading": "Assumptions",
+          "note": "Assumptions"
+        },
+        {
+          "heading": "Issues",
+          "note": "Issues"
+        },
+        {
+          "heading": "Dependencies",
+          "note": "Dependencies"
+        }
+      ]
+    },
+    {
+      "stem": "scope-document",
+      "title": "Scope Document",
+      "stage": "1.4",
+      "stageSlug": "scope-definition",
+      "recordPath": "ideation/scope-definition/scope-document.md",
+      "ruleFile": "core/aidlc-common/stages/ideation/scope-definition.md",
+      "ruleText": "Create scope definition document (in/out boundary)",
+      "sections": [
+        {
+          "heading": "In Scope",
+          "note": "In boundary"
+        },
+        {
+          "heading": "Out of Scope",
+          "note": "Out boundary"
+        }
+      ]
+    },
+    {
+      "stem": "initiative-brief",
+      "title": "Initiative Brief",
+      "stage": "1.7",
+      "stageSlug": "approval-handoff",
+      "recordPath": "ideation/approval-handoff/initiative-brief.md",
+      "ruleFile": "core/aidlc-common/stages/ideation/approval-handoff.md",
+      "ruleText": "Create initiative-brief.md — a one-pager combining: intent and problem statement; market validation summary; feasibility and risk highlights; scope boundary; concept visuals; team plan; go/no-go recommendation.",
+      "sections": [
+        {
+          "heading": "Intent and Problem Statement",
+          "note": ""
+        },
+        {
+          "heading": "Market Validation Summary",
+          "note": ""
+        },
+        {
+          "heading": "Feasibility and Risk Highlights",
+          "note": ""
+        },
+        {
+          "heading": "Scope Boundary",
+          "note": ""
+        },
+        {
+          "heading": "Concept Visuals",
+          "note": ""
+        },
+        {
+          "heading": "Team Plan",
+          "note": ""
+        },
+        {
+          "heading": "Go/No-Go Recommendation",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "stem": "requirements",
+      "title": "Requirements",
+      "stage": "2.3",
+      "stageSlug": "requirements-analysis",
+      "recordPath": "inception/requirements-analysis/requirements.md",
+      "ruleFile": "core/aidlc-common/stages/inception/requirements-analysis.md",
+      "ruleText": "Create requirements.md containing: intent analysis; functional requirements (FR{n}); non-functional requirements (NFR{n}); constraints; assumptions; out of scope; open questions. Must not contain a ## Review section.",
+      "sections": [
+        {
+          "heading": "Intent Analysis",
+          "note": "What the user is trying to achieve (goals, not just features)"
+        },
+        {
+          "heading": "Functional Requirements",
+          "note": "Organized by feature area or domain; stable FR{n} IDs, sub-requirements FR{n}.{m}"
+        },
+        {
+          "heading": "Non-Functional Requirements",
+          "note": "Performance, security, scalability, reliability and observability targets; stable NFR{n} IDs"
+        },
+        {
+          "heading": "Constraints",
+          "note": "Technical, business, and organizational constraints"
+        },
+        {
+          "heading": "Assumptions",
+          "note": "Documented assumptions with rationale"
+        },
+        {
+          "heading": "Out of Scope",
+          "note": "Explicitly excluded items"
+        },
+        {
+          "heading": "Open Questions",
+          "note": "Any remaining uncertainties for later stages"
+        }
+      ]
+    },
+    {
+      "stem": "personas",
+      "title": "Personas",
+      "stage": "2.4",
+      "stageSlug": "user-stories",
+      "recordPath": "inception/user-stories/personas.md",
+      "ruleFile": "core/aidlc-common/stages/inception/user-stories.md",
+      "ruleText": "personas.md: user persona definitions (name, role, goals, pain points, context); persona relationships and priority ranking",
+      "sections": [
+        {
+          "heading": "Persona Definitions",
+          "note": "Name, role, goals, pain points, context"
+        },
+        {
+          "heading": "Persona Relationships and Priority Ranking",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "stem": "performance-requirements",
+      "title": "Performance Requirements",
+      "stage": "3.2",
+      "stageSlug": "nfr-requirements",
+      "recordPath": "construction/<unit-name>/nfr-requirements/performance-requirements.md",
+      "ruleFile": "core/aidlc-common/stages/construction/nfr-requirements.md",
+      "ruleText": "performance-requirements.md: Response time targets, throughput requirements, latency budgets, resource constraints, benchmarks. Every requirement carries an NFR{n}.{m} ID.",
+      "sections": [
+        {
+          "heading": "Response Time Targets",
+          "note": ""
+        },
+        {
+          "heading": "Throughput Requirements",
+          "note": ""
+        },
+        {
+          "heading": "Latency Budgets",
+          "note": ""
+        },
+        {
+          "heading": "Resource Constraints",
+          "note": ""
+        },
+        {
+          "heading": "Benchmarks",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "stem": "security-requirements",
+      "title": "Security Requirements",
+      "stage": "3.2",
+      "stageSlug": "nfr-requirements",
+      "recordPath": "construction/<unit-name>/nfr-requirements/security-requirements.md",
+      "ruleFile": "core/aidlc-common/stages/construction/nfr-requirements.md",
+      "ruleText": "security-requirements.md: Authentication requirements, authorization model, data protection, compliance, threat considerations.",
+      "sections": [
+        {
+          "heading": "Authentication Requirements",
+          "note": ""
+        },
+        {
+          "heading": "Authorization Model",
+          "note": ""
+        },
+        {
+          "heading": "Data Protection",
+          "note": ""
+        },
+        {
+          "heading": "Compliance",
+          "note": ""
+        },
+        {
+          "heading": "Threat Considerations",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "stem": "scalability-requirements",
+      "title": "Scalability Requirements",
+      "stage": "3.2",
+      "stageSlug": "nfr-requirements",
+      "recordPath": "construction/<unit-name>/nfr-requirements/scalability-requirements.md",
+      "ruleFile": "core/aidlc-common/stages/construction/nfr-requirements.md",
+      "ruleText": "scalability-requirements.md: Load projections, scaling triggers, capacity planning, data growth, concurrency targets.",
+      "sections": [
+        {
+          "heading": "Load Projections",
+          "note": ""
+        },
+        {
+          "heading": "Scaling Triggers",
+          "note": ""
+        },
+        {
+          "heading": "Capacity Planning",
+          "note": ""
+        },
+        {
+          "heading": "Data Growth",
+          "note": ""
+        },
+        {
+          "heading": "Concurrency Targets",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "stem": "reliability-requirements",
+      "title": "Reliability Requirements",
+      "stage": "3.2",
+      "stageSlug": "nfr-requirements",
+      "recordPath": "construction/<unit-name>/nfr-requirements/reliability-requirements.md",
+      "ruleFile": "core/aidlc-common/stages/construction/nfr-requirements.md",
+      "ruleText": "reliability-requirements.md: Availability targets (SLA/SLO), fault tolerance requirements, backup/recovery, graceful degradation.",
+      "sections": [
+        {
+          "heading": "Availability Targets (SLA/SLO)",
+          "note": ""
+        },
+        {
+          "heading": "Fault Tolerance Requirements",
+          "note": ""
+        },
+        {
+          "heading": "Backup/Recovery",
+          "note": ""
+        },
+        {
+          "heading": "Graceful Degradation",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "stem": "observability-requirements",
+      "title": "Observability Requirements",
+      "stage": "3.2",
+      "stageSlug": "nfr-requirements",
+      "recordPath": "construction/<unit-name>/nfr-requirements/observability-requirements.md",
+      "ruleFile": "core/aidlc-common/stages/construction/nfr-requirements.md",
+      "ruleText": "observability-requirements.md: Monitoring requirements, logging standards, distributed tracing needs, alerting thresholds, dashboard requirements, SLI/SLO definitions.",
+      "sections": [
+        {
+          "heading": "Monitoring Requirements",
+          "note": ""
+        },
+        {
+          "heading": "Logging Standards",
+          "note": ""
+        },
+        {
+          "heading": "Distributed Tracing Needs",
+          "note": ""
+        },
+        {
+          "heading": "Alerting Thresholds",
+          "note": ""
+        },
+        {
+          "heading": "Dashboard Requirements",
+          "note": ""
+        },
+        {
+          "heading": "SLI/SLO Definitions",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "stem": "performance-design",
+      "title": "Performance Design",
+      "stage": "3.3",
+      "stageSlug": "nfr-design",
+      "recordPath": "construction/<unit-name>/nfr-design/performance-design.md",
+      "ruleFile": "core/aidlc-common/stages/construction/nfr-design.md",
+      "ruleText": "performance-design.md: Caching architecture, optimization strategies, resource pooling, async patterns, performance budgets.",
+      "sections": [
+        {
+          "heading": "Caching Architecture",
+          "note": ""
+        },
+        {
+          "heading": "Optimization Strategies",
+          "note": ""
+        },
+        {
+          "heading": "Resource Pooling",
+          "note": ""
+        },
+        {
+          "heading": "Async Patterns",
+          "note": ""
+        },
+        {
+          "heading": "Performance Budgets",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "stem": "security-design",
+      "title": "Security Design",
+      "stage": "3.3",
+      "stageSlug": "nfr-design",
+      "recordPath": "construction/<unit-name>/nfr-design/security-design.md",
+      "ruleFile": "core/aidlc-common/stages/construction/nfr-design.md",
+      "ruleText": "security-design.md: Authentication/authorization architecture, encryption design, input validation strategy, security headers, compliance controls.",
+      "sections": [
+        {
+          "heading": "Authentication/Authorization Architecture",
+          "note": ""
+        },
+        {
+          "heading": "Encryption Design",
+          "note": ""
+        },
+        {
+          "heading": "Input Validation Strategy",
+          "note": ""
+        },
+        {
+          "heading": "Security Headers",
+          "note": ""
+        },
+        {
+          "heading": "Compliance Controls",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "stem": "scalability-design",
+      "title": "Scalability Design",
+      "stage": "3.3",
+      "stageSlug": "nfr-design",
+      "recordPath": "construction/<unit-name>/nfr-design/scalability-design.md",
+      "ruleFile": "core/aidlc-common/stages/construction/nfr-design.md",
+      "ruleText": "scalability-design.md: Scaling architecture, load distribution, data partitioning strategy, capacity thresholds, auto-scaling rules.",
+      "sections": [
+        {
+          "heading": "Scaling Architecture",
+          "note": ""
+        },
+        {
+          "heading": "Load Distribution",
+          "note": ""
+        },
+        {
+          "heading": "Data Partitioning Strategy",
+          "note": ""
+        },
+        {
+          "heading": "Capacity Thresholds",
+          "note": ""
+        },
+        {
+          "heading": "Auto-Scaling Rules",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "stem": "reliability-design",
+      "title": "Reliability Design",
+      "stage": "3.3",
+      "stageSlug": "nfr-design",
+      "recordPath": "construction/<unit-name>/nfr-design/reliability-design.md",
+      "ruleFile": "core/aidlc-common/stages/construction/nfr-design.md",
+      "ruleText": "reliability-design.md: Resilience patterns, circuit breaker configuration, retry policies, health check design, failover procedures, backup strategy.",
+      "sections": [
+        {
+          "heading": "Resilience Patterns",
+          "note": ""
+        },
+        {
+          "heading": "Circuit Breaker Configuration",
+          "note": ""
+        },
+        {
+          "heading": "Retry Policies",
+          "note": ""
+        },
+        {
+          "heading": "Health Check Design",
+          "note": ""
+        },
+        {
+          "heading": "Failover Procedures",
+          "note": ""
+        },
+        {
+          "heading": "Backup Strategy",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "stem": "observability-design",
+      "title": "Observability Design",
+      "stage": "3.3",
+      "stageSlug": "nfr-design",
+      "recordPath": "construction/<unit-name>/nfr-design/observability-design.md",
+      "ruleFile": "core/aidlc-common/stages/construction/nfr-design.md",
+      "ruleText": "observability-design.md: Metrics collection architecture, structured logging design, distributed tracing strategy, alerting rules and escalation, dashboard specifications, SLI/SLO definitions, correlation ID propagation.",
+      "sections": [
+        {
+          "heading": "Metrics Collection Architecture",
+          "note": ""
+        },
+        {
+          "heading": "Structured Logging Design",
+          "note": ""
+        },
+        {
+          "heading": "Distributed Tracing Strategy",
+          "note": ""
+        },
+        {
+          "heading": "Alerting Rules and Escalation",
+          "note": ""
+        },
+        {
+          "heading": "Dashboard Specifications",
+          "note": ""
+        },
+        {
+          "heading": "SLI/SLO Definitions",
+          "note": ""
+        },
+        {
+          "heading": "Correlation ID Propagation",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "stem": "logical-components",
+      "title": "Logical Components",
+      "stage": "3.3",
+      "stageSlug": "nfr-design",
+      "recordPath": "construction/<unit-name>/nfr-design/logical-components.md",
+      "ruleFile": "core/aidlc-common/stages/construction/nfr-design.md",
+      "ruleText": "logical-components.md: Logical infrastructure component inventory — service boundaries, failure domains, blast radius mapping, component isolation strategy, shared resource identification.",
+      "sections": [
+        {
+          "heading": "Service Boundaries",
+          "note": ""
+        },
+        {
+          "heading": "Failure Domains",
+          "note": ""
+        },
+        {
+          "heading": "Blast Radius Mapping",
+          "note": ""
+        },
+        {
+          "heading": "Component Isolation Strategy",
+          "note": ""
+        },
+        {
+          "heading": "Shared Resource Identification",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "stem": "infrastructure-specification",
+      "title": "Infrastructure Specification",
+      "stage": "3.4",
+      "stageSlug": "infrastructure-design",
+      "recordPath": "construction/<unit-name>/infrastructure-design/infrastructure-specification.md",
+      "ruleFile": "core/aidlc-common/stages/construction/infrastructure-design.md",
+      "ruleText": "infrastructure-specification.md: Deployment table, Infrastructure Services table, Shared Infrastructure table (CONDITIONAL — only when multiple units share resources; left out of this template so it is not required).",
+      "sections": [
+        {
+          "heading": "Deployment",
+          "note": "| Facet | Choice | Rationale | — compute model, networking topology, storage strategy, environments, IaC approach, resource sizing"
+        },
+        {
+          "heading": "Infrastructure Services",
+          "note": "| Service | Role | Configuration | Notes |"
+        }
+      ]
+    },
+    {
+      "stem": "monitoring-design",
+      "title": "Monitoring Design",
+      "stage": "3.4",
+      "stageSlug": "infrastructure-design",
+      "recordPath": "construction/<unit-name>/infrastructure-design/monitoring-design.md",
+      "ruleFile": "core/aidlc-common/stages/construction/infrastructure-design.md",
+      "ruleText": "monitoring-design.md: Metrics & KPIs, Alerts, SLIs / SLOs, Logs & Tracing — tabular wherever possible.",
+      "sections": [
+        {
+          "heading": "Metrics & KPIs",
+          "note": "| Metric | Source | Threshold | Why it matters |"
+        },
+        {
+          "heading": "Alerts",
+          "note": "| Alert | Condition | Severity | Routes to |"
+        },
+        {
+          "heading": "SLIs / SLOs",
+          "note": "| SLI | SLO target | Measurement window |"
+        },
+        {
+          "heading": "Logs & Tracing",
+          "note": "Log aggregation strategy, tracing configuration, dashboard specifications"
+        }
+      ]
+    },
+    {
+      "stem": "build-instructions",
+      "title": "Build Instructions",
+      "stage": "3.6",
+      "stageSlug": "build-and-test",
+      "recordPath": "construction/build-and-test/build-instructions.md",
+      "ruleFile": "core/aidlc-common/stages/construction/build-and-test.md",
+      "ruleText": "build-instructions.md: dependency installation steps; environment setup; build commands; build verification steps; IaC static checks (conditional, left out of this template); troubleshooting common build issues.",
+      "sections": [
+        {
+          "heading": "Dependency Installation",
+          "note": "Dependency installation steps"
+        },
+        {
+          "heading": "Environment Setup",
+          "note": "Env vars, config files, local services"
+        },
+        {
+          "heading": "Build Commands",
+          "note": "Compile, bundle, transpile"
+        },
+        {
+          "heading": "Build Verification",
+          "note": "Build verification steps"
+        },
+        {
+          "heading": "Troubleshooting",
+          "note": "Troubleshooting common build issues"
+        }
+      ]
+    },
+    {
+      "stem": "build-and-test-summary",
+      "title": "Build and Test Summary",
+      "stage": "3.6",
+      "stageSlug": "build-and-test",
+      "recordPath": "construction/build-and-test/build-and-test-summary.md",
+      "ruleFile": "core/aidlc-common/stages/construction/build-and-test.md",
+      "ruleText": "build-and-test-summary.md: overall build status and prerequisites; test type inventory; coverage expectations; a ## Target Verification Matrix; readiness assessment; known limitations or outstanding items.",
+      "sections": [
+        {
+          "heading": "Overall Build Status and Prerequisites",
+          "note": ""
+        },
+        {
+          "heading": "Test Type Inventory",
+          "note": "Which test types were generated"
+        },
+        {
+          "heading": "Coverage Expectations",
+          "note": "For the project and each Unit"
+        },
+        {
+          "heading": "Target Verification Matrix",
+          "note": "One row per target: Target ID, Source, Expected, Actual, Evidence, Owning Stage, Verdict. Actual, Evidence and Verdict start as Pending."
+        },
+        {
+          "heading": "Readiness Assessment",
+          "note": "Build-ready, test-ready, deployment-ready"
+        },
+        {
+          "heading": "Known Limitations",
+          "note": "Known limitations or outstanding items"
+        }
+      ]
+    }
+  ]
+}

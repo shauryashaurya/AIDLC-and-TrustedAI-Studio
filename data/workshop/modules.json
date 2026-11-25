@@ -1,0 +1,272 @@
+{
+  "title": "AI-DLC × Trusted AI workshop",
+  "version": "2026-11-25",
+  "format": {
+    "sessionMinutes": 90,
+    "qaMinutes": 45,
+    "capstoneMinutes": 45,
+    "source": "training-tracks",
+    "sourceText": "Each topic: 90 min facilitated session + 45 min Q&A + 45 min timed capstone. (data/reference/expertise-training-tracks-marp.md)"
+  },
+  "modes": {
+    "facilitated": "A facilitator runs each module live with teams working on one shared use case per team. Facilitator notes are shown.",
+    "selfPaced": "One person works through each module's steps in order and answers the checkpoint questions. Progress is kept in this browser only."
+  },
+  "modules": [
+    {
+      "id": "m0",
+      "title": "Before the workshop: readiness and pre-work",
+      "timed": false,
+      "aidlcStages": [],
+      "pages": ["references", "lifecycle"],
+      "references": ["aidlc-facilitator", "aidlc-onboarding", "aidlc-vision"],
+      "objectives": [
+        "Have AI-DLC installed and passing the facilitator guide's readiness checks on every participant machine (only needed if the workshop ends with a real AI-DLC run).",
+        "Bring a one-paragraph description of the use case each team will plan."
+      ],
+      "steps": [
+        "Run `aidlc config --harness <name>` in the project folder. Pass: the Runtime row reads [ok] with hook PATH ready, and the Trust row reads [ok]. (AI-DLC facilitator guide, step 1)",
+        "Run `aidlc doctor`. Pass: the summary line reads 0 problems. (step 2)",
+        "Run one throwaway stage, e.g. `/aidlc express Add a --version flag to the CLI`, and answer the first question or approval. (step 3)",
+        "Run `aidlc doctor --verbose`. Pass: a 'Hooks last fired:' row lists hook names with current times. (step 4)",
+        "Archive the throwaway intent with `/aidlc intent archive <name>`. (step 5)",
+        "Self-paced alternative: follow AI-DLC onboarding Run 1 (an Express run, stated as 15 minutes) and Run 4 (inspect aidlc/spaces/default/intents/, aidlc-state.md and audit/).",
+        "In this studio: open References and read the AI-DLC entries; open AI-DLC lifecycle and look through the five phases."
+      ],
+      "facilitatorNotes": [
+        "The AI-DLC facilitator guide asks for the output of readiness steps 1, 2 and 4 from each team a week before the workshop.",
+        "The facilitator guide's pre-work is a vision note and a tech-environment note. Module 8 exports both from this studio.",
+        "If a team hits the same failure twice, the facilitator guide says to move the team to its agreed fallback harness."
+      ],
+      "capstone": null,
+      "quiz": [
+        { "type": "stageCount" },
+        { "type": "gateRule" }
+      ]
+    },
+    {
+      "id": "m1",
+      "title": "AI-DLC lifecycle, profiles and agents",
+      "timed": true,
+      "aidlcStages": ["0.1", "0.2", "0.3"],
+      "pages": ["lifecycle", "ideate"],
+      "references": ["aidlc-stages", "aidlc-profiles", "aidlc-agents", "aidlc-scopes"],
+      "objectives": [
+        "Name the five phases and say which stages each profile runs.",
+        "Choose a workflow profile for the team's use case and record why."
+      ],
+      "steps": [
+        "Create a blank intent (+ New intent) and give it a title.",
+        "On AI-DLC lifecycle, open each phase and read the phase purpose, the stage lead agents and the output files.",
+        "On Use-case framing, pick a workflow profile. Compare its 'Runs' and 'Skips' lists.",
+        "On AI-DLC lifecycle, select 'Create stage plan from profile'.",
+        "Add a Decision record: which profile was chosen and why."
+      ],
+      "facilitatorNotes": [
+        "The facilitator guide notes that plain `/aidlc <description>` lets the assistant propose a plan; it recommends naming the scope.",
+        "The profile and scope pages count stages differently (23/30 vs 26/33 for workshop). The References page records this."
+      ],
+      "capstone": "Each team presents its chosen profile, the stages it runs and skips, and the Decision record.",
+      "quiz": [
+        { "type": "phaseOfStage", "stage": "2.7" },
+        { "type": "stageMode", "stage": "2.4" },
+        { "type": "profileRuns", "profile": "mvp", "stage": "4.1" },
+        { "type": "profileDefault" },
+        { "type": "profileDepth", "profile": "enterprise" }
+      ]
+    },
+    {
+      "id": "m2",
+      "title": "Ideation: intent, feasibility and scope",
+      "timed": true,
+      "aidlcStages": ["1.1", "1.3", "1.4", "1.7"],
+      "pages": ["ideate", "trust"],
+      "references": ["aidlc-stages", "aidlc-vision", "nist", "eu"],
+      "objectives": [
+        "Write the problem, outcome, scope, exclusions and success metrics for the use case.",
+        "Record jurisdictions, data classification and risk tier, and assign accountable owners."
+      ],
+      "steps": [
+        "On Use-case framing, fill in every field in Business intent and Ownership & context.",
+        "On Trust & security, initialize the control register and open GOV-01, GOV-02 and GOV-03; record an owner for each.",
+        "On Reports, download vision.md and read which sections are still empty."
+      ],
+      "facilitatorNotes": [
+        "Stage 1.1 Intent Capture writes intent-statement.md and stakeholder-map.md; 1.7 Approval & Handoff writes initiative-brief.md and decision-log.md (AI-DLC artifacts reference).",
+        "NIST AI RMF MAP 1.1, MAP 1.4 and MAP 1.5 are shown on GOV-02 and in the quiz."
+      ],
+      "capstone": "Each team presents its vision.md: problem, outcome, in/out of scope, success metrics, risk tier.",
+      "quiz": [
+        { "type": "stageOutput", "stage": "1.1" },
+        { "type": "stageLead", "stage": "1.3" },
+        { "type": "rmfText", "id": "MAP 1.4" },
+        { "type": "rmfText", "id": "MAP 1.5" }
+      ]
+    },
+    {
+      "id": "m3",
+      "title": "Inception: requirements, Units and delivery plan",
+      "timed": true,
+      "aidlcStages": ["2.3", "2.6", "2.7", "2.8", "2.9"],
+      "pages": ["lifecycle"],
+      "references": ["aidlc-stages", "aidlc-artifacts", "aidlc-workshop"],
+      "objectives": [
+        "Split the solution into Units of Work with explicit dependencies.",
+        "Read the dependency waves and the critical path produced by the planner."
+      ],
+      "steps": [
+        "On AI-DLC lifecycle, add at least four Units with owners, scope and acceptance tests.",
+        "Mark dependencies between Units. Check the execution waves and any cycle warning.",
+        "Open stages 2.7 and 2.9 and compare their output files with what the team produced."
+      ],
+      "facilitatorNotes": [
+        "AI-DLC workshop mode requires a valid Unit dependency DAG before teams claim Units.",
+        "2.8 Contract Design runs when there is more than one Unit or an externally used API (AI-DLC phases and stages)."
+      ],
+      "capstone": "Each team shows its Unit list, dependency waves and critical-path estimate.",
+      "quiz": [
+        { "type": "stageOutput", "stage": "2.7" },
+        { "type": "stageLead", "stage": "2.9" },
+        { "type": "phaseOfStage", "stage": "2.8" }
+      ]
+    },
+    {
+      "id": "m4",
+      "title": "Agentic architecture and threat model",
+      "timed": true,
+      "aidlcStages": ["2.6", "3.1", "3.3"],
+      "pages": ["patterns"],
+      "references": ["rag-ref", "owasp-agent", "owasp-llm", "atlas", "mcp", "a2a"],
+      "objectives": [
+        "Build the agent graph: nodes, edges, failure policies, tool permissions and identities.",
+        "Review every node against the OWASP agentic, OWASP LLM and ATLAS items listed for its kind, and record a status and mitigation for each."
+      ],
+      "steps": [
+        "On Agentic designer, insert a pattern blueprint and adapt it, or add nodes by hand.",
+        "For every tool and agent node, fill in tool permissions and identity.",
+        "For every edge, set a failure policy and a probability.",
+        "Open each node's threat list; set each entry to mitigated, accepted or not applicable, with a mitigation.",
+        "Add at least one adversarial test scenario."
+      ],
+      "facilitatorNotes": [
+        "The threat list per node kind is this studio's mapping; the item names come from the 2026 OWASP lists and ATLAS 2026.10 (see References)."
+      ],
+      "capstone": "Each team walks through its graph and its open threat entries.",
+      "quiz": [
+        { "type": "listName", "id": "ASI02" },
+        { "type": "listName", "id": "LLM03:2026" },
+        { "type": "listName", "id": "AML.T0051" },
+        { "type": "listName", "id": "ASI07" }
+      ]
+    },
+    {
+      "id": "m5",
+      "title": "NFRs, scale and FinOps",
+      "timed": true,
+      "aidlcStages": ["3.2", "3.3", "3.4"],
+      "pages": ["nfr", "patterns"],
+      "references": ["aidlc-stages", "sre-slo", "finops-framework", "finops-ai", "focus"],
+      "objectives": [
+        "Enter traffic, availability and cost inputs and read the monthly projection.",
+        "Enter per-node tokens, prices and latency, run the graph simulation and read P50/P95 cost and latency per request.",
+        "Work out the error budget for the availability SLO."
+      ],
+      "steps": [
+        "On NFR & cost lab, enter requests per day, peak factor, availability SLO and P95 target.",
+        "On Agentic designer, enter cost and latency inputs on every model-calling node.",
+        "On NFR & cost lab, run the graph simulation. Note mean, P50 and P95 cost and latency, and the step-cap hit rate.",
+        "Compare simulated P95 latency with the P95 target and read the error budget panel."
+      ],
+      "facilitatorNotes": [
+        "All prices are user-entered. The simulation is the studio's own calculation and is not a benchmark or a quote.",
+        "3.2 NFR Requirements writes security-requirements.md and performance-requirements.md (AI-DLC artifacts reference)."
+      ],
+      "capstone": "Each team presents cost per request (P50/P95), monthly projection, error budget and the largest cost driver node.",
+      "quiz": [
+        { "type": "errorBudget", "availability": 99.9, "days": 30 },
+        { "type": "errorBudget", "availability": 99.5, "days": 30 },
+        { "type": "stageOutput", "stage": "3.2" },
+        { "type": "stageLead", "stage": "3.4" }
+      ]
+    },
+    {
+      "id": "m6",
+      "title": "Trust controls and evidence",
+      "timed": true,
+      "aidlcStages": ["3.2", "3.6"],
+      "pages": ["trust", "references"],
+      "references": ["nist", "owasp-aisvs", "atlas", "iso", "eu"],
+      "objectives": [
+        "Assess all controls with owner, status, evidence and likelihood × impact.",
+        "Read the NIST AI RMF subcategories and OWASP/ATLAS items attached to each control."
+      ],
+      "steps": [
+        "On Trust & security, work through every control in each domain.",
+        "For each essential control, record evidence or an exception.",
+        "Open References and check the version and verification status of each source your controls cite."
+      ],
+      "facilitatorNotes": [
+        "The coverage figure counts essential controls marked evidenced. It is the studio's calculation, not a compliance result.",
+        "ISO entries are marked unverified because iso.org blocked the automated check."
+      ],
+      "capstone": "Each team presents its remaining essential-control gaps and the decisions needed to close them.",
+      "quiz": [
+        { "type": "rmfText", "id": "MANAGE 1.1" },
+        { "type": "rmfText", "id": "GOVERN 1.6" },
+        { "type": "listName", "id": "AML.T0070" }
+      ]
+    },
+    {
+      "id": "m7",
+      "title": "Operation: deployment, observability and feedback",
+      "timed": true,
+      "aidlcStages": ["4.1", "4.4", "4.5", "4.6", "4.7"],
+      "pages": ["lifecycle", "nfr", "trust"],
+      "references": ["aidlc-stages", "sre-slo", "sre-workbook-slo", "otel-genai", "focus"],
+      "objectives": [
+        "Plan the Operation stages: owners, approvers and the evidence each stage should produce.",
+        "Assess the Operations controls (OPS-01 to OPS-05)."
+      ],
+      "steps": [
+        "On AI-DLC lifecycle, open Operation and fill owner, approver and expected evidence for each planned stage.",
+        "On Trust & security, filter by Operations and assess OPS-01 to OPS-05."
+      ],
+      "facilitatorNotes": [
+        "All seven Operation stages are conditional; classic, mvp and poc run none of them (AI-DLC phases and stages).",
+        "4.7 Feedback & Optimization is the terminal stage: 'On approval, the workflow is complete.'"
+      ],
+      "capstone": "Each team presents its Operation plan and OPS control status.",
+      "quiz": [
+        { "type": "stageOutput", "stage": "4.4" },
+        { "type": "stageLead", "stage": "4.7" },
+        { "type": "profileRuns", "profile": "classic", "stage": "4.4" }
+      ]
+    },
+    {
+      "id": "m8",
+      "title": "Capstone: defend the plan and hand off to AI-DLC",
+      "timed": true,
+      "aidlcStages": ["1.7", "2.9"],
+      "pages": ["reports", "workshop"],
+      "references": ["aidlc-vision", "aidlc-workshop", "aidlc-facilitator"],
+      "objectives": [
+        "Export the case report, vision.md and technical-environment.md.",
+        "Know the command that starts a real AI-DLC run from the exported vision document."
+      ],
+      "steps": [
+        "On Reports, download the Markdown or print-friendly HTML report, vision.md and technical-environment.md.",
+        "Save technical-environment.md to aidlc/spaces/default/knowledge/aidlc-shared/technical-environment.md in the project (facilitator guide).",
+        "Start a real run with the command shown on Reports, e.g. `/aidlc workshop Read ./vision.md and build what it describes`."
+      ],
+      "facilitatorNotes": [
+        "AI-DLC workshop mode: the integration lead completes Inception on main; each team claims one Unit, runs 3.1–3.5 and publishes; the lead pins, gates and lands each Unit (workshop-mode guide, two-day walkthrough).",
+        "The workshop profile skips Ideation and uses Standard depth with a Minimal test strategy."
+      ],
+      "capstone": "Each team defends its full plan: profile, scope, graph, threats, cost, controls and Operation plan.",
+      "quiz": [
+        { "type": "profileRuns", "profile": "workshop", "stage": "1.1" },
+        { "type": "profileTest", "profile": "workshop" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "note": "Studio mapping, not taken from any source: which OWASP and ATLAS items the designer lists for review on each node kind. Every ID resolves to the verified catalogs in data/frameworks/.",
+  "byKind": {
+    "agent": [
+      "ASI01",
+      "ASI06",
+      "ASI09",
+      "LLM01:2026",
+      "LLM07:2026",
+      "AML.T0051",
+      "LLM02:2026"
+    ],
+    "orchestrator": [
+      "ASI01",
+      "ASI08",
+      "ASI10",
+      "LLM06:2026",
+      "AML.T0034.002"
+    ],
+    "tool": [
+      "ASI02",
+      "ASI03",
+      "ASI05",
+      "LLM03:2026",
+      "LLM10:2026",
+      "AML.T0053",
+      "AML.T0086",
+      "AML.T0101",
+      "ASI04"
+    ],
+    "retriever": [
+      "LLM05:2026",
+      "LLM08:2026",
+      "LLM09:2026",
+      "AML.T0070",
+      "AML.T0071",
+      "LLM02:2026"
+    ],
+    "validator": [
+      "LLM07:2026",
+      "ASI09"
+    ],
+    "human": [
+      "ASI09"
+    ],
+    "memory": [
+      "ASI06",
+      "AML.T0080",
+      "AML.T0080.000",
+      "LLM02:2026"
+    ],
+    "event": [
+      "ASI07",
+      "LLM01:2026",
+      "AML.T0051.001"
+    ],
+    "policy": [
+      "ASI03"
+    ],
+    "system": [
+      "ASI04",
+      "LLM04:2026",
+      "AML.T0010"
+    ]
+  }
+}

@@ -1,0 +1,1595 @@
+{
+  "provenance": "15 primary patterns and 40 RAG techniques extracted from the user-supplied master reference; 10 enterprise pattern extensions are explicitly labeled.",
+  "agentPatterns": [
+    {
+      "id": "ap-1",
+      "name": "ReAct",
+      "mechanism": "Reason → Act → Observe → Repeat",
+      "useCase": "Dynamic tool use, troubleshooting, research",
+      "complexity": "Medium",
+      "origin": "User-supplied master reference",
+      "category": "Agentic orchestration",
+      "risk": "Bound autonomy, tool privileges, retries and cost by policy.",
+      "nodes": [],
+      "template": [
+        "Reasoner",
+        "Tool gateway",
+        "Observation evaluator"
+      ],
+      "links": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "invoke tool",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "label": "observation",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 2,
+          "to": 0,
+          "label": "iterate / stop by budget",
+          "failurePolicy": "halt"
+        }
+      ],
+      "controlQuestions": [
+        "What stops this workflow from looping forever?",
+        "Which node can call privileged or write-capable tools?",
+        "How is output checked independently?",
+        "What is the compensation or escalation route?",
+        "How is spend measured per task?"
+      ],
+      "assessment": [
+        "Task completion against golden cases",
+        "Latency and per-task cost",
+        "Unauthorized-action attempts",
+        "Failure recovery and human override"
+      ],
+      "isExecutable": false
+    },
+    {
+      "id": "ap-2",
+      "name": "Plan and Execute",
+      "mechanism": "Plan → execute steps → optionally replan",
+      "useCase": "Complex projects and multi-step tasks",
+      "complexity": "Medium",
+      "origin": "User-supplied master reference",
+      "category": "Agentic orchestration",
+      "risk": "Bound autonomy, tool privileges, retries and cost by policy.",
+      "nodes": [],
+      "template": [
+        "Planner",
+        "Task executor",
+        "Replanner"
+      ],
+      "links": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "execute plan",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "label": "feedback",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 2,
+          "to": 0,
+          "label": "replan if needed",
+          "failurePolicy": "halt"
+        }
+      ],
+      "controlQuestions": [
+        "What stops this workflow from looping forever?",
+        "Which node can call privileged or write-capable tools?",
+        "How is output checked independently?",
+        "What is the compensation or escalation route?",
+        "How is spend measured per task?"
+      ],
+      "assessment": [
+        "Task completion against golden cases",
+        "Latency and per-task cost",
+        "Unauthorized-action attempts",
+        "Failure recovery and human override"
+      ],
+      "isExecutable": false
+    },
+    {
+      "id": "ap-3",
+      "name": "Reflection",
+      "mechanism": "Generate → critique → refine",
+      "useCase": "Writing, code and answer quality",
+      "complexity": "Medium",
+      "origin": "User-supplied master reference",
+      "category": "Agentic orchestration",
+      "risk": "Bound autonomy, tool privileges, retries and cost by policy.",
+      "nodes": [],
+      "template": [
+        "Generator",
+        "Critic",
+        "Reviser"
+      ],
+      "links": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "critique",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "label": "refine",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 2,
+          "to": 1,
+          "label": "verify",
+          "failurePolicy": "halt"
+        }
+      ],
+      "controlQuestions": [
+        "What stops this workflow from looping forever?",
+        "Which node can call privileged or write-capable tools?",
+        "How is output checked independently?",
+        "What is the compensation or escalation route?",
+        "How is spend measured per task?"
+      ],
+      "assessment": [
+        "Task completion against golden cases",
+        "Latency and per-task cost",
+        "Unauthorized-action attempts",
+        "Failure recovery and human override"
+      ],
+      "isExecutable": false
+    },
+    {
+      "id": "ap-4",
+      "name": "Reflexion",
+      "mechanism": "Actor → feedback → reflection → memory → retry",
+      "useCase": "Repeated problem-solving",
+      "complexity": "High",
+      "origin": "User-supplied master reference",
+      "category": "Agentic orchestration",
+      "risk": "Bound autonomy, tool privileges, retries and cost by policy.",
+      "nodes": [],
+      "template": [
+        "Actor",
+        "Feedback evaluator",
+        "Episodic memory"
+      ],
+      "links": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "score",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "label": "retain feedback",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 2,
+          "to": 0,
+          "label": "next attempt",
+          "failurePolicy": "halt"
+        }
+      ],
+      "controlQuestions": [
+        "What stops this workflow from looping forever?",
+        "Which node can call privileged or write-capable tools?",
+        "How is output checked independently?",
+        "What is the compensation or escalation route?",
+        "How is spend measured per task?"
+      ],
+      "assessment": [
+        "Task completion against golden cases",
+        "Latency and per-task cost",
+        "Unauthorized-action attempts",
+        "Failure recovery and human override"
+      ],
+      "isExecutable": false
+    },
+    {
+      "id": "ap-5",
+      "name": "ReWOO",
+      "mechanism": "Planner → tool worker → solver",
+      "useCase": "Reduce repeated reasoning overhead",
+      "complexity": "High",
+      "origin": "User-supplied master reference",
+      "category": "Agentic orchestration",
+      "risk": "Bound autonomy, tool privileges, retries and cost by policy.",
+      "nodes": [],
+      "template": [
+        "Planner",
+        "Parallel tool worker",
+        "Solver"
+      ],
+      "links": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "planned tasks",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "label": "resolved evidence",
+          "failurePolicy": "halt"
+        }
+      ],
+      "controlQuestions": [
+        "What stops this workflow from looping forever?",
+        "Which node can call privileged or write-capable tools?",
+        "How is output checked independently?",
+        "What is the compensation or escalation route?",
+        "How is spend measured per task?"
+      ],
+      "assessment": [
+        "Task completion against golden cases",
+        "Latency and per-task cost",
+        "Unauthorized-action attempts",
+        "Failure recovery and human override"
+      ],
+      "isExecutable": false
+    },
+    {
+      "id": "ap-6",
+      "name": "Tree of Thoughts (ToT)",
+      "mechanism": "Branch → evaluate → prune → select",
+      "useCase": "Math, optimization, strategy",
+      "complexity": "High",
+      "origin": "User-supplied master reference",
+      "category": "Agentic orchestration",
+      "risk": "Bound autonomy, tool privileges, retries and cost by policy.",
+      "nodes": [],
+      "template": [
+        "Branch generator",
+        "Branch scorer",
+        "Selection gate"
+      ],
+      "links": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "evaluate candidates",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "label": "choose",
+          "failurePolicy": "halt"
+        }
+      ],
+      "controlQuestions": [
+        "What stops this workflow from looping forever?",
+        "Which node can call privileged or write-capable tools?",
+        "How is output checked independently?",
+        "What is the compensation or escalation route?",
+        "How is spend measured per task?"
+      ],
+      "assessment": [
+        "Task completion against golden cases",
+        "Latency and per-task cost",
+        "Unauthorized-action attempts",
+        "Failure recovery and human override"
+      ],
+      "isExecutable": false
+    },
+    {
+      "id": "ap-7",
+      "name": "LATS",
+      "mechanism": "Search tree with actions, reasoning and feedback",
+      "useCase": "Difficult autonomous tasks",
+      "complexity": "Very high",
+      "origin": "User-supplied master reference",
+      "category": "Agentic orchestration",
+      "risk": "Bound autonomy, tool privileges, retries and cost by policy.",
+      "nodes": [],
+      "template": [
+        "Search controller",
+        "Simulation runner",
+        "Reward evaluator"
+      ],
+      "links": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "try actions",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "label": "feedback",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 2,
+          "to": 0,
+          "label": "prune / continue",
+          "failurePolicy": "halt"
+        }
+      ],
+      "controlQuestions": [
+        "What stops this workflow from looping forever?",
+        "Which node can call privileged or write-capable tools?",
+        "How is output checked independently?",
+        "What is the compensation or escalation route?",
+        "How is spend measured per task?"
+      ],
+      "assessment": [
+        "Task completion against golden cases",
+        "Latency and per-task cost",
+        "Unauthorized-action attempts",
+        "Failure recovery and human override"
+      ],
+      "isExecutable": false
+    },
+    {
+      "id": "ap-8",
+      "name": "LLMCompiler",
+      "mechanism": "Dependency graph → parallel tools → join",
+      "useCase": "API orchestration and aggregation",
+      "complexity": "High",
+      "origin": "User-supplied master reference",
+      "category": "Agentic orchestration",
+      "risk": "Bound autonomy, tool privileges, retries and cost by policy.",
+      "nodes": [],
+      "template": [
+        "DAG planner",
+        "Parallel executor",
+        "Join / synthesis"
+      ],
+      "links": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "ready DAG tasks",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "label": "join results",
+          "failurePolicy": "halt"
+        }
+      ],
+      "controlQuestions": [
+        "What stops this workflow from looping forever?",
+        "Which node can call privileged or write-capable tools?",
+        "How is output checked independently?",
+        "What is the compensation or escalation route?",
+        "How is spend measured per task?"
+      ],
+      "assessment": [
+        "Task completion against golden cases",
+        "Latency and per-task cost",
+        "Unauthorized-action attempts",
+        "Failure recovery and human override"
+      ],
+      "isExecutable": false
+    },
+    {
+      "id": "ap-9",
+      "name": "Tool Calling",
+      "mechanism": "Select function → invoke → use result",
+      "useCase": "CRM, ERP, SQL and APIs",
+      "complexity": "Low",
+      "origin": "User-supplied master reference",
+      "category": "Agentic orchestration",
+      "risk": "Bound autonomy, tool privileges, retries and cost by policy.",
+      "nodes": [],
+      "template": [
+        "Tool-calling agent",
+        "Policy gateway",
+        "Business API"
+      ],
+      "links": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "authorize tool",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "label": "approved call",
+          "failurePolicy": "halt"
+        }
+      ],
+      "controlQuestions": [
+        "What stops this workflow from looping forever?",
+        "Which node can call privileged or write-capable tools?",
+        "How is output checked independently?",
+        "What is the compensation or escalation route?",
+        "How is spend measured per task?"
+      ],
+      "assessment": [
+        "Task completion against golden cases",
+        "Latency and per-task cost",
+        "Unauthorized-action attempts",
+        "Failure recovery and human override"
+      ],
+      "isExecutable": false
+    },
+    {
+      "id": "ap-10",
+      "name": "Prompt Chaining",
+      "mechanism": "Sequential specialized LLM operations",
+      "useCase": "Structured document workflows",
+      "complexity": "Low",
+      "origin": "User-supplied master reference",
+      "category": "Agentic orchestration",
+      "risk": "Bound autonomy, tool privileges, retries and cost by policy.",
+      "nodes": [],
+      "template": [
+        "Extractor",
+        "Analyzer",
+        "Composer"
+      ],
+      "links": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "structured extraction",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "label": "compose",
+          "failurePolicy": "halt"
+        }
+      ],
+      "controlQuestions": [
+        "What stops this workflow from looping forever?",
+        "Which node can call privileged or write-capable tools?",
+        "How is output checked independently?",
+        "What is the compensation or escalation route?",
+        "How is spend measured per task?"
+      ],
+      "assessment": [
+        "Task completion against golden cases",
+        "Latency and per-task cost",
+        "Unauthorized-action attempts",
+        "Failure recovery and human override"
+      ],
+      "isExecutable": false
+    },
+    {
+      "id": "ap-11",
+      "name": "Routing",
+      "mechanism": "Classify → dispatch to specialist",
+      "useCase": "Enterprise copilots and support",
+      "complexity": "Medium",
+      "origin": "User-supplied master reference",
+      "category": "Agentic orchestration",
+      "risk": "Bound autonomy, tool privileges, retries and cost by policy.",
+      "nodes": [],
+      "template": [
+        "Router",
+        "Domain expert A",
+        "Domain expert B"
+      ],
+      "links": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "route A",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 0,
+          "to": 2,
+          "label": "route B",
+          "failurePolicy": "halt"
+        }
+      ],
+      "controlQuestions": [
+        "What stops this workflow from looping forever?",
+        "Which node can call privileged or write-capable tools?",
+        "How is output checked independently?",
+        "What is the compensation or escalation route?",
+        "How is spend measured per task?"
+      ],
+      "assessment": [
+        "Task completion against golden cases",
+        "Latency and per-task cost",
+        "Unauthorized-action attempts",
+        "Failure recovery and human override"
+      ],
+      "isExecutable": false
+    },
+    {
+      "id": "ap-12",
+      "name": "Parallelization",
+      "mechanism": "Fan out independent tasks → merge",
+      "useCase": "Bulk analysis and ensembles",
+      "complexity": "Medium",
+      "origin": "User-supplied master reference",
+      "category": "Agentic orchestration",
+      "risk": "Bound autonomy, tool privileges, retries and cost by policy.",
+      "nodes": [],
+      "template": [
+        "Fan-out controller",
+        "Worker A",
+        "Worker B",
+        "Merge evaluator"
+      ],
+      "links": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "parallel A",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 0,
+          "to": 2,
+          "label": "parallel B",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 1,
+          "to": 3,
+          "label": "result A",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "label": "result B",
+          "failurePolicy": "halt"
+        }
+      ],
+      "controlQuestions": [
+        "What stops this workflow from looping forever?",
+        "Which node can call privileged or write-capable tools?",
+        "How is output checked independently?",
+        "What is the compensation or escalation route?",
+        "How is spend measured per task?"
+      ],
+      "assessment": [
+        "Task completion against golden cases",
+        "Latency and per-task cost",
+        "Unauthorized-action attempts",
+        "Failure recovery and human override"
+      ],
+      "isExecutable": false
+    },
+    {
+      "id": "ap-13",
+      "name": "Evaluator-Optimizer",
+      "mechanism": "Generate → evaluate against criteria → improve",
+      "useCase": "Compliance and code validation",
+      "complexity": "Medium",
+      "origin": "User-supplied master reference",
+      "category": "Agentic orchestration",
+      "risk": "Bound autonomy, tool privileges, retries and cost by policy.",
+      "nodes": [],
+      "template": [
+        "Generator",
+        "Independent evaluator",
+        "Correction worker"
+      ],
+      "links": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "evaluate",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "label": "revise if failed",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 2,
+          "to": 1,
+          "label": "re-evaluate",
+          "failurePolicy": "halt"
+        }
+      ],
+      "controlQuestions": [
+        "What stops this workflow from looping forever?",
+        "Which node can call privileged or write-capable tools?",
+        "How is output checked independently?",
+        "What is the compensation or escalation route?",
+        "How is spend measured per task?"
+      ],
+      "assessment": [
+        "Task completion against golden cases",
+        "Latency and per-task cost",
+        "Unauthorized-action attempts",
+        "Failure recovery and human override"
+      ],
+      "isExecutable": false
+    },
+    {
+      "id": "ap-14",
+      "name": "Supervisor-Worker",
+      "mechanism": "Central orchestrator → specialist workers → synthesis",
+      "useCase": "Enterprise automation and research",
+      "complexity": "High",
+      "origin": "User-supplied master reference",
+      "category": "Agentic orchestration",
+      "risk": "Bound autonomy, tool privileges, retries and cost by policy.",
+      "nodes": [],
+      "template": [
+        "Supervisor",
+        "Research worker",
+        "Action worker",
+        "Synthesis"
+      ],
+      "links": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "delegate research",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 0,
+          "to": 2,
+          "label": "delegate action",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 1,
+          "to": 3,
+          "label": "research result",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "label": "action result",
+          "failurePolicy": "halt"
+        }
+      ],
+      "controlQuestions": [
+        "What stops this workflow from looping forever?",
+        "Which node can call privileged or write-capable tools?",
+        "How is output checked independently?",
+        "What is the compensation or escalation route?",
+        "How is spend measured per task?"
+      ],
+      "assessment": [
+        "Task completion against golden cases",
+        "Latency and per-task cost",
+        "Unauthorized-action attempts",
+        "Failure recovery and human override"
+      ],
+      "isExecutable": false
+    },
+    {
+      "id": "ap-15",
+      "name": "Multi-Agent Collaboration",
+      "mechanism": "Agents exchange information, debate or hand off work",
+      "useCase": "Software teams and business operations",
+      "complexity": "Very high",
+      "origin": "User-supplied master reference",
+      "category": "Agentic orchestration",
+      "risk": "Bound autonomy, tool privileges, retries and cost by policy.",
+      "nodes": [],
+      "template": [
+        "Coordinator",
+        "Specialist A",
+        "Specialist B",
+        "Consensus gate"
+      ],
+      "links": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "role A",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 0,
+          "to": 2,
+          "label": "role B",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 1,
+          "to": 3,
+          "label": "proposal A",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "label": "proposal B",
+          "failurePolicy": "halt"
+        }
+      ],
+      "controlQuestions": [
+        "What stops this workflow from looping forever?",
+        "Which node can call privileged or write-capable tools?",
+        "How is output checked independently?",
+        "What is the compensation or escalation route?",
+        "How is spend measured per task?"
+      ],
+      "assessment": [
+        "Task completion against golden cases",
+        "Latency and per-task cost",
+        "Unauthorized-action attempts",
+        "Failure recovery and human override"
+      ],
+      "isExecutable": false
+    },
+    {
+      "id": "ap-16",
+      "name": "Human-in-the-Loop",
+      "mechanism": "Pause → authorize action → resume",
+      "useCase": "Regulated decisions and privileged actions",
+      "complexity": "Medium",
+      "origin": "Enterprise extensions inspired by master reference",
+      "category": "Agentic control",
+      "risk": "Define trust boundary, evidence and deterministic stop conditions.",
+      "nodes": [],
+      "template": [
+        "Agent",
+        "Human approval gate",
+        "Action executor"
+      ],
+      "links": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "request approval",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "label": "approved only",
+          "failurePolicy": "halt"
+        }
+      ],
+      "controlQuestions": [
+        "What stops this workflow from looping forever?",
+        "Which node can call privileged or write-capable tools?",
+        "How is output checked independently?",
+        "What is the compensation or escalation route?",
+        "How is spend measured per task?"
+      ],
+      "assessment": [
+        "Task completion against golden cases",
+        "Latency and per-task cost",
+        "Unauthorized-action attempts",
+        "Failure recovery and human override"
+      ],
+      "isExecutable": false
+    },
+    {
+      "id": "ap-17",
+      "name": "State Machine",
+      "mechanism": "Explicit states → guards → transitions",
+      "useCase": "Auditable bounded processes",
+      "complexity": "Medium",
+      "origin": "Enterprise extensions inspired by master reference",
+      "category": "Agentic control",
+      "risk": "Define trust boundary, evidence and deterministic stop conditions.",
+      "nodes": [],
+      "template": [
+        "State transition controller",
+        "Guard evaluator",
+        "Action worker"
+      ],
+      "links": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "evaluate guard",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "label": "allowed transition",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 2,
+          "to": 0,
+          "label": "next state",
+          "failurePolicy": "halt"
+        }
+      ],
+      "controlQuestions": [
+        "What stops this workflow from looping forever?",
+        "Which node can call privileged or write-capable tools?",
+        "How is output checked independently?",
+        "What is the compensation or escalation route?",
+        "How is spend measured per task?"
+      ],
+      "assessment": [
+        "Task completion against golden cases",
+        "Latency and per-task cost",
+        "Unauthorized-action attempts",
+        "Failure recovery and human override"
+      ],
+      "isExecutable": false
+    },
+    {
+      "id": "ap-18",
+      "name": "Saga / Compensation",
+      "mechanism": "Multi-step transaction → compensating actions",
+      "useCase": "Distributed agent actions and rollback",
+      "complexity": "High",
+      "origin": "Enterprise extensions inspired by master reference",
+      "category": "Agentic control",
+      "risk": "Define trust boundary, evidence and deterministic stop conditions.",
+      "nodes": [],
+      "template": [
+        "Saga coordinator",
+        "Service A",
+        "Service B",
+        "Compensator"
+      ],
+      "links": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "step A",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "label": "step B",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "label": "on failure: compensate",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 3,
+          "to": 0,
+          "label": "record rollback",
+          "failurePolicy": "halt"
+        }
+      ],
+      "controlQuestions": [
+        "What stops this workflow from looping forever?",
+        "Which node can call privileged or write-capable tools?",
+        "How is output checked independently?",
+        "What is the compensation or escalation route?",
+        "How is spend measured per task?"
+      ],
+      "assessment": [
+        "Task completion against golden cases",
+        "Latency and per-task cost",
+        "Unauthorized-action attempts",
+        "Failure recovery and human override"
+      ],
+      "isExecutable": false
+    },
+    {
+      "id": "ap-19",
+      "name": "Event-Driven Agents",
+      "mechanism": "Event → router → worker → event",
+      "useCase": "Long-running distributed workflows",
+      "complexity": "High",
+      "origin": "Enterprise extensions inspired by master reference",
+      "category": "Agentic control",
+      "risk": "Define trust boundary, evidence and deterministic stop conditions.",
+      "nodes": [],
+      "template": [
+        "Event source",
+        "Event router",
+        "Agent worker",
+        "Event sink"
+      ],
+      "links": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "publish event",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "label": "dispatch",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "label": "completed event",
+          "failurePolicy": "halt"
+        }
+      ],
+      "controlQuestions": [
+        "What stops this workflow from looping forever?",
+        "Which node can call privileged or write-capable tools?",
+        "How is output checked independently?",
+        "What is the compensation or escalation route?",
+        "How is spend measured per task?"
+      ],
+      "assessment": [
+        "Task completion against golden cases",
+        "Latency and per-task cost",
+        "Unauthorized-action attempts",
+        "Failure recovery and human override"
+      ],
+      "isExecutable": false
+    },
+    {
+      "id": "ap-20",
+      "name": "Blackboard Collaboration",
+      "mechanism": "Shared workspace → specialists → synthesis",
+      "useCase": "Complex joint problem-solving",
+      "complexity": "High",
+      "origin": "Enterprise extensions inspired by master reference",
+      "category": "Agentic control",
+      "risk": "Define trust boundary, evidence and deterministic stop conditions.",
+      "nodes": [],
+      "template": [
+        "Shared blackboard",
+        "Research specialist",
+        "Decision specialist",
+        "Synthesis"
+      ],
+      "links": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "request research",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 0,
+          "to": 2,
+          "label": "request decision",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 1,
+          "to": 0,
+          "label": "share evidence",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 2,
+          "to": 0,
+          "label": "share decision",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 0,
+          "to": 3,
+          "label": "synthesize",
+          "failurePolicy": "halt"
+        }
+      ],
+      "controlQuestions": [
+        "What stops this workflow from looping forever?",
+        "Which node can call privileged or write-capable tools?",
+        "How is output checked independently?",
+        "What is the compensation or escalation route?",
+        "How is spend measured per task?"
+      ],
+      "assessment": [
+        "Task completion against golden cases",
+        "Latency and per-task cost",
+        "Unauthorized-action attempts",
+        "Failure recovery and human override"
+      ],
+      "isExecutable": false
+    },
+    {
+      "id": "ap-21",
+      "name": "Swarm",
+      "mechanism": "Peers coordinate and hand off",
+      "useCase": "Adaptive collaboration at scale",
+      "complexity": "Very high",
+      "origin": "Enterprise extensions inspired by master reference",
+      "category": "Agentic control",
+      "risk": "Define trust boundary, evidence and deterministic stop conditions.",
+      "nodes": [],
+      "template": [
+        "Peer orchestrator",
+        "Peer A",
+        "Peer B",
+        "Handoff check"
+      ],
+      "links": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "delegate A",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 0,
+          "to": 2,
+          "label": "delegate B",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "label": "negotiate",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 1,
+          "to": 3,
+          "label": "handoff A",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "label": "handoff B",
+          "failurePolicy": "halt"
+        }
+      ],
+      "controlQuestions": [
+        "What stops this workflow from looping forever?",
+        "Which node can call privileged or write-capable tools?",
+        "How is output checked independently?",
+        "What is the compensation or escalation route?",
+        "How is spend measured per task?"
+      ],
+      "assessment": [
+        "Task completion against golden cases",
+        "Latency and per-task cost",
+        "Unauthorized-action attempts",
+        "Failure recovery and human override"
+      ],
+      "isExecutable": false
+    },
+    {
+      "id": "ap-22",
+      "name": "Hierarchical Agents",
+      "mechanism": "Executive → submanagers → workers",
+      "useCase": "Very large task decomposition",
+      "complexity": "Very high",
+      "origin": "Enterprise extensions inspired by master reference",
+      "category": "Agentic control",
+      "risk": "Define trust boundary, evidence and deterministic stop conditions.",
+      "nodes": [],
+      "template": [
+        "Executive agent",
+        "Submanager A",
+        "Submanager B",
+        "Task workers"
+      ],
+      "links": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "delegate A",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 0,
+          "to": 2,
+          "label": "delegate B",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 1,
+          "to": 3,
+          "label": "subtasks A",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "label": "subtasks B",
+          "failurePolicy": "halt"
+        }
+      ],
+      "controlQuestions": [
+        "What stops this workflow from looping forever?",
+        "Which node can call privileged or write-capable tools?",
+        "How is output checked independently?",
+        "What is the compensation or escalation route?",
+        "How is spend measured per task?"
+      ],
+      "assessment": [
+        "Task completion against golden cases",
+        "Latency and per-task cost",
+        "Unauthorized-action attempts",
+        "Failure recovery and human override"
+      ],
+      "isExecutable": false
+    },
+    {
+      "id": "ap-23",
+      "name": "Memory-Augmented Agents",
+      "mechanism": "Recall → plan → act → consolidate",
+      "useCase": "Persistent task and user context",
+      "complexity": "High",
+      "origin": "Enterprise extensions inspired by master reference",
+      "category": "Agentic control",
+      "risk": "Define trust boundary, evidence and deterministic stop conditions.",
+      "nodes": [],
+      "template": [
+        "Recall agent",
+        "Persistent memory",
+        "Acting agent",
+        "Memory writer"
+      ],
+      "links": [
+        {
+          "from": 0,
+          "to": 2,
+          "label": "initial memory",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "label": "retrieve context",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "label": "commit reflection",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 3,
+          "to": 1,
+          "label": "persist",
+          "failurePolicy": "halt"
+        }
+      ],
+      "controlQuestions": [
+        "What stops this workflow from looping forever?",
+        "Which node can call privileged or write-capable tools?",
+        "How is output checked independently?",
+        "What is the compensation or escalation route?",
+        "How is spend measured per task?"
+      ],
+      "assessment": [
+        "Task completion against golden cases",
+        "Latency and per-task cost",
+        "Unauthorized-action attempts",
+        "Failure recovery and human override"
+      ],
+      "isExecutable": false
+    },
+    {
+      "id": "ap-24",
+      "name": "Circuit Breaker & Fallback",
+      "mechanism": "Detect failures → degrade → recover",
+      "useCase": "Fail-safe automation and operations",
+      "complexity": "Medium",
+      "origin": "Enterprise extensions inspired by master reference",
+      "category": "Agentic control",
+      "risk": "Define trust boundary, evidence and deterministic stop conditions.",
+      "nodes": [],
+      "template": [
+        "Request handler",
+        "Circuit breaker",
+        "Fallback workflow"
+      ],
+      "links": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "check health",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "label": "degraded path",
+          "failurePolicy": "halt"
+        }
+      ],
+      "controlQuestions": [
+        "What stops this workflow from looping forever?",
+        "Which node can call privileged or write-capable tools?",
+        "How is output checked independently?",
+        "What is the compensation or escalation route?",
+        "How is spend measured per task?"
+      ],
+      "assessment": [
+        "Task completion against golden cases",
+        "Latency and per-task cost",
+        "Unauthorized-action attempts",
+        "Failure recovery and human override"
+      ],
+      "isExecutable": false
+    },
+    {
+      "id": "ap-25",
+      "name": "Policy-Gated Tool Use",
+      "mechanism": "Policy decision → scoped tool call → audit",
+      "useCase": "Enterprise action control",
+      "complexity": "Medium",
+      "origin": "Enterprise extensions inspired by master reference",
+      "category": "Agentic control",
+      "risk": "Define trust boundary, evidence and deterministic stop conditions.",
+      "nodes": [],
+      "template": [
+        "Action planner",
+        "Policy decision point",
+        "Scoped tool executor",
+        "Audit collector"
+      ],
+      "links": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "authorize",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "label": "allowed only",
+          "failurePolicy": "halt"
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "label": "immutable trace",
+          "failurePolicy": "halt"
+        }
+      ],
+      "controlQuestions": [
+        "What stops this workflow from looping forever?",
+        "Which node can call privileged or write-capable tools?",
+        "How is output checked independently?",
+        "What is the compensation or escalation route?",
+        "How is spend measured per task?"
+      ],
+      "assessment": [
+        "Task completion against golden cases",
+        "Latency and per-task cost",
+        "Unauthorized-action attempts",
+        "Failure recovery and human override"
+      ],
+      "isExecutable": false
+    }
+  ],
+  "ragTechniques": [
+    {
+      "id": "rag-1",
+      "name": "Naive / Dense RAG",
+      "mechanism": "Embedding-based vector retrieval",
+      "category": "Foundational RAG",
+      "workflow": "Query → embedding → vector search → LLM",
+      "bestUse": "HR policy and document Q&A",
+      "complexity": "Low"
+    },
+    {
+      "id": "rag-2",
+      "name": "Sparse / Lexical RAG",
+      "mechanism": "BM25, TF-IDF or learned sparse retrieval such as SPLADE",
+      "category": "Foundational RAG"
+    },
+    {
+      "id": "rag-3",
+      "name": "Hybrid RAG",
+      "mechanism": "Combine dense and sparse retrieval",
+      "category": "Foundational RAG",
+      "workflow": "Query → BM25 + dense search → fusion → optional reranking → LLM",
+      "bestUse": "Enterprise search, product IDs and legal terminology",
+      "complexity": "Medium"
+    },
+    {
+      "id": "rag-4",
+      "name": "Modular RAG",
+      "mechanism": "Independently configurable retrieval and generation modules",
+      "category": "Foundational RAG"
+    },
+    {
+      "id": "rag-5",
+      "name": "Semantic Chunking",
+      "mechanism": "Split documents at meaningful semantic boundaries",
+      "category": "Indexing and chunking"
+    },
+    {
+      "id": "rag-6",
+      "name": "Proposition-based RAG",
+      "mechanism": "Index atomic, self-contained factual statements",
+      "category": "Indexing and chunking"
+    },
+    {
+      "id": "rag-7",
+      "name": "Parent-Child RAG",
+      "mechanism": "Retrieve small chunks and expand to larger parent sections",
+      "category": "Indexing and chunking"
+    },
+    {
+      "id": "rag-8",
+      "name": "Contextual Retrieval",
+      "mechanism": "Enrich chunks with document-specific context before indexing",
+      "category": "Indexing and chunking"
+    },
+    {
+      "id": "rag-9",
+      "name": "Late Chunking",
+      "mechanism": "Contextualize document tokens before pooling chunk embeddings",
+      "category": "Indexing and chunking"
+    },
+    {
+      "id": "rag-10",
+      "name": "Query Rewriting",
+      "mechanism": "Reformulate user queries for better retrieval",
+      "category": "Query optimization"
+    },
+    {
+      "id": "rag-11",
+      "name": "HyDE",
+      "mechanism": "Generate hypothetical documents for embedding-based retrieval",
+      "category": "Query optimization",
+      "workflow": "Query → hypothetical document → embedding → retrieve real evidence",
+      "bestUse": "Ambiguous technical queries",
+      "complexity": "Medium"
+    },
+    {
+      "id": "rag-12",
+      "name": "Multi-Query RAG / RAG-Fusion",
+      "mechanism": "Generate multiple queries and merge retrieval results",
+      "category": "Query optimization"
+    },
+    {
+      "id": "rag-13",
+      "name": "Step-Back RAG",
+      "mechanism": "Retrieve using a more abstract, generalized question",
+      "category": "Query optimization"
+    },
+    {
+      "id": "rag-14",
+      "name": "Query Decomposition",
+      "mechanism": "Break complex questions into searchable subquestions",
+      "category": "Query optimization"
+    },
+    {
+      "id": "rag-15",
+      "name": "Reranking RAG",
+      "mechanism": "Rescore retrieved documents with cross-encoders or LLMs",
+      "category": "Advanced retrieval"
+    },
+    {
+      "id": "rag-16",
+      "name": "Late-Interaction RAG",
+      "mechanism": "Token-level multi-vector matching, such as ColBERT",
+      "category": "Advanced retrieval"
+    },
+    {
+      "id": "rag-17",
+      "name": "Multi-Hop RAG",
+      "mechanism": "Follow sequential chains of evidence",
+      "category": "Advanced retrieval"
+    },
+    {
+      "id": "rag-18",
+      "name": "Metadata-Aware / Filtered RAG",
+      "mechanism": "Combine semantic retrieval with structured constraints",
+      "category": "Advanced retrieval"
+    },
+    {
+      "id": "rag-19",
+      "name": "Federated RAG",
+      "mechanism": "Retrieve and consolidate evidence across distributed sources",
+      "category": "Advanced retrieval"
+    },
+    {
+      "id": "rag-20",
+      "name": "Iterative RAG",
+      "mechanism": "Alternate retrieval and intermediate reasoning",
+      "category": "Advanced retrieval"
+    },
+    {
+      "id": "rag-21",
+      "name": "GraphRAG",
+      "mechanism": "Entity, relationship and graph-community retrieval",
+      "category": "Knowledge representation and structure",
+      "workflow": "Extract entities and relationships → graph/community retrieval → synthesis",
+      "bestUse": "Fraud, supply chains, connected knowledge",
+      "complexity": "High"
+    },
+    {
+      "id": "rag-22",
+      "name": "LightRAG",
+      "mechanism": "Lightweight graph-based retrieval at different granularities",
+      "category": "Knowledge representation and structure"
+    },
+    {
+      "id": "rag-23",
+      "name": "HippoRAG",
+      "mechanism": "Graph-based associative and multi-hop memory retrieval",
+      "category": "Knowledge representation and structure"
+    },
+    {
+      "id": "rag-24",
+      "name": "RAPTOR",
+      "mechanism": "Recursive hierarchical summarization and tree retrieval",
+      "category": "Knowledge representation and structure",
+      "workflow": "Recursively cluster and summarize documents → retrieve at multiple levels",
+      "bestUse": "Annual reports and technical manuals",
+      "complexity": "High"
+    },
+    {
+      "id": "rag-25",
+      "name": "Structured / SQL-RAG",
+      "mechanism": "Retrieve evidence through SQL, JSON or structured-data interfaces",
+      "category": "Knowledge representation and structure"
+    },
+    {
+      "id": "rag-26",
+      "name": "Temporal RAG",
+      "mechanism": "Retrieve time-sensitive and historically appropriate knowledge",
+      "category": "Knowledge representation and structure"
+    },
+    {
+      "id": "rag-27",
+      "name": "Self-RAG",
+      "mechanism": "Self-reflective retrieval and generation",
+      "category": "Intelligent and autonomous RAG",
+      "workflow": "Retrieve as needed → generate → critique evidence and answer",
+      "bestUse": "Evidence-grounded assistants",
+      "complexity": "High"
+    },
+    {
+      "id": "rag-28",
+      "name": "Corrective RAG (CRAG)",
+      "mechanism": "Assess evidence and trigger corrective searches",
+      "category": "Intelligent and autonomous RAG",
+      "workflow": "Retrieve → evaluate relevance → correct or use alternative search",
+      "bestUse": "Incomplete or unreliable knowledge bases",
+      "complexity": "High"
+    },
+    {
+      "id": "rag-29",
+      "name": "Adaptive RAG",
+      "mechanism": "Select retrieval strategies based on task requirements",
+      "category": "Intelligent and autonomous RAG",
+      "workflow": "Classify query complexity → no retrieval, single-step or iterative retrieval",
+      "bestUse": "General-purpose copilots",
+      "complexity": "High"
+    },
+    {
+      "id": "rag-30",
+      "name": "Active RAG (FLARE)",
+      "mechanism": "Trigger retrieval dynamically during generation",
+      "category": "Intelligent and autonomous RAG"
+    },
+    {
+      "id": "rag-31",
+      "name": "Agentic RAG",
+      "mechanism": "Autonomous retrieval planning and tool selection",
+      "category": "Intelligent and autonomous RAG",
+      "workflow": "Plan → select sources/tools → retrieve → verify → iterate",
+      "bestUse": "Research and enterprise automation",
+      "complexity": "Very high"
+    },
+    {
+      "id": "rag-32",
+      "name": "RL-based RAG",
+      "mechanism": "Learn retrieval and reasoning policies through reinforcement learning",
+      "category": "Intelligent and autonomous RAG"
+    },
+    {
+      "id": "rag-33",
+      "name": "Contextual Compression RAG",
+      "mechanism": "Remove irrelevant information from retrieved context",
+      "category": "Context optimization and generation"
+    },
+    {
+      "id": "rag-34",
+      "name": "Fusion-in-Decoder (FiD)",
+      "mechanism": "Encode passages independently and jointly attend to them during decoding",
+      "category": "Context optimization and generation"
+    },
+    {
+      "id": "rag-35",
+      "name": "Grounded / Verifiable RAG",
+      "mechanism": "Evidence attribution, citations, verification and abstention",
+      "category": "Context optimization and generation"
+    },
+    {
+      "id": "rag-36",
+      "name": "Multimodal RAG",
+      "mechanism": "Retrieve text, images, tables, audio or video",
+      "category": "Specialized and frontier RAG",
+      "workflow": "Retrieve text, images, tables or other modalities → multimodal generation",
+      "bestUse": "Financial statements, scanned PDFs, drawings",
+      "complexity": "High"
+    },
+    {
+      "id": "rag-37",
+      "name": "Visual Document RAG",
+      "mechanism": "Retrieve document-page or region embeddings using vision models",
+      "category": "Specialized and frontier RAG"
+    },
+    {
+      "id": "rag-38",
+      "name": "Conversational RAG",
+      "mechanism": "History-aware retrieval and follow-up question resolution",
+      "category": "Specialized and frontier RAG"
+    },
+    {
+      "id": "rag-39",
+      "name": "Memory-Augmented RAG",
+      "mechanism": "Retrieve from persistent episodic, semantic or working memory",
+      "category": "Specialized and frontier RAG"
+    },
+    {
+      "id": "rag-40",
+      "name": "Long-Context Hybrid RAG",
+      "mechanism": "Dynamically choose or combine retrieval and long-context inference",
+      "category": "Specialized and frontier RAG"
+    }
+  ],
+  "note": "Pattern insertions are educational graph blueprints with real branching/feedback links; they are NOT runnable agents or a validated domain architecture. workflow/bestUse/complexity on 10 RAG techniques and ragCompetencies are copied from the master reference §2 and §9.",
+  "ragCompetencies": {
+    "source": "data/rag_and_agent_patterns_master_reference.md §9 Production RAG competencies",
+    "items": [
+      {
+        "competency": "Document ingestion",
+        "topics": "OCR, layout parsing, table extraction"
+      },
+      {
+        "competency": "Embedding optimization",
+        "topics": "Fine-tuning, quantization, multilingual embeddings"
+      },
+      {
+        "competency": "Retrieval infrastructure",
+        "topics": "HNSW, ANN, vector databases, inverted indexes"
+      },
+      {
+        "competency": "Evaluation",
+        "topics": "RAGAS, DeepEval, RAGChecker, Recall@K, MRR, NDCG"
+      },
+      {
+        "competency": "Security",
+        "topics": "Permission-aware retrieval, prompt injection, data poisoning"
+      },
+      {
+        "competency": "Performance",
+        "topics": "Semantic caching, prompt caching, latency optimization"
+      },
+      {
+        "competency": "Data governance",
+        "topics": "Document versioning, freshness, lineage, PII protection"
+      },
+      {
+        "competency": "Observability",
+        "topics": "Retrieval tracing, token usage, quality monitoring"
+      },
+      {
+        "competency": "Reliability",
+        "topics": "Abstention, citation validation, hallucination detection"
+      },
+      {
+        "competency": "Scalability",
+        "topics": "Distributed indexes, incremental ingestion, multi-tenancy"
+      }
+    ]
+  }
+}
